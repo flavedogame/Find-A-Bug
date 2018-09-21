@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Cinemachine
 {
@@ -6,14 +6,14 @@ namespace Cinemachine
     /// This is a CinemachineComponent in the Aim section of the component pipeline.
     /// Its job is to aim the camera hard at the LookAt target.
     /// </summary>
-    [DocumentationSorting(23, DocumentationSortingAttribute.Level.UserRef)]
+    [DocumentationSorting(27, DocumentationSortingAttribute.Level.UserRef)]
     [AddComponentMenu("")] // Don't display in add component menu
     [RequireComponent(typeof(CinemachinePipeline))]
     [SaveDuringPlay]
-    public class CinemachineHardLookAt : CinemachineComponentBase
+    public class CinemachineSameAsFollowObject : CinemachineComponentBase
     {
-        /// <summary>True if component is enabled and has a LookAt defined</summary>
-        public override bool IsValid { get { return enabled && LookAtTarget != null; } }
+        /// <summary>True if component is enabled and has a Follow target defined</summary>
+        public override bool IsValid { get { return enabled && FollowTarget != null; } }
 
         /// <summary>Get the Cinemachine Pipeline stage that this component implements.
         /// Always returns the Aim stage</summary>
@@ -25,17 +25,8 @@ namespace Cinemachine
         /// zero, then target will snap to the center of the dead zone.</param>
         public override void MutateCameraState(ref CameraState curState, float deltaTime)
         {
-            if (IsValid && curState.HasLookAt)
-            {
-                Vector3 dir = (curState.ReferenceLookAt - curState.CorrectedPosition);
-                if (dir.magnitude > Epsilon)
-                {
-                    if (Vector3.Cross(dir.normalized, curState.ReferenceUp).magnitude < Epsilon)
-                        curState.RawOrientation = Quaternion.FromToRotation(Vector3.forward, dir);
-                    else
-                        curState.RawOrientation = Quaternion.LookRotation(dir, curState.ReferenceUp);
-                }
-            }
+            if (IsValid)
+                curState.RawOrientation = FollowTarget.transform.rotation;
         }
     }
 }
