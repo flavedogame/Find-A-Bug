@@ -1,0 +1,3 @@
+identifier,name,description
+player,player,"This is the player, the hero, whatever you call him"
+wall,wall,"This is a wall, it is used to confine player in a room"

@@ -1,0 +1,13 @@
+identifier,description,hp,attack,hitSfx,attackSfx,welcomeDialog,getHitDialog,attackDialog,deadDialog
+monster,the basic monster,1,1|2,monsterHit,monsterAttack,"Look! A ball!|I've heard PRINCESS will show today.|Are you here to see PRINCESS? Sadly you won't see it.|I have a secret, don't tell others. I want to be PRINCESS",Don't kill me! Wait I'm still alive!,yah ha!|For the PRINCESS!,Ouch! A ball.|You won't see the PRINCESS either..|Oh PRINCESS is that you?
+guard,the guard,1|2,1,weakMaleHit,maleAttack,"A ball? Are you their accomplices?|Where are other guards?|If you are here to hurt PRINCESS, I'll not allow you|Gave up! The KING has already seen through your plot!",I know you are!|I won't retreat!,For the KING!,For the KING and PRINCESS..
+assasin,"the first boss, has high attack",2,10,girlHit,swordAttack,I'm surprised to see a ball trying to stop me,"Hey hey hey, we can work together!",Die. I didn't want to waste my attack on you.,I failed on a ball? ehhh!
+test,will throw player back,1,1,,,,,,
+test2,will throw player to a random circle,2,2,,,,,,
+ghost,not able to attack for some time,3,3,,,,,,
+boss,can summon circle with monsters,4,4,,,,,,
+bird,fly horizontally,5,5,,,,,,
+insect,jump vertically,6,6,,,,,,
+guardBoss,guard boss,7,7,,,,,,
+princess,princess,8,8,,,,,,
+king,king,9,9,,,,,,
