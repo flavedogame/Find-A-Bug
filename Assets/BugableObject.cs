@@ -21,13 +21,14 @@ public class BugableObject : MonoBehaviour {
 		
 	}
 
-    protected string Identifier
+    protected virtual string Identifier
     {
-        get { return "player"; }
+        get { Debug.LogError("should implement in child"); return ""; }
     }
 
     public void DidTap()
     {
         Debug.Log("did tap " + info.description);
+        new BugableObjectStateViewController(info);
     }
 }
