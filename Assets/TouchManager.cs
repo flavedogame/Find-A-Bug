@@ -33,7 +33,8 @@ public class TouchManager : MonoBehaviour {
             {
                 if (vhit.transform.tag == "BugableObject")
                 {
-                    Debug.Log("tapped buagable object");
+                    BugableObject script = vhit.transform.gameObject.GetComponent<BugableObject>();
+                    script.DidTap();
                 }
             }
         }
@@ -50,7 +51,8 @@ public class TouchManager : MonoBehaviour {
             {
                 if (vhit.transform.tag == "BugableObject" && vhit.collider.isTrigger)
                 {
-                    //Debug.Log("tapped buagable object");
+                    BugableObject script = vhit.transform.gameObject.GetComponent<BugableObject>();
+                    script.DidTap();
                 }
             }
         }
