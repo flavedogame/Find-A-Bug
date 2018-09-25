@@ -23,5 +23,6 @@ public class BugableObjectStateViewController : DefaultViewController {
     {
         objectName.text = info.name;
         objectDescription.text = info.description;
+        objectIcon.sprite = info.icon;
     }
 }

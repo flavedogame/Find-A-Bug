@@ -6,13 +6,14 @@ public class BugableObjectInfo {
     public string identifier;
     public string description;
     public string name;
-    //public Sprite icon {
-    //    get
-    //    {
-    //        MonsterEnum monsterEnum = (MonsterEnum)System.Enum.Parse(typeof(MonsterEnum), identifier);
-    //        return ResourceManager.Instance.monsterSprite[(int)monsterEnum];
-    //    }
+    public Sprite icon
+    {
+        get
+        {
+            BugableObjectIconEnum iconEnum = (BugableObjectIconEnum)System.Enum.Parse(typeof(BugableObjectIconEnum), identifier);
+            return ResourceManager.Instance.bugableObjectIcons[(int)iconEnum];
+        }
 
-    //}
+    }
 
 }
