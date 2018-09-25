@@ -6,7 +6,7 @@ public enum ViewControllerEnum { BugableObjectStateViewController };
 
 public class ViewControllerManager : Singleton<ViewControllerManager>
 {
-    public List<GameObject> viewControllers;
+    public List<Object> viewControllers;
     public GameObject viewControllerCanvas;
 	// Use this for initialization
 	void Start () {

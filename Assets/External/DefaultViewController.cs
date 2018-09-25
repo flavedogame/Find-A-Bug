@@ -29,7 +29,7 @@ public class DefaultViewController : MonoBehaviour {
 
     public virtual void Back() {
         //SFXManager.Instance.ButtonClick();
-        gameObject.SetActive(false);
+        Destroy(gameObject);
         if (ShouldUnhideParent())
         {
             parentViewController.SetActive(true);

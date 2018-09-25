@@ -13,14 +13,15 @@ public class BugableObjectStateViewController : DefaultViewController {
     public BugableObjectStateViewController(BugableObjectInfo info)
     {
         //int index = 
-        GameObject go = ViewControllerManager.Instance.viewControllers[0];
-        Instantiate(go, ViewControllerManager.Instance.viewControllerCanvas.transform);
+        Object prefab = ViewControllerManager.Instance.viewControllers[0];
+        GameObject go = Instantiate(prefab, ViewControllerManager.Instance.viewControllerCanvas.transform) as GameObject;
         BugableObjectStateViewController script = go.GetComponent<BugableObjectStateViewController>();
         script.Init(info);
     }
 
     public void Init(BugableObjectInfo info)
     {
+        //Debug.Log("init BugableObjectStateViewController with info " + info.name);
         objectName.text = info.name;
         objectDescription.text = info.description;
         objectIcon.sprite = info.icon;
