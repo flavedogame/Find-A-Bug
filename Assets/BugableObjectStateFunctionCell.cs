@@ -7,6 +7,7 @@ using TMPro;
 public class BugableObjectStateFunctionCell : MonoBehaviour {
 
     public TextMeshProUGUI functionDescription;
+    Button cellBackground;
 
     public BugableObjectStateFunctionCell(BugableObjectFunctionInfo info, Object cellPrefab, Transform tableTransform)
     {
@@ -18,5 +19,12 @@ public class BugableObjectStateFunctionCell : MonoBehaviour {
     public void Init(BugableObjectFunctionInfo info)
     {
         functionDescription.text = info.description;
+        cellBackground = GetComponent<Button>();
+        cellBackground.onClick.AddListener(OnClick);
+    }
+
+    public void OnClick()
+    {
+        GameLogicManager.Instance.addPoints();
     }
 }
