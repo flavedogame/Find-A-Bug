@@ -9,6 +9,9 @@ public class BugableObjectStateViewController : DefaultViewController {
     public TextMeshProUGUI objectDescription;
     public TextMeshProUGUI objectName;
 
+    public Object cellPrefab;
+    public Transform functionTableTransform;
+
 
     public BugableObjectStateViewController(BugableObjectInfo info)
     {
@@ -23,7 +26,11 @@ public class BugableObjectStateViewController : DefaultViewController {
     {
         //Debug.Log("init BugableObjectStateViewController with info " + info.name);
         objectName.text = info.name;
-        objectDescription.text = info.BugableFunctions[0].description;//info.description;
+        objectDescription.text = info.description;
         objectIcon.sprite = info.icon;
+        foreach(BugableObjectFunctionInfo functionInfo in info.BugableFunctions)
+        {
+            new BugableObjectStateFunctionCell(functionInfo, cellPrefab, functionTableTransform);
+        }
     }
 }
