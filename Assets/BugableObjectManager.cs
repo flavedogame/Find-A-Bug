@@ -34,4 +34,6 @@ public class BugableObjectManager : Singleton<BugableObjectManager>
         }
         Debug.Log("finish load bugableObject.csv");
     }
+
+
 }

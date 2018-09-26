@@ -23,7 +23,7 @@ public class BugableObjectStateViewController : DefaultViewController {
     {
         //Debug.Log("init BugableObjectStateViewController with info " + info.name);
         objectName.text = info.name;
-        objectDescription.text = info.description;
+        objectDescription.text = info.BugableFunctions[0].description;//info.description;
         objectIcon.sprite = info.icon;
     }
 }

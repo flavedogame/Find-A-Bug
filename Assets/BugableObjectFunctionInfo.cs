@@ -9,6 +9,7 @@ public class BugableObjectFunctionInfo {
     public string prerequisite;
     public string achievementToFinish;
     public int indexInObject;
+
     //objectId	description	prerequisite	achievementToFinish	indexInObject
 
     //public Sprite icon {

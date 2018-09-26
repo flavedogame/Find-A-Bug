@@ -6,6 +6,7 @@ public class StartupSteps : MonoBehaviour {
 
     private void Awake()
     {
+        BugableObjectFunctionManager.Instance.Init();
         BugableObjectManager.Instance.Init();
         //SQLiteDatabaseManager.Instance.Init();
         //CheatManager.Instance.Init();

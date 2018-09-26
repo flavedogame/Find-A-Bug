@@ -16,4 +16,12 @@ public class BugableObjectInfo {
 
     }
 
+    public List<BugableObjectFunctionInfo> BugableFunctions
+    {
+        get
+        {
+            return BugableObjectFunctionManager.Instance.bugableObjectFunctionInfoDict[identifier];
+        }
+    }
+
 }
