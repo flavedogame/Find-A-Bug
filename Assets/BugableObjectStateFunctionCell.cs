@@ -25,6 +25,6 @@ public class BugableObjectStateFunctionCell : MonoBehaviour {
 
     public void OnClick()
     {
-        GameLogicManager.Instance.addPoints();
+        CurrencyManager.Instance.AddValue("points", 1);
     }
 }

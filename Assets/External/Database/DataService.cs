@@ -101,12 +101,12 @@ public class DataService  {
         return _connection.Table<PersistentCurrency>();
     }
 
-    public PersistentCurrency GetPointAmount()
+    public PersistentCurrency GetCurrencyAmount(string identifier)
     {
-        return _connection.Table<PersistentCurrency>().Where(x => x.identifier == "points").FirstOrDefault();
+        return _connection.Table<PersistentCurrency>().Where(x => x.identifier == identifier).FirstOrDefault();
     }
 
-    public void UpdatePointAmount(PersistentCurrency currency)
+    public void UpdateCurrencyAmount(PersistentCurrency currency)
     {
         _connection.Update(currency);
     }

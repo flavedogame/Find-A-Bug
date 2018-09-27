@@ -15,6 +15,6 @@ public class GameViewController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        pointsText.text = CurrencyManager.Instance.AmountOfCurrency("").ToString();//GameLogicManager.Instance.points.ToString();
+        pointsText.text = CurrencyManager.Instance.AmountOfCurrency("points").ToString();
 	}
 }
