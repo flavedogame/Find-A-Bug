@@ -96,19 +96,20 @@ public class DataService  {
     //	});
     //}
 
-    //public IEnumerable<PersistentCurrency> GetPersistentCurrencys(){
-    //		return _connection.Table<PersistentCurrency>();
-    //	}
+    public IEnumerable<PersistentCurrency> GetPersistentCurrencys()
+    {
+        return _connection.Table<PersistentCurrency>();
+    }
 
-    //    public PersistentCurrency GetGoldAmount()
-    //    {
-    //        return _connection.Table<PersistentCurrency>().Where(x => x.identifier == "gold").FirstOrDefault();
-    //    }
+    public PersistentCurrency GetPointAmount()
+    {
+        return _connection.Table<PersistentCurrency>().Where(x => x.identifier == "points").FirstOrDefault();
+    }
 
-    //    public void UpdateGoldAmount(PersistentCurrency currency)
-    //    {
-    //        _connection.Update(currency);
-    //    }
+    public void UpdatePointAmount(PersistentCurrency currency)
+    {
+        _connection.Update(currency);
+    }
 
     //    public IEnumerable<PersistentBall> GetBallsOwned()
     //    {

@@ -6,10 +6,13 @@ public class StartupSteps : MonoBehaviour {
 
     private void Awake()
     {
+        SQLiteDatabaseManager.Instance.Init();
+
+        CurrencyManager.Instance.Init();
+
         BugableObjectFunctionManager.Instance.Init();
         BugableObjectManager.Instance.Init();
         GameLogicManager.Instance.Init();
-        //SQLiteDatabaseManager.Instance.Init();
         //CheatManager.Instance.Init();
         //CurrencyManager.Instance.Init();
         //AbilityManager.Instance.Init();
