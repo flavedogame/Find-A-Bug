@@ -8,13 +8,12 @@ public class BugableObjectFunctionManager : Singleton<BugableObjectFunctionManag
 
     public List<BugableObjectFunctionInfo> bugableObjectFunctionInfoList;
     public Dictionary<string, List<BugableObjectFunctionInfo>> bugableObjectFunctionInfoDict;
-    //public Dictionary<string, PersistentBall> ballsOwned;
-
-
-    //public string currentlyUsingBall;
+    public DataService ds;
 
     public void Init()
     {
+
+        ds = new DataService("db.s3db");
         ReadCSV();
         //ReadDatabase();
     }
@@ -28,8 +27,34 @@ public class BugableObjectFunctionManager : Singleton<BugableObjectFunctionManag
             {
                 bugableObjectFunctionInfoDict[info.objectId] = new List<BugableObjectFunctionInfo>();
             }
+
+            ReadDatabase(info);
+
             bugableObjectFunctionInfoDict[info.objectId].Add(info);
         }
         Debug.Log("finish load bugableObjectFunction.csv");
+    }
+
+    void ReadDatabase(BugableObjectFunctionInfo info)
+    {
+        PersistentObjectFunction persistentObjectFunction = ds.GetPersistentObjectFunction(info.identifier);
+        if (persistentObjectFunction == null)
+        {
+            persistentObjectFunction = new PersistentObjectFunction();
+            persistentObjectFunction.identifier = info.identifier;
+            ds.InsertObjectFunction(persistentObjectFunction);
+        }
+        else
+        {
+            info.hasViewed = persistentObjectFunction.isViewed;
+            info.hasViewed = true;
+        }
+    }
+
+    void ViewFunction(string identifier)
+    {
+        //persistentObjectFunction.amount = amount;
+        //currencyAmountByIdentifier[id] = currency.amount;
+        //ds.UpdateCurrencyAmount(currency);
     }
 }

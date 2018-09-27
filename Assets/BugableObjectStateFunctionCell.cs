@@ -7,6 +7,7 @@ using TMPro;
 public class BugableObjectStateFunctionCell : MonoBehaviour {
 
     public TextMeshProUGUI functionDescription;
+    public GameObject newBanner;
     Button cellBackground;
 
     public BugableObjectStateFunctionCell(BugableObjectFunctionInfo info, Object cellPrefab, Transform tableTransform)
@@ -19,6 +20,7 @@ public class BugableObjectStateFunctionCell : MonoBehaviour {
     public void Init(BugableObjectFunctionInfo info)
     {
         functionDescription.text = info.description;
+        newBanner.SetActive(!info.hasViewed);
         cellBackground = GetComponent<Button>();
         cellBackground.onClick.AddListener(OnClick);
     }

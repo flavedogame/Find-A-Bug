@@ -111,25 +111,27 @@ public class DataService  {
         _connection.Update(currency);
     }
 
-    //    public IEnumerable<PersistentBall> GetBallsOwned()
-    //    {
-    //        return _connection.Table<PersistentBall>();
-    //    }
 
-    //    public PersistentBall GetBall(string identifier)
-    //    {
-    //        return _connection.Table<PersistentBall>().Where(x => x.identifier == identifier).FirstOrDefault();
-    //    }
 
-    //    public void InsertBall(PersistentBall ball)
-    //    {
-    //        _connection.Insert(ball);
-    //    }
+    public IEnumerable<PersistentObjectFunction> GetAllObjectFunctions()
+    {
+        return _connection.Table<PersistentObjectFunction>();
+    }
+    public PersistentObjectFunction GetPersistentObjectFunction(string identifier)
+    {
+        return _connection.Table<PersistentObjectFunction>().Where(x => x.identifier == identifier).FirstOrDefault();
+    }
 
-    //    public void UpdateBall(PersistentBall ball)
-    //    {
-    //        _connection.Update(ball);
-    //    }
+    public void InsertObjectFunction(PersistentObjectFunction achieve)
+    {
+        _connection.Insert(achieve);
+    }
+
+    public void UpdateObjectFunction(PersistentObjectFunction achieve)
+    {
+        _connection.Update(achieve);
+    }
+
 
     public IEnumerable<PersistentAchievement> GetAllAchievements()
     {
