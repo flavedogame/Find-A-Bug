@@ -14,7 +14,6 @@ public class BugableObjectStateFunctionCell : MonoBehaviour {
 
     public BugableObjectStateFunctionCell(BugableObjectFunctionInfo info, Object cellPrefab, Transform tableTransform)
     {
-        Debug.LogError("function info " + functionInfo);
         GameObject go = Instantiate(cellPrefab, tableTransform) as GameObject;
         BugableObjectStateFunctionCell script = go.GetComponent<BugableObjectStateFunctionCell>();
         script.Init(info);
@@ -28,7 +27,6 @@ public class BugableObjectStateFunctionCell : MonoBehaviour {
 
     public void UpdateView()
     {
-        Debug.LogError("function info " + functionInfo);
         functionDescription.text = functionInfo.description;
         newBanner.SetActive(!functionInfo.isViewed);
         cellBackground = GetComponent<Button>();
