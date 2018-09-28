@@ -46,15 +46,19 @@ public class BugableObjectFunctionManager : Singleton<BugableObjectFunctionManag
         }
         else
         {
-            info.hasViewed = persistentObjectFunction.isViewed;
-            info.hasViewed = true;
+            info.isViewed = persistentObjectFunction.isViewed;
+            
         }
     }
 
-    void ViewFunction(string identifier)
+
+
+    public void ViewFunction(BugableObjectFunctionInfo info)
     {
-        //persistentObjectFunction.amount = amount;
-        //currencyAmountByIdentifier[id] = currency.amount;
-        //ds.UpdateCurrencyAmount(currency);
+        PersistentObjectFunction persistentObjectFunction = ds.GetPersistentObjectFunction(info.identifier);
+        persistentObjectFunction.isViewed = true;
+
+        ds.UpdateObjectFunction(persistentObjectFunction);
+        info.isViewed = true;
     }
 }

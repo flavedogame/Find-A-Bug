@@ -9,7 +9,7 @@ public class BugableObjectFunctionInfo {
     public string prerequisite;
     public string achievementToFinish;
     public int indexInObject;
-    public bool hasViewed;
+    public bool isViewed;
 
     //objectId	description	prerequisite	achievementToFinish	indexInObject
 

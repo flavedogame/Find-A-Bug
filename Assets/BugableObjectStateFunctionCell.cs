@@ -9,9 +9,12 @@ public class BugableObjectStateFunctionCell : MonoBehaviour {
     public TextMeshProUGUI functionDescription;
     public GameObject newBanner;
     Button cellBackground;
+    BugableObjectFunctionInfo functionInfo;
+
 
     public BugableObjectStateFunctionCell(BugableObjectFunctionInfo info, Object cellPrefab, Transform tableTransform)
     {
+        Debug.LogError("function info " + functionInfo);
         GameObject go = Instantiate(cellPrefab, tableTransform) as GameObject;
         BugableObjectStateFunctionCell script = go.GetComponent<BugableObjectStateFunctionCell>();
         script.Init(info);
@@ -19,14 +22,29 @@ public class BugableObjectStateFunctionCell : MonoBehaviour {
 
     public void Init(BugableObjectFunctionInfo info)
     {
-        functionDescription.text = info.description;
-        newBanner.SetActive(!info.hasViewed);
+        functionInfo = info;
+        UpdateView();
+    }
+
+    public void UpdateView()
+    {
+        Debug.LogError("function info " + functionInfo);
+        functionDescription.text = functionInfo.description;
+        newBanner.SetActive(!functionInfo.isViewed);
         cellBackground = GetComponent<Button>();
         cellBackground.onClick.AddListener(OnClick);
     }
 
     public void OnClick()
     {
-        CurrencyManager.Instance.AddValue("points", 1);
+        if (!functionInfo.isViewed)
+        {
+            CurrencyManager.Instance.AddValue("points", 1);
+            BugableObjectFunctionManager.Instance.ViewFunction(functionInfo);
+            UpdateView();
+        } else
+        {
+            Debug.Log("already collected for function " + functionInfo.identifier);
+        }
     }
 }
