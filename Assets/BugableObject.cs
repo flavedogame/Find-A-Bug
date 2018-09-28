@@ -6,6 +6,8 @@ public class BugableObject : MonoBehaviour {
 
     BugableObjectInfo info;
 
+    public GameObject alertIcon;
+
 	// Use this for initialization
 	void Start () {
         info = BugableObjectManager.Instance.bugableObjectInfoDict[Identifier];
@@ -13,12 +15,16 @@ public class BugableObject : MonoBehaviour {
         {
             Debug.LogError(Identifier + " does not exist in bugable object info dict");
         }
-
+        UpdateAlertView();
 	}
+
+    void UpdateAlertView()
+    {
+        alertIcon.SetActive(!info.IsFullyViewed);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
     protected virtual string Identifier

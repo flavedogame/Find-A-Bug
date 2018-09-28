@@ -24,4 +24,18 @@ public class BugableObjectInfo {
         }
     }
 
+    public bool IsFullyViewed
+    {
+        get { 
+        foreach(BugableObjectFunctionInfo functionInfo in BugableFunctions)
+        {
+            if (!functionInfo.isViewed)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    }
+
 }
