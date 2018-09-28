@@ -15,7 +15,7 @@ sysinfo.txt
 Packages/
 ProjectSettings/
 *.meta
- 
+Logs
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
