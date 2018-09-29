@@ -13,7 +13,7 @@ public class DefaultViewController : MonoBehaviour {
     virtual protected void Update()
     {
 #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)|| Input.GetMouseButtonDown(1))
         {
             Back();
             return;
@@ -40,4 +40,5 @@ public class DefaultViewController : MonoBehaviour {
     {
         return parentViewController!=null;
     }
+
 }
