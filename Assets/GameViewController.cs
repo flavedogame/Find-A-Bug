@@ -7,11 +7,18 @@ using TMPro;
 public class GameViewController : MonoBehaviour {
 
     public TextMeshProUGUI pointsText;
+    public Button pauseButton;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        pauseButton.onClick.AddListener(OnClickPauseButton);
+
+    }
+
+    void OnClickPauseButton()
+    {
+        new PauseMenuViewController();
+    }
 	
 	// Update is called once per frame
 	void Update () {
