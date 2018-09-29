@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TouchManager : MonoBehaviour {
     // Use this for initialization
@@ -17,6 +18,10 @@ public class TouchManager : MonoBehaviour {
         //    return;
         //}
         //#if !UNITY_EDITOR
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
