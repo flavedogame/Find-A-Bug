@@ -8,6 +8,8 @@ public class CheatMenuViewController : DefaultViewController
     public Object cheatButtonPrefab;
     public Transform listTransform;
 
+    delegate void ButtonDelegate();
+
     static public void CreateViewController()
     {
 
@@ -19,11 +21,16 @@ public class CheatMenuViewController : DefaultViewController
 
     private void Init()
     {
+        DataService ds = SQLiteDatabaseManager.Instance.ds;
+        AddButton("clean object function", delegate {  ds.DeleteAllObjectFunction(); });
+    }
+    void AddButton(string name,ButtonDelegate dele) 
+    {
         GameObject go = Instantiate(cheatButtonPrefab, listTransform) as GameObject;
         Button button = go.GetComponent<Button>();
-        Text name = go.GetComponentInChildren<Text>();
-        name.text = "clean database";
-        button.onClick.AddListener(delegate { Debug.Log("Hello"); });
+        Text text = go.GetComponentInChildren<Text>();
+        text.text = name;
+        button.onClick.AddListener(delegate { dele(); });
     }
     
 }

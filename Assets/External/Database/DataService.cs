@@ -111,8 +111,6 @@ public class DataService  {
         _connection.Update(currency);
     }
 
-
-
     public IEnumerable<PersistentObjectFunction> GetAllObjectFunctions()
     {
         return _connection.Table<PersistentObjectFunction>();
@@ -130,6 +128,11 @@ public class DataService  {
     public void UpdateObjectFunction(PersistentObjectFunction achieve)
     {
         _connection.Update(achieve);
+    }
+
+    public void DeleteAllObjectFunction()
+    {
+        _connection.DeleteAll<PersistentObjectFunction>();
     }
 
 

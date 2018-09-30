@@ -814,7 +814,6 @@ namespace SQLite4Unity3d
 		{
 			return new TableQuery<T> (this);
 		}
-
 		/// <summary>
 		/// Attempts to retrieve an object with the given primary key from the table
 		/// associated with the specified type. Use of this method requires that
