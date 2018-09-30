@@ -17,7 +17,7 @@ public class GameViewController : MonoBehaviour {
 
     void OnClickPauseButton()
     {
-        new PauseMenuViewController();
+        PauseMenuViewController.CreateViewController();
     }
 	
 	// Update is called once per frame

@@ -7,9 +7,10 @@ public class CheatMenuViewController : DefaultViewController
 {
     public Object cheatButtonPrefab;
     public Transform listTransform;
-    public CheatMenuViewController()
+
+    static public void CreateViewController()
     {
-        //int index = 
+
         Object prefab = ViewControllerManager.Instance.viewControllers[2];
         GameObject go = Instantiate(prefab, ViewControllerManager.Instance.viewControllerCanvas.transform) as GameObject;
         CheatMenuViewController script = go.GetComponent<CheatMenuViewController>();

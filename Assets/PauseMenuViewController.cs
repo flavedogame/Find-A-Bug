@@ -10,7 +10,7 @@ public class PauseMenuViewController : DefaultViewController
     public Button settingButton;
     public Button existButton;
 
-    public PauseMenuViewController()
+    static public void CreateViewController()
     {
         Object prefab = ViewControllerManager.Instance.viewControllers[1];
         GameObject go = Instantiate(prefab, ViewControllerManager.Instance.viewControllerCanvas.transform) as GameObject;
@@ -22,6 +22,6 @@ public class PauseMenuViewController : DefaultViewController
     {
 
         resumeButton.onClick.AddListener(Back);
-        cheatButton.onClick.AddListener(delegate { new CheatMenuViewController(); });
+        cheatButton.onClick.AddListener(delegate { CheatMenuViewController.CreateViewController(); });
     }
 }
