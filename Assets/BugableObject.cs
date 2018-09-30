@@ -16,10 +16,20 @@ public class BugableObject : MonoBehaviour {
             Debug.LogError(Identifier + " does not exist in bugable object info dict");
         }
         UpdateAlertView();
+        AddObserveUpdateFunction();
 	}
+
+    void AddObserveUpdateFunction()
+    {
+        BugableObjectFunctionManager.Instance.RegisterCompletionDelegate(delegate {
+            //Debug.Log("delegate for function");
+            //info = BugableObjectManager.Instance.bugableObjectInfoDict[Identifier];
+            UpdateAlertView(); });
+    }
 
     void UpdateAlertView()
     {
+        Debug.Log("info is view " + info.IsFullyViewed);
         alertIcon.SetActive(!info.IsFullyViewed);
     }
 	
@@ -34,7 +44,7 @@ public class BugableObject : MonoBehaviour {
 
     public void DidTap()
     {
-        Debug.Log("did tap " + info.description);
+        //Debug.Log("did tap " + info.description);
         new BugableObjectStateViewController(info);
     }
 }

@@ -26,6 +26,7 @@ public class BugableObjectManager : Singleton<BugableObjectManager>
     //}
     void ReadCSV()
     {
+        //Debug.Log("read csv for bugableObjectManager");
         bugableObjectInfoList = CsvUtil.LoadObjects<BugableObjectInfo>("bugableObject.csv");
         bugableObjectInfoDict = new Dictionary<string, BugableObjectInfo>();
         foreach (BugableObjectInfo info in bugableObjectInfoList)
