@@ -137,7 +137,7 @@ namespace Completed
             //foodText.text = "Food: " + food;
 
             //Call the AttemptMove method of the base class, passing in the component T (in this case Wall) and x and y direction to move.
-            Debug.Log("attempt to move "+xDir+" "+yDir);
+            //Debug.Log("attempt to move "+xDir+" "+yDir);
             base.AttemptMove <T> (xDir, yDir);
 			
 			//Hit allows us to reference the result of the Linecast done in Move.
