@@ -52,11 +52,12 @@ namespace Completed
 			if(hit.transform == null)
 			{
 				//If nothing was hit, start SmoothMovement co-routine passing in the Vector2 end as destination
-				StartCoroutine (SmoothMovement (end));
+				StartCoroutine (SmoothMovement(end));
 				
 				//Return true to say that Move was successful
 				return true;
 			}
+            Debug.Log("hit " + hit);
 			
 			//If something was hit, return false, Move was unsuccesful.
 			return false;
@@ -66,6 +67,7 @@ namespace Completed
 		//Co-routine for moving units from one space to next, takes a parameter end to specify where to move to.
 		protected IEnumerator SmoothMovement (Vector3 end)
 		{
+            Debug.Log("smooth movement " + transform.position+" "+end);
 			//Calculate the remaining distance to move based on the square magnitude of the difference between current position and end parameter. 
 			//Square magnitude is used instead of magnitude because it's computationally cheaper.
 			float sqrRemainingDistance = (transform.position - end).sqrMagnitude;
@@ -75,7 +77,7 @@ namespace Completed
 			{
 				//Find a new position proportionally closer to the end, based on the moveTime
 				Vector3 newPostion = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
-				
+                Debug.Log("move position " + newPostion);
 				//Call MovePosition on attached Rigidbody2D and move it to the calculated position.
 				rb2D.MovePosition (newPostion);
 				

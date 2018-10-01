@@ -29,7 +29,7 @@ public class BugableObject : MonoBehaviour {
 
     void UpdateAlertView()
     {
-        Debug.Log("info is view " + info.IsFullyViewed);
+        //Debug.Log("info is view " + info.IsFullyViewed);
         alertIcon.SetActive(!info.IsFullyViewed);
     }
 	

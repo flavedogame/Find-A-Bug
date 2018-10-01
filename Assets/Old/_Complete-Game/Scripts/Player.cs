@@ -130,14 +130,15 @@ namespace Completed
 		//AttemptMove takes a generic parameter T which for Player will be of the type Wall, it also takes integers for x and y direction to move in.
 		protected override void AttemptMove <T> (int xDir, int yDir)
 		{
-			//Every time player moves, subtract from food points total.
-			food--;
-			
-			//Update food text display to reflect current score.
-			//foodText.text = "Food: " + food;
-			
-			//Call the AttemptMove method of the base class, passing in the component T (in this case Wall) and x and y direction to move.
-			base.AttemptMove <T> (xDir, yDir);
+            //Every time player moves, subtract from food points total.
+            //food--;
+
+            //Update food text display to reflect current score.
+            //foodText.text = "Food: " + food;
+
+            //Call the AttemptMove method of the base class, passing in the component T (in this case Wall) and x and y direction to move.
+            Debug.Log("attempt to move "+xDir+" "+yDir);
+            base.AttemptMove <T> (xDir, yDir);
 			
 			//Hit allows us to reference the result of the Linecast done in Move.
 			RaycastHit2D hit;
@@ -150,72 +151,72 @@ namespace Completed
 			}
 			
 			//Since the player has moved and lost food points, check if the game has ended.
-			CheckIfGameOver ();
+			//CheckIfGameOver ();
 			
 			//Set the playersTurn boolean of GameManager to false now that players turn is over.
 			GameManager.instance.playersTurn = false;
 		}
-		
-		
-		//OnCantMove overrides the abstract function OnCantMove in MovingObject.
-		//It takes a generic parameter T which in the case of Player is a Wall which the player can attack and destroy.
-		protected override void OnCantMove <T> (T component)
+
+
+        //OnCantMove overrides the abstract function OnCantMove in MovingObject.
+        //It takes a generic parameter T which in the case of Player is a Wall which the player can attack and destroy.
+        protected override void OnCantMove<T>(T component)
+        {
+            ////Set hitWall to equal the component passed in as a parameter.
+            //Wall hitWall = component as Wall;
+
+            ////Call the DamageWall function of the Wall we are hitting.
+            //hitWall.DamageWall(wallDamage);
+
+            ////Set the attack trigger of the player's animation controller in order to play the player's attack animation.
+            //animator.SetTrigger("playerChop");
+        }
+
+
+        //OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
+        private void OnTriggerEnter2D (Collider2D other)
 		{
-			//Set hitWall to equal the component passed in as a parameter.
-			Wall hitWall = component as Wall;
+			////Check if the tag of the trigger collided with is Exit.
+			//if(other.tag == "Exit")
+			//{
+			//	//Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
+			//	Invoke ("Restart", restartLevelDelay);
+				
+			//	//Disable the player object since level is over.
+			//	enabled = false;
+			//}
 			
-			//Call the DamageWall function of the Wall we are hitting.
-			hitWall.DamageWall (wallDamage);
+			////Check if the tag of the trigger collided with is Food.
+			//else if(other.tag == "Food")
+			//{
+			//	//Add pointsPerFood to the players current food total.
+			//	food += pointsPerFood;
+				
+			//	//Update foodText to represent current total and notify player that they gained points
+			//	foodText.text = "+" + pointsPerFood + " Food: " + food;
+				
+			//	//Call the RandomizeSfx function of SoundManager and pass in two eating sounds to choose between to play the eating sound effect.
+			//	SoundManager.instance.RandomizeSfx (eatSound1, eatSound2);
+				
+			//	//Disable the food object the player collided with.
+			//	other.gameObject.SetActive (false);
+			//}
 			
-			//Set the attack trigger of the player's animation controller in order to play the player's attack animation.
-			animator.SetTrigger ("playerChop");
-		}
-		
-		
-		//OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
-		private void OnTriggerEnter2D (Collider2D other)
-		{
-			//Check if the tag of the trigger collided with is Exit.
-			if(other.tag == "Exit")
-			{
-				//Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
-				Invoke ("Restart", restartLevelDelay);
+			////Check if the tag of the trigger collided with is Soda.
+			//else if(other.tag == "Soda")
+			//{
+			//	//Add pointsPerSoda to players food points total
+			//	food += pointsPerSoda;
 				
-				//Disable the player object since level is over.
-				enabled = false;
-			}
-			
-			//Check if the tag of the trigger collided with is Food.
-			else if(other.tag == "Food")
-			{
-				//Add pointsPerFood to the players current food total.
-				food += pointsPerFood;
+			//	//Update foodText to represent current total and notify player that they gained points
+			//	foodText.text = "+" + pointsPerSoda + " Food: " + food;
 				
-				//Update foodText to represent current total and notify player that they gained points
-				foodText.text = "+" + pointsPerFood + " Food: " + food;
+			//	//Call the RandomizeSfx function of SoundManager and pass in two drinking sounds to choose between to play the drinking sound effect.
+			//	SoundManager.instance.RandomizeSfx (drinkSound1, drinkSound2);
 				
-				//Call the RandomizeSfx function of SoundManager and pass in two eating sounds to choose between to play the eating sound effect.
-				SoundManager.instance.RandomizeSfx (eatSound1, eatSound2);
-				
-				//Disable the food object the player collided with.
-				other.gameObject.SetActive (false);
-			}
-			
-			//Check if the tag of the trigger collided with is Soda.
-			else if(other.tag == "Soda")
-			{
-				//Add pointsPerSoda to players food points total
-				food += pointsPerSoda;
-				
-				//Update foodText to represent current total and notify player that they gained points
-				foodText.text = "+" + pointsPerSoda + " Food: " + food;
-				
-				//Call the RandomizeSfx function of SoundManager and pass in two drinking sounds to choose between to play the drinking sound effect.
-				SoundManager.instance.RandomizeSfx (drinkSound1, drinkSound2);
-				
-				//Disable the soda object the player collided with.
-				other.gameObject.SetActive (false);
-			}
+			//	//Disable the soda object the player collided with.
+			//	other.gameObject.SetActive (false);
+			//}
 		}
 		
 		
@@ -233,34 +234,34 @@ namespace Completed
 		public void LoseFood (int loss)
 		{
 			//Set the trigger for the player animator to transition to the playerHit animation.
-			animator.SetTrigger ("playerHit");
+			//animator.SetTrigger ("playerHit");
 			
-			//Subtract lost food points from the players total.
-			food -= loss;
+			////Subtract lost food points from the players total.
+			//food -= loss;
 			
-			//Update the food display with the new total.
-			foodText.text = "-"+ loss + " Food: " + food;
+			////Update the food display with the new total.
+			//foodText.text = "-"+ loss + " Food: " + food;
 			
-			//Check to see if game has ended.
-			CheckIfGameOver ();
+			////Check to see if game has ended.
+			//CheckIfGameOver ();
 		}
 		
 		
 		//CheckIfGameOver checks if the player is out of food points and if so, ends the game.
 		private void CheckIfGameOver ()
 		{
-			//Check if food point total is less than or equal to zero.
-			if (food <= 0) 
-			{
-				//Call the PlaySingle function of SoundManager and pass it the gameOverSound as the audio clip to play.
-				SoundManager.instance.PlaySingle (gameOverSound);
+			////Check if food point total is less than or equal to zero.
+			//if (food <= 0) 
+			//{
+			//	//Call the PlaySingle function of SoundManager and pass it the gameOverSound as the audio clip to play.
+			//	SoundManager.instance.PlaySingle (gameOverSound);
 				
-				//Stop the background music.
-				SoundManager.instance.musicSource.Stop();
+			//	//Stop the background music.
+			//	SoundManager.instance.musicSource.Stop();
 				
-				//Call the GameOver function of GameManager.
-				GameManager.instance.GameOver ();
-			}
+			//	//Call the GameOver function of GameManager.
+			//	GameManager.instance.GameOver ();
+			//}
 		}
 	}
 }
