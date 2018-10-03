@@ -16,11 +16,18 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         {
             System.Type narrativeType = System.Type.GetType(info.narrativeAction);
             NarrativeAction action = (NarrativeAction)System.Activator.CreateInstance(narrativeType, info);
-            if (!narrativeActionDictionary.ContainsKey(info.achievement))
+            if (info.achievement.Length == 0)
             {
-                narrativeActionDictionary[info.achievement] = new HashSet<NarrativeAction>();
+                activeNarrativeActions.Add(action);
             }
-            narrativeActionDictionary[info.achievement].Add(action);
+            else
+            {
+                if (!narrativeActionDictionary.ContainsKey(info.achievement))
+                {
+                    narrativeActionDictionary[info.achievement] = new HashSet<NarrativeAction>();
+                }
+                narrativeActionDictionary[info.achievement].Add(action);
+            }
         }
     }
 

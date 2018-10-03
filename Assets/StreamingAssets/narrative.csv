@@ -1,3 +1,3 @@
 identifier,achievement,narrativeAction,param
 gameStartNarration,,NarrationAction,narrationID:developerIntroduction
-wallBugFinishedNarration,wallBugFinished,NarrationAction,narrationID:developerTestOneRoomBugFinished
+wallBugFinishedNarration,finishWallBug,NarrationAction,narrationID:developerTestOneRoomBugFinished
