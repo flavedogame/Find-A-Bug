@@ -16,8 +16,8 @@ public class StartupSteps : MonoBehaviour {
         //CheatManager.Instance.Init();
         //CurrencyManager.Instance.Init();
         //AbilityManager.Instance.Init();
-        //AchievementManager.Instance.Init();
-        //NarrativeManager.Instance.Init();
+        AchievementManager.Instance.Init();
+        NarrativeManager.Instance.Init();
         //TutorialManager.Instance.Init();
         //MonsterManager.Instance.Init();
         //LevelManager.Instance.Init();

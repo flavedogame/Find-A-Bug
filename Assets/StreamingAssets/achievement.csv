@@ -1,4 +1,3 @@
 identifier,prerequisite,achievementStep,fallThrough,description,isTutorial,reward,comment
-firstStartPlaying,,firstStartPlayingStep,,get Into Start Playing,TRUE,,tutorial0
-changeColor,firstStartPlaying,changeColorStep,,change Color,TRUE,,tutorial1
-passCorrectColor,changeColor,passCorrectColorStep,,pass Correct Color,TRUE,,tutorial2
+finishIntroduction,,emptyStep,,,TRUE,,
+finishWallBug,,emptyStep,,,TRUE,,

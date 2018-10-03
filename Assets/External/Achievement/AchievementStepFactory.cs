@@ -7,11 +7,11 @@ public class AchievementStepFactory {
 	public static AchievementStep CreateAchievementStep(AchievementStepInfo info)
     {
         //use reflection later
-        if (info.requirementClassString == "PlayerReachedLocationRequirement")
-        {
+        //if (info.requirementClassString == "PlayerReachedLocationRequirement")
+        //{
             AchievementAmountStep step = new AchievementAmountStep(info);
             return step;
-        }
-        return null;
+        //}
+        //return null;
     }
 }
