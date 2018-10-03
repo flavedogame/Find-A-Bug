@@ -4,13 +4,29 @@ using UnityEngine;
 
 public class NarrationAction : NarrativeAction
 {
-        public NarrationAction(NarrativeInfo info) : base(info)
-        {
-            //Debug.Log("create tutorial action with info: " + narrativeInfo.identifier);
-        }
+    public NarrationAction(NarrativeInfo info) : base(info)
+    {
+        //Debug.Log("create tutorial action with info: " + narrativeInfo.identifier);
+    }
 
-        protected override void P_Enable()
+    protected override void P_Enable()
+    {
+        Debug.Log("enable tutorial action with info: " + narrativeInfo.identifier);
+        if (narrativeInfo.delayTime > 0)
         {
-            Debug.Log("enable tutorial action with info: " + narrativeInfo.identifier);
+            //schedule later
+        }
+        else
+        {
+            ShowNarration();
         }
     }
+
+    void ShowNarration()
+    {
+        if (!NarrationManager.Instance.IsShowingNarrationWithIdentifier(narrativeInfo.identifier))
+        {
+            NarrationManager.Instance.ShowNarrationWithIdentifier(narrativeInfo.identifier);
+        }
+    }
+}

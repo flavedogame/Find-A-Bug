@@ -18,6 +18,7 @@ public class StartupSteps : MonoBehaviour {
         //AbilityManager.Instance.Init();
         AchievementManager.Instance.Init();
         NarrativeManager.Instance.Init();
+        NarrationManager.Instance.Init();
         //TutorialManager.Instance.Init();
         //MonsterManager.Instance.Init();
         //LevelManager.Instance.Init();
