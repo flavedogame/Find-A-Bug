@@ -4,30 +4,29 @@ using UnityEngine;
 using Sinbad;
 
 public class NarrationManager : Singleton<NarrationManager> {
-    Dictionary<string, HashSet<NarrativeAction>> narrativeActionDictionary;
+    Dictionary<string, List<NarrationInfo>> narrationDictionary;
     List<NarrativeAction> activeNarrativeActions;
     HashSet<string> enabledNarrativeActions;
     public void Init() {
         List<NarrationInfo> narrationInfoList = CsvUtil.LoadObjects<NarrationInfo>("narration.csv");
-        narrativeActionDictionary = new Dictionary<string, HashSet<NarrativeAction>>();
-        enabledNarrativeActions = new HashSet<string>();
-        activeNarrativeActions = new List<NarrativeAction>();
+        narrationDictionary = new Dictionary<string, List<NarrationInfo>>();
         foreach(NarrationInfo info in narrationInfoList)
         {
-            //System.Type narrativeType = System.Type.GetType(info.narrativeAction);
-            //NarrativeAction action = (NarrativeAction)System.Activator.CreateInstance(narrativeType, info);
-            //if (info.achievement.Length == 0)
-            //{
-            //    activeNarrativeActions.Add(action);
-            //}
-            //else
-            //{
-            //    if (!narrativeActionDictionary.ContainsKey(info.achievement))
-            //    {
-            //        narrativeActionDictionary[info.achievement] = new HashSet<NarrativeAction>();
-            //    }
-            //    narrativeActionDictionary[info.achievement].Add(action);
-            //}
+            string identifier = info.identifier;
+            string[] splitIdentifier = info.identifier.Split('_');
+            if (splitIdentifier.Length > 2)
+            {
+                Debug.LogError("narration identifier format is wrong " + info.identifier);
+            }
+            if(splitIdentifier.Length == 2)
+            {
+                identifier = splitIdentifier[0];
+            }
+            if (!narrationDictionary.ContainsKey(identifier))
+            {
+                narrationDictionary[identifier] = new List<NarrationInfo>();
+            }
+            narrationDictionary[identifier].Add(info);
         }
     }
 
@@ -36,41 +35,13 @@ public class NarrationManager : Singleton<NarrationManager> {
         return false;
     }
 
-    public void ShowNarrationWithIdentifier(string identifier)
+    public void ShowNarrationWithIdentifier(string identifier)//delegate, tag, give choice
     {
         Debug.Log("show narration " + identifier);
-    }
-
-    public void UpdateAchievement(string achievement, AchievementState oldState,AchievementState newState)
-    {
-        if (narrativeActionDictionary == null)
+        if (!narrationDictionary.ContainsKey(identifier))
         {
-            return;
+            Debug.LogError("identifier does not exist in narration dict " + identifier);
         }
-        if(oldState == AchievementState.locked && newState == AchievementState.active)
-        {
-
-            Debug.Log("update " + achievement + " " + oldState + " " + newState);
-            if (narrativeActionDictionary.ContainsKey(achievement)) { 
-                activeNarrativeActions.AddRange(narrativeActionDictionary[achievement]);
-            }
-        }
-        //sort
-    }
-
-    private void Update()
-    {
-        if (narrativeActionDictionary == null)
-        {
-            return;
-        }
-        foreach (NarrativeAction action in activeNarrativeActions)
-        {
-            if (!enabledNarrativeActions.Contains(action.identifier))
-            {
-                action.Enable();
-                enabledNarrativeActions.Add(action.identifier);
-            }
-        }
+        List<NarrationInfo> narrationInfos = narrationDictionary[identifier];
     }
 }

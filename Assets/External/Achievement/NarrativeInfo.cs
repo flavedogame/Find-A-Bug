@@ -9,4 +9,12 @@ public class NarrativeInfo{
     public int delayTime;
     public Dictionary<string,string> param;
 
+    public string NarrationId
+    {
+        get
+        {
+            return param["narrationID"];
+        }
+    }
+
 }

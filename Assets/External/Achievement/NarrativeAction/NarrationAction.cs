@@ -26,7 +26,7 @@ public class NarrationAction : NarrativeAction
     {
         if (!NarrationManager.Instance.IsShowingNarrationWithIdentifier(narrativeInfo.identifier))
         {
-            NarrationManager.Instance.ShowNarrationWithIdentifier(narrativeInfo.identifier);
+            NarrationManager.Instance.ShowNarrationWithIdentifier(narrativeInfo.NarrationId);
         }
     }
 }

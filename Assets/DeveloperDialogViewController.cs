@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class DeveloperDialogViewController : MonoBehaviour
+public class DeveloperDialogViewController : DefaultViewController
 {
 
     public TextMeshProUGUI dialogText;
