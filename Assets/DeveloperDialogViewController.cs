@@ -30,6 +30,33 @@ public class DeveloperDialogViewController : DefaultViewController
         ShowNextFrame();
     }
 
+    bool IsLastFrame()
+    {
+        return currentNarrationFrameIndex == narrationInfoList.Count;
+    }
+
+    void OnClick()
+    {
+        if (IsLastFrame())
+        {
+            //
+            Destroy(gameObject);
+        }
+        else
+        {
+            ShowNextFrame();
+        }
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if (Input.GetMouseButtonDown(0))
+        {
+            OnClick();
+        }
+    }
+
     void SetupView()
     {
 
