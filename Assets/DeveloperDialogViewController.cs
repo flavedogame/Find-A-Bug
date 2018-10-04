@@ -9,6 +9,8 @@ public class DeveloperDialogViewController : DefaultViewController
 
     public TextMeshProUGUI dialogText;
     public Image dialogIcon;
+    List<NarrationInfo> narrationInfoList;
+    int currentNarrationFrameIndex;
     // Start is called before the first frame update
 
     static public void CreateViewController(List<NarrationInfo> narrationInfoList)
@@ -20,9 +22,43 @@ public class DeveloperDialogViewController : DefaultViewController
         script.Init(narrationInfoList);
     }
 
-    private void Init(List<NarrationInfo> narrationInfoList)
+    private void Init(List<NarrationInfo> list)
     {
-        //DataService ds = SQLiteDatabaseManager.Instance.ds;
-        //AddButton("clean object function", delegate { ds.DeleteAllObjectFunction(); BugableObjectFunctionManager.Instance.ReadDatabase(); });
+        narrationInfoList = list;
+        currentNarrationFrameIndex = -1;
+        SetupView();
+        ShowNextFrame();
+    }
+
+    void SetupView()
+    {
+
+    }
+
+    void ShowNextFrame()
+    {
+        currentNarrationFrameIndex++;
+        NarrationInfo currentNarrationInfo = CurrentNarrationInfo();
+        if (currentNarrationInfo != null)
+        {
+            UpdateView(currentNarrationInfo);
+        } else
+        {
+            Debug.LogError("narration info could not be found for index " + currentNarrationFrameIndex);
+        }
+    }
+
+    void UpdateView(NarrationInfo narrationInfo)
+    {
+        dialogText.text = narrationInfo.dialog;
+    }
+
+    NarrationInfo CurrentNarrationInfo()
+    {
+        if (currentNarrationFrameIndex < narrationInfoList.Count)
+        {
+            return narrationInfoList[currentNarrationFrameIndex];
+        }
+        return null;
     }
 }
