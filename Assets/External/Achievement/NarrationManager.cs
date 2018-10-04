@@ -43,5 +43,6 @@ public class NarrationManager : Singleton<NarrationManager> {
             Debug.LogError("identifier does not exist in narration dict " + identifier);
         }
         List<NarrationInfo> narrationInfos = narrationDictionary[identifier];
+        DeveloperDialogViewController.CreateViewController(narrationInfos);
     }
 }

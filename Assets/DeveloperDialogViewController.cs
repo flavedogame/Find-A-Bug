@@ -11,18 +11,18 @@ public class DeveloperDialogViewController : DefaultViewController
     public Image dialogIcon;
     // Start is called before the first frame update
 
-    public void Init()
+    static public void CreateViewController(List<NarrationInfo> narrationInfoList)
     {
 
-    }
-    void Start()
-    {
-        
+        Object prefab = ViewControllerManager.Instance.viewControllers[3];
+        GameObject go = Instantiate(prefab, ViewControllerManager.Instance.viewControllerCanvas.transform) as GameObject;
+        DeveloperDialogViewController script = go.GetComponent<DeveloperDialogViewController>();
+        script.Init(narrationInfoList);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Init(List<NarrationInfo> narrationInfoList)
     {
-        
+        //DataService ds = SQLiteDatabaseManager.Instance.ds;
+        //AddButton("clean object function", delegate { ds.DeleteAllObjectFunction(); BugableObjectFunctionManager.Instance.ReadDatabase(); });
     }
 }
