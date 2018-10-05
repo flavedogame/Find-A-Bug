@@ -5,8 +5,6 @@ using Sinbad;
 
 public class NarrationManager : Singleton<NarrationManager> {
     Dictionary<string, List<NarrationInfo>> narrationDictionary;
-    List<NarrativeAction> activeNarrativeActions;
-    HashSet<string> enabledNarrativeActions;
     public void Init() {
         List<NarrationInfo> narrationInfoList = CsvUtil.LoadObjects<NarrationInfo>("narration.csv");
         narrationDictionary = new Dictionary<string, List<NarrationInfo>>();
@@ -35,14 +33,16 @@ public class NarrationManager : Singleton<NarrationManager> {
         return false;
     }
 
-    public void ShowNarrationWithIdentifier(string identifier)//delegate, tag, give choice
+    public void ShowNarrationWithIdentifier(NarrativeInfo narrativeInfo)//delegate, tag, give choice
     {
+        string identifier = narrativeInfo.NarrationId;
+        string narrativeIdentifier = narrativeInfo.identifier;
         Debug.Log("show narration " + identifier);
         if (!narrationDictionary.ContainsKey(identifier))
         {
             Debug.LogError("identifier does not exist in narration dict " + identifier);
         }
         List<NarrationInfo> narrationInfos = narrationDictionary[identifier];
-        DeveloperDialogViewController.CreateViewController(narrationInfos);
+        DeveloperDialogViewController.CreateViewController(narrativeIdentifier,narrationInfos);
     }
 }

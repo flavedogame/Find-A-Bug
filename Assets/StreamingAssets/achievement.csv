@@ -1,3 +1,4 @@
 identifier,prerequisite,achievementStep,fallThrough,description,isTutorial,reward,comment
-finishIntroduction,,emptyStep,,,TRUE,,
-finishWallBug,,emptyStep,,,TRUE,,
+startGame,,emptyStep,,,TRUE,,
+finishIntroduction,startGame,emptyStep,,,TRUE,,
+finishWallBug,finishIntroduction,emptyStep,,,TRUE,,

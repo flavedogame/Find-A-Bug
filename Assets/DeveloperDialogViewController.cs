@@ -11,19 +11,20 @@ public class DeveloperDialogViewController : DefaultViewController
     public Image dialogIcon;
     List<NarrationInfo> narrationInfoList;
     int currentNarrationFrameIndex;
+    string narrativeIdentifier;
     // Start is called before the first frame update
 
-    static public void CreateViewController(List<NarrationInfo> narrationInfoList)
+    static public void CreateViewController(string identifier, List<NarrationInfo> narrationInfoList)
     {
-
         Object prefab = ViewControllerManager.Instance.viewControllers[3];
         GameObject go = Instantiate(prefab, ViewControllerManager.Instance.viewControllerCanvas.transform) as GameObject;
         DeveloperDialogViewController script = go.GetComponent<DeveloperDialogViewController>();
-        script.Init(narrationInfoList);
+        script.Init(identifier,narrationInfoList);
     }
 
-    private void Init(List<NarrationInfo> list)
+    private void Init(string identifier, List<NarrationInfo> list)
     {
+        narrativeIdentifier = identifier;
         narrationInfoList = list;
         currentNarrationFrameIndex = -1;
         SetupView();
@@ -32,14 +33,14 @@ public class DeveloperDialogViewController : DefaultViewController
 
     bool IsLastFrame()
     {
-        return currentNarrationFrameIndex == narrationInfoList.Count;
+        return currentNarrationFrameIndex == narrationInfoList.Count-1;
     }
 
     void OnClick()
     {
         if (IsLastFrame())
         {
-            //
+            NarrativeManager.Instance.FinishNarrative(narrativeIdentifier);
             Destroy(gameObject);
         }
         else

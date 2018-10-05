@@ -8,7 +8,7 @@ public class NarrativeInfo{
     public string narrativeAction;
     public int delayTime;
     public Dictionary<string,string> param;
-
+    public string finishAchievement;
     public string NarrationId
     {
         get

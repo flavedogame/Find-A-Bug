@@ -1,4 +1,4 @@
-identifier,achievement,narrativeAction,param,delayTime
-gameStartNarration,,NarrationAction,narrationID:developerIntroduction,0
-wallBugHintNarration,finishIntroduction,NarrationAction,narrationID:wallBugHint,10
-wallBugFinishedNarration,finishWallBug,NarrationAction,narrationID:developerTestOneRoomBugFinished,0
+identifier,achievement,narrativeAction,param,delayTime,finishAchievement
+gameStartNarration,startGame,NarrationAction,narrationID:developerIntroduction,0,
+wallBugHintNarration,finishIntroduction,NarrationAction,narrationID:wallBugHint,0,
+wallBugFinishedNarration,finishWallBug,NarrationAction,narrationID:developerTestOneRoomBugFinished,0,
