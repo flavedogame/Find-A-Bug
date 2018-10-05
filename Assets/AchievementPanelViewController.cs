@@ -19,10 +19,6 @@ public class AchievementPanelViewController : DefaultViewController
 
     void Init()
     {
-        //foreach (Transform child in achievementListPanel.transform)
-        //{
-        //    GameObject.Destroy(child.gameObject);
-        //}
         foreach (Achievement achievement in AchievementManager.Instance.achievementList)
         {
 
