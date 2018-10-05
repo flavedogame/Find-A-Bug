@@ -4,12 +4,17 @@ using UnityEngine;
 using Sinbad;
 
 public class NarrationManager : Singleton<NarrationManager> {
+    
     Dictionary<string, List<NarrationInfo>> narrationDictionary;
     public void Init() {
         List<NarrationInfo> narrationInfoList = CsvUtil.LoadObjects<NarrationInfo>("narration.csv");
         narrationDictionary = new Dictionary<string, List<NarrationInfo>>();
         foreach(NarrationInfo info in narrationInfoList)
         {
+            if (!info.isVisibleForTest && CheatSettings.Instance.skipTestingNarrations)
+            {
+                continue;
+            }
             string identifier = info.identifier;
             string[] splitIdentifier = info.identifier.Split('_');
             if (splitIdentifier.Length > 2)

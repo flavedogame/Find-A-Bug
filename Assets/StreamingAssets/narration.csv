@@ -1,15 +1,15 @@
-identifier,speakerName,dialog,speakerImage
-developerIntroduction_1,,"Hi,I'm Flavedo, a game develop",
-developerIntroduction_2,,You must be the volunteer tester to help me test my game! Thank you very much!,
-developerIntroduction_3,,"Before we start testing, let me test your test skill :P",
-developerIntroduction_4,,"So first, there is a bug in this room.",
-developerIntroduction_5,,You can click on objects with an alert in the game to check attributes of them.,
-developerIntroduction_6,,"When you met a bug(or we would say, reproduce a bug),",
-developerIntroduction_7,,you can click on "FOUND IT" button then click on the object that cause the bug.,
-developerIntroduction_8,,Now find the bug in the room!,
-developerTestOneRoomBugFinished_1,,Wow I'm impressed you find it so fast! ,
-developerTestOneRoomBugFinished_2,,"The wall says it will block you, but I didn't implement it -- on purpose!",
-developerTestOneRoomBugFinished_3,,"Ok I'll fix the bug, you can't walk through the wall now.",
-developerTestOneRoomBugFinished_4,,"I also added some new stuff, a real bug! Try it!",
-wallBugHint_1,,"Hmm...When I say there is a bug in the room, it does not mean a real bug",
-wallBugHint_2,,Or it is really in the room.,
+identifier,speakerName,dialog,speakerImage,isVisibleForTest
+developerIntroduction_1,,"Hi,I'm Flavedo, a game develop",,TRUE
+developerIntroduction_2,,You must be the volunteer tester to help me test my game! Thank you very much!,,FALSE
+developerIntroduction_3,,"Before we start testing, let me test your test skill :P",,FALSE
+developerIntroduction_4,,"So first, there is a bug in this room.",,FALSE
+developerIntroduction_5,,You can click on objects with an alert in the game to check attributes of them.,,FALSE
+developerIntroduction_6,,"When you met a bug(or we would say, reproduce a bug),",,FALSE
+developerIntroduction_7,,you can click on "FOUND IT" button then click on the object that cause the bug.,,FALSE
+developerIntroduction_8,,Now find the bug in the room!,,FALSE
+developerTestOneRoomBugFinished_1,,Wow I'm impressed you find it so fast! ,,TRUE
+developerTestOneRoomBugFinished_2,,"The wall says it will block you, but I didn't implement it -- on purpose!",,FALSE
+developerTestOneRoomBugFinished_3,,"Ok I'll fix the bug, you can't walk through the wall now.",,FALSE
+developerTestOneRoomBugFinished_4,,"I also added some new stuff, a real bug! Try it!",,FALSE
+wallBugHint_1,,"Hmm...When I say there is a bug in the room, it does not mean a real bug",,TRUE
+wallBugHint_2,,Or it is really in the room.,,FALSE

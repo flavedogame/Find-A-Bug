@@ -7,5 +7,6 @@ public class NarrationInfo{
     public string speakerName;
     public string dialog;
     public string speakerImage;
+    public bool isVisibleForTest;
 
 }
