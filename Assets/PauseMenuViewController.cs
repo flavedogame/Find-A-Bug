@@ -23,5 +23,6 @@ public class PauseMenuViewController : DefaultViewController
 
         resumeButton.onClick.AddListener(Back);
         cheatButton.onClick.AddListener(delegate { CheatMenuViewController.CreateViewController(); });
+        existButton.onClick.AddListener(delegate { AchievementPanelViewController.CreateViewController(); });
     }
 }
