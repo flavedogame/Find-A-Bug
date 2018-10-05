@@ -23,6 +23,12 @@ public class CheatMenuViewController : DefaultViewController
     {
         DataService ds = SQLiteDatabaseManager.Instance.ds;
         AddButton("clean object function", delegate {  ds.DeleteAllObjectFunction(); BugableObjectFunctionManager.Instance.ReadDatabase(); });
+        AddButton("clean Achievement", delegate
+        {
+            AchievementManager.Instance.CleanAchievements();
+        }
+            );
+
     }
     void AddButton(string name,ButtonDelegate dele) 
     {
