@@ -14,7 +14,8 @@ public class NarrationAction : NarrativeAction
         Debug.Log("enable tutorial action with info: " + narrativeInfo.identifier);
         if (narrativeInfo.delayTime > 0)
         {
-            //schedule later
+            MonoBehaviour mb = CoroutineMonobehavior.Instance.GetComponent<MonoBehaviour>();
+            mb.StartCoroutine(ShowNarrationAfterTime(narrativeInfo.delayTime));
         }
         else
         {
@@ -22,11 +23,23 @@ public class NarrationAction : NarrativeAction
         }
     }
 
+    void Update()
+    {
+        Debug.Log("update action" + identifier);
+    }
+
     void ShowNarration()
     {
+        Debug.Log("show narration " + identifier);
         if (!NarrationManager.Instance.IsShowingNarrationWithIdentifier(narrativeInfo.identifier))
         {
             NarrationManager.Instance.ShowNarrationWithIdentifier(narrativeInfo);
         }
+    }
+
+    IEnumerator ShowNarrationAfterTime(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        ShowNarration();
     }
 }

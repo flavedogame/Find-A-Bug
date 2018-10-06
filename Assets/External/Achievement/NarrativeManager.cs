@@ -7,12 +7,14 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     Dictionary<string, HashSet<NarrativeAction>> narrativeActionDictionary;
     Dictionary<string, NarrativeInfo> narrativeInfoDictionary;
     List<NarrativeAction> activeNarrativeActions;
-    HashSet<string> enabledNarrativeActions;
+    HashSet<string> enabledNarrativeActionNames;
+    HashSet<NarrativeAction> enabledNarrativeActions;
     public void Init() {
         List<NarrativeInfo> narrativeInfoList = CsvUtil.LoadObjects<NarrativeInfo>("narrative.csv");
         narrativeActionDictionary = new Dictionary<string, HashSet<NarrativeAction>>();
         narrativeInfoDictionary = new Dictionary<string, NarrativeInfo>();
-        enabledNarrativeActions = new HashSet<string>();
+        enabledNarrativeActionNames = new HashSet<string>();
+        enabledNarrativeActions = new HashSet<NarrativeAction>();
         activeNarrativeActions = new List<NarrativeAction>();
         foreach(NarrativeInfo info in narrativeInfoList)
         {
@@ -62,10 +64,10 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         }
         foreach (NarrativeAction action in activeNarrativeActions)
         {
-            if (!enabledNarrativeActions.Contains(action.identifier))
+            if (!enabledNarrativeActionNames.Contains(action.identifier))
             {
                 action.Enable();
-                enabledNarrativeActions.Add(action.identifier);
+                enabledNarrativeActionNames.Add(action.identifier);
             }
         }
     }
@@ -74,10 +76,10 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     {
         NarrativeInfo narrativeInfo = narrativeInfoDictionary[identifier];
 
-        Debug.Log("finish narrative " + identifier+" "+ narrativeInfo+" "+ narrativeInfo.achievement);
-        if (narrativeInfo.achievement!=null && narrativeInfo.achievement.Length > 0)
+        Debug.Log("finish narrative " + identifier+" "+ narrativeInfo+" "+ narrativeInfo.finishAchievement);
+        if (narrativeInfo.finishAchievement != null && narrativeInfo.finishAchievement.Length > 0)
         {
-            AchievementManager.Instance.FinishAchievement(narrativeInfo.achievement);
+            AchievementManager.Instance.FinishAchievement(narrativeInfo.finishAchievement);
         }
     }
 }

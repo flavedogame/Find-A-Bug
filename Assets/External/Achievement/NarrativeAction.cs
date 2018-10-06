@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NarrativeAction {
+public class NarrativeAction{
     public string identifier;
     public NarrativeInfo narrativeInfo;
     bool isEnabled;
