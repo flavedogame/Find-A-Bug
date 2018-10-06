@@ -95,5 +95,7 @@ public class AchievementManager : Singleton<AchievementManager> {
             achievement.CleanStep();
             achievement.state = AchievementState.locked;
         }
+        NarrationManager.Instance.Init();
+        NarrativeManager.Instance.Init();
     }
 }

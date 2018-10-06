@@ -39,6 +39,11 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         }
     }
 
+    public void SetupNarrativeInfoList()
+    {
+
+    }
+
     public void UpdateAchievement(string achievement, AchievementState oldState,AchievementState newState)
     {
         if (narrativeActionDictionary == null)
