@@ -13,6 +13,7 @@ public class CheatSettings : Singleton<CheatSettings>
         if (cleanAchievementWhenStart)
         {
             AchievementManager.Instance.CleanAchievements();
+
         }
     }
 

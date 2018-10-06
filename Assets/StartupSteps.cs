@@ -13,6 +13,7 @@ public class StartupSteps : MonoBehaviour {
         BugableObjectFunctionManager.Instance.Init();
         BugableObjectManager.Instance.Init();
         GameLogicManager.Instance.Init();
+        GameModeManager.Instance.Init();
         //CheatManager.Instance.Init();
         //CurrencyManager.Instance.Init();
         //AbilityManager.Instance.Init();

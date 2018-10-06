@@ -45,6 +45,18 @@ public class BugableObject : MonoBehaviour {
     public void DidTap()
     {
         //Debug.Log("did tap " + info.description);
-        new BugableObjectStateViewController(info);
+        if (GameModeManager.Instance.isInFindBugMode)
+        {
+            FindBug();
+        }
+        else
+        {
+            new BugableObjectStateViewController(info);
+        }
+    }
+
+    virtual protected void FindBug()
+    {
+        Debug.LogError("should implement in child");
     }
 }
