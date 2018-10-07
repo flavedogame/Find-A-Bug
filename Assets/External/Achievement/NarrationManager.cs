@@ -50,4 +50,10 @@ public class NarrationManager : Singleton<NarrationManager> {
         List<NarrationInfo> narrationInfos = narrationDictionary[identifier];
         DeveloperDialogViewController.CreateViewController(narrativeIdentifier,narrationInfos);
     }
+
+    public void ShowNarrationWithIdentifier(string narrationIdentifier)
+    {
+        List<NarrationInfo> narrationInfos = narrationDictionary[narrationIdentifier];
+        DeveloperDialogViewController.CreateViewController(null, narrationInfos);
+    }
 }

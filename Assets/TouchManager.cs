@@ -30,13 +30,19 @@ public class TouchManager : MonoBehaviour {
             //CSUtil.LOG("screen touched " + mousePosition);
             mousePosition = new Vector3(mousePosition.x, mousePosition.y, 10);
             RaycastHit2D[] vHits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(mousePosition), Vector2.zero);
+            bool getHit = false;
             foreach (RaycastHit2D vhit in vHits)
             {
                 if (vhit.transform.tag == "BugableObject")
                 {
                     BugableObject script = vhit.transform.gameObject.GetComponent<BugableObject>();
                     script.DidTap();
+                    getHit = true;
                 }
+            }
+            if(getHit == false)
+            {
+                //should not do this here, but we should show different cursor when it is on something that is a bug object to when it is not
             }
         }
         //#endif

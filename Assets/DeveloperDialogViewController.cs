@@ -40,7 +40,10 @@ public class DeveloperDialogViewController : DefaultViewController
     {
         if (IsLastFrame())
         {
-            NarrativeManager.Instance.FinishNarrative(narrativeIdentifier);
+            if (narrativeIdentifier != null)
+            {
+                NarrativeManager.Instance.FinishNarrative(narrativeIdentifier);
+            }
             Destroy(gameObject);
         }
         else

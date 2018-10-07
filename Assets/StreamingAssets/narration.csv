@@ -13,3 +13,4 @@ developerTestOneRoomBugFinished_3,,"Ok I'll fix the bug, you can't walk through 
 developerTestOneRoomBugFinished_4,,"I also added some new stuff, a real bug! Try it!",,FALSE
 wallBugHint_1,,"Hmm...When I say there is a bug in the room, it does not mean a real bug",,TRUE
 wallBugHint_2,,Or it is really in the room.,,FALSE
+nothingSpecial,,I can't see a bug here,,TRUE

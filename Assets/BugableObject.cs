@@ -57,6 +57,11 @@ public class BugableObject : MonoBehaviour {
 
     virtual protected void FindBug()
     {
+        //nothingSpecial
+
         Debug.LogError("should implement in child");
+        NarrationManager.Instance.ShowNarrationWithIdentifier("nothingSpecial");
     }
+
+
 }
