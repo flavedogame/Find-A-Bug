@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameLogicManager : Singleton<GameLogicManager>
 {
-
+    public GameObject playerObject;
 
 
     public void Init()
