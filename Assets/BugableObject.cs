@@ -57,10 +57,35 @@ public class BugableObject : MonoBehaviour {
 
     virtual protected void FindBug()
     {
-        //nothingSpecial
+        bool hasFoundBug = false;
+        foreach (BugableObjectFunctionInfo notEnabledFunctionInfo in info.NotEnabledBugableFunctions)
+        {
+            System.Type T = GetType();
+            string checkMethod = "Check_" + notEnabledFunctionInfo.identifier + "_BugTriggered";
+            System.Reflection.MethodInfo methodInfo =  T.GetMethod(checkMethod);
+            if (methodInfo!=null)
+            {
+                bool ret = bool.Parse(methodInfo.Invoke(this, null).ToString());
+                if (ret)
+                {
+                    Debug.Log("check passed " + checkMethod + " " + methodInfo.Invoke(this, null).ToString());
+                    hasFoundBug = true;
 
-        Debug.LogError("should implement in child");
-        NarrationManager.Instance.ShowNarrationWithIdentifier("nothingSpecial");
+                    break;
+                } else
+                {
+                    Debug.Log("check failed " + checkMethod + " " + methodInfo.Invoke(this, null).ToString());
+                }
+            } else
+            {
+                Debug.LogError("function not implemented " + checkMethod);
+            }
+        }
+        if (!hasFoundBug)
+        {
+
+            NarrationManager.Instance.ShowNarrationWithIdentifier("nothingSpecial");
+        }
     }
 
 
