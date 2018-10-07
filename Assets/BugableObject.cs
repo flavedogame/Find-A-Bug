@@ -70,7 +70,7 @@ public class BugableObject : MonoBehaviour {
                 {
                     Debug.Log("check passed " + checkMethod + " " + methodInfo.Invoke(this, null).ToString());
                     hasFoundBug = true;
-
+                    AchievementManager.Instance.FinishAchievement(notEnabledFunctionInfo.achievementToFinish);
                     break;
                 } else
                 {
