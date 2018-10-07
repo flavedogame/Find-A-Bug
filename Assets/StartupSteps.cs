@@ -10,6 +10,9 @@ public class StartupSteps : MonoBehaviour {
 
         CurrencyManager.Instance.Init();
 
+        AchievementManager.Instance.Init();
+        NarrativeManager.Instance.Init();
+        NarrationManager.Instance.Init();
         BugableObjectFunctionManager.Instance.Init();
         BugableObjectManager.Instance.Init();
         GameLogicManager.Instance.Init();
@@ -17,9 +20,6 @@ public class StartupSteps : MonoBehaviour {
         //CheatManager.Instance.Init();
         //CurrencyManager.Instance.Init();
         //AbilityManager.Instance.Init();
-        AchievementManager.Instance.Init();
-        NarrativeManager.Instance.Init();
-        NarrationManager.Instance.Init();
         //TutorialManager.Instance.Init();
         //MonsterManager.Instance.Init();
         //LevelManager.Instance.Init();

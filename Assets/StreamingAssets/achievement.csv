@@ -2,3 +2,4 @@ identifier,prerequisite,achievementStep,fallThrough,description,isTutorial,rewar
 startGame,,emptyStep,,,TRUE,,
 finishIntroduction,startGame,emptyStep,,,TRUE,,
 finishWallBug,finishIntroduction,emptyStep,,,TRUE,,
+attackMonster,finishWallBug,emptyStep,,,TRUE,,

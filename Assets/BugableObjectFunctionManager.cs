@@ -8,7 +8,8 @@ public class BugableObjectFunctionManager : Singleton<BugableObjectFunctionManag
 {
 
     public List<BugableObjectFunctionInfo> bugableObjectFunctionInfoList;
-    public Dictionary<string, List<BugableObjectFunctionInfo>> bugableObjectFunctionInfoDict;
+    public Dictionary<string, List<BugableObjectFunctionInfo>> enabledBugableObjectFunctionInfoDict;
+    public Dictionary<string, List<BugableObjectFunctionInfo>> notEnabledBugableObjectFunctionInfoDict;
     public DataService ds;
 
     List<UpdateFunctionDelegate> updateFunctionDelegates;
@@ -26,17 +27,29 @@ public class BugableObjectFunctionManager : Singleton<BugableObjectFunctionManag
     void ReadCSV()
     {
         bugableObjectFunctionInfoList = CsvUtil.LoadObjects<BugableObjectFunctionInfo>("bugableObjectFunction.csv");
-        bugableObjectFunctionInfoDict = new Dictionary<string, List<BugableObjectFunctionInfo>>();
+        enabledBugableObjectFunctionInfoDict = new Dictionary<string, List<BugableObjectFunctionInfo>>();
+        notEnabledBugableObjectFunctionInfoDict = new Dictionary<string, List<BugableObjectFunctionInfo>>();
         foreach (BugableObjectFunctionInfo info in bugableObjectFunctionInfoList)
         {
-            if (!bugableObjectFunctionInfoDict.ContainsKey(info.objectId))
+            if (!enabledBugableObjectFunctionInfoDict.ContainsKey(info.objectId))
             {
-                bugableObjectFunctionInfoDict[info.objectId] = new List<BugableObjectFunctionInfo>();
+                enabledBugableObjectFunctionInfoDict[info.objectId] = new List<BugableObjectFunctionInfo>();
+                notEnabledBugableObjectFunctionInfoDict[info.objectId] = new List<BugableObjectFunctionInfo>();
             }
 
             //ReadDatabase(info);
-
-            bugableObjectFunctionInfoDict[info.objectId].Add(info);
+            string prerequisiteString = info.prerequisite;
+            if (prerequisiteString.Length != 0)
+            {
+                Debug.Log("prerequisite for function " + info.identifier + " is " + prerequisiteString);
+                Achievement prerequisite = AchievementManager.Instance.achievementDictionary[prerequisiteString];
+                if (prerequisite.state != AchievementState.complete)
+                {
+                    notEnabledBugableObjectFunctionInfoDict[info.objectId].Add(info);
+                    continue;
+                }
+            }
+            enabledBugableObjectFunctionInfoDict[info.objectId].Add(info);
         }
         //Debug.Log("finish load bugableObjectFunction.csv");
     }

@@ -28,7 +28,7 @@ public class BugableObjectStateViewController : DefaultViewController {
         objectName.text = info.name;
         objectDescription.text = info.description;
         objectIcon.sprite = info.icon;
-        foreach(BugableObjectFunctionInfo functionInfo in info.BugableFunctions)
+        foreach(BugableObjectFunctionInfo functionInfo in info.EnabledBugableFunctions)
         {
             new BugableObjectStateFunctionCell(functionInfo, cellPrefab, functionTableTransform);
         }

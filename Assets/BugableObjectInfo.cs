@@ -16,18 +16,26 @@ public class BugableObjectInfo {
 
     }
 
-    public List<BugableObjectFunctionInfo> BugableFunctions
+    public List<BugableObjectFunctionInfo> EnabledBugableFunctions
     {
         get
         {
-            return BugableObjectFunctionManager.Instance.bugableObjectFunctionInfoDict[identifier];
+            return BugableObjectFunctionManager.Instance.enabledBugableObjectFunctionInfoDict[identifier];
+        }
+    }
+
+    public List<BugableObjectFunctionInfo> NotEnabledBugableFunctions
+    {
+        get
+        {
+            return BugableObjectFunctionManager.Instance.notEnabledBugableObjectFunctionInfoDict[identifier];
         }
     }
 
     public bool IsFullyViewed
     {
         get { 
-        foreach(BugableObjectFunctionInfo functionInfo in BugableFunctions)
+        foreach(BugableObjectFunctionInfo functionInfo in EnabledBugableFunctions)
         {
             if (!functionInfo.isViewed)
             {
