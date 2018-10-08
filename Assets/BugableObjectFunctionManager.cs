@@ -96,7 +96,12 @@ public class BugableObjectFunctionManager : Singleton<BugableObjectFunctionManag
         ds.UpdateObjectFunction(persistentObjectFunction);
         info.isViewed = true;
         //Debug.Log("updateFunctionDelegates " + updateFunctionDelegates);
-        foreach(UpdateFunctionDelegate dele in updateFunctionDelegates)
+        UpdateFunctionDelegate();
+    }
+
+    public void UpdateFunctionDelegate()
+    {
+        foreach (UpdateFunctionDelegate dele in updateFunctionDelegates)
         {
             dele();
         }

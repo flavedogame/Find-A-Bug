@@ -71,6 +71,11 @@ public class BugableObject : MonoBehaviour {
                     Debug.Log("check passed " + checkMethod + " " + methodInfo.Invoke(this, null).ToString());
                     hasFoundBug = true;
                     AchievementManager.Instance.FinishAchievement(notEnabledFunctionInfo.achievementToFinish);
+                    //put these three line in manager
+                    BugableObjectFunctionManager.Instance.enabledBugableObjectFunctionInfoDict[info.identifier].Add(notEnabledFunctionInfo);
+                    BugableObjectFunctionManager.Instance.notEnabledBugableObjectFunctionInfoDict[info.identifier].Remove(notEnabledFunctionInfo);
+                    BugableObjectFunctionManager.Instance.UpdateFunctionDelegate();
+
                     break;
                 } else
                 {
