@@ -27,12 +27,22 @@ public class GameViewController : MonoBehaviour {
         if (GameModeManager.Instance.isInFindBugMode)
         {
             GameModeManager.Instance.GetIntoPlayMode();
-            foundBugButtonText.text = "FOUND IT!";
         }
         else
         {
             GameModeManager.Instance.GetIntoFindBugMode();
+        }
+    }
+
+    public void UpdateUI()
+    {
+        if (GameModeManager.Instance.isInFindBugMode)
+        {
             foundBugButtonText.text = "Back To Play";
+        }
+        else
+        {
+            foundBugButtonText.text = "FOUND IT!";
         }
     }
 	

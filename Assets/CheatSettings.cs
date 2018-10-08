@@ -10,6 +10,15 @@ public class CheatSettings : Singleton<CheatSettings>
     public bool cleanObjectFunctionWhenStart;
     public bool alwaysTriggeringBugs;
     // Start is called before the first frame update
+
+    public void Init()
+    {
+        if (cleanObjectFunctionWhenStart)
+        {
+            DataService ds = SQLiteDatabaseManager.Instance.ds;
+            ds.DeleteAllObjectFunction();
+        }
+    }
     void Start()
     {
         if (cleanAchievementWhenStart)

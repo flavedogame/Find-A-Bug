@@ -76,6 +76,8 @@ public class BugableObject : MonoBehaviour {
                     BugableObjectFunctionManager.Instance.notEnabledBugableObjectFunctionInfoDict[info.identifier].Remove(notEnabledFunctionInfo);
                     BugableObjectFunctionManager.Instance.UpdateFunctionDelegate();
 
+                    GameModeManager.Instance.GetIntoPlayMode();
+
                     break;
                 } else
                 {

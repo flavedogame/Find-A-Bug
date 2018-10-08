@@ -5,9 +5,11 @@ using UnityEngine;
 public class GameModeManager : Singleton<GameModeManager>
 {
 
+    GameViewController gameViewController;
+
     public void Init()
     {
-
+        gameViewController = FindObjectOfType<GameViewController>();
     }
 
     public bool isInFindBugMode;
@@ -15,10 +17,12 @@ public class GameModeManager : Singleton<GameModeManager>
     public void GetIntoFindBugMode()
     {
         isInFindBugMode = true;
+        gameViewController.UpdateUI();
     }
 
     public void GetIntoPlayMode()
     {
         isInFindBugMode = false;
+        gameViewController.UpdateUI();
     }
 }
