@@ -24,7 +24,7 @@ public class BugableObjectFunctionManager : Singleton<BugableObjectFunctionManag
         ReadDatabase();
     }
     
-    void ReadCSV()
+    public void ReadCSV()
     {
         bugableObjectFunctionInfoList = CsvUtil.LoadObjects<BugableObjectFunctionInfo>("bugableObjectFunction.csv");
         enabledBugableObjectFunctionInfoDict = new Dictionary<string, List<BugableObjectFunctionInfo>>();

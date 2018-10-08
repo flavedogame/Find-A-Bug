@@ -13,11 +13,6 @@ public class CheatSettings : Singleton<CheatSettings>
 
     public void Init()
     {
-        if (cleanObjectFunctionWhenStart)
-        {
-            DataService ds = SQLiteDatabaseManager.Instance.ds;
-            ds.DeleteAllObjectFunction();
-        }
     }
     void Start()
     {
@@ -30,7 +25,7 @@ public class CheatSettings : Singleton<CheatSettings>
         {
             DataService ds = SQLiteDatabaseManager.Instance.ds;
             ds.DeleteAllObjectFunction();
-            BugableObjectFunctionManager.Instance.ReadDatabase();
+            BugableObjectFunctionManager.Instance.ReadCSV();
         }
     }
 
