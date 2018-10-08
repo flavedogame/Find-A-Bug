@@ -8,6 +8,7 @@ public class CheatSettings : Singleton<CheatSettings>
     public bool skipTestingNarrations;
     public bool cleanAchievementWhenStart;
     public bool cleanObjectFunctionWhenStart;
+    public bool alwaysTriggeringBugs;
     // Start is called before the first frame update
     void Start()
     {
