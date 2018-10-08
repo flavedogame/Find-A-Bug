@@ -10,6 +10,7 @@ public class GameViewController : MonoBehaviour {
     public Button pauseButton;
     public Button foundBugButton;
     public TextMeshProUGUI foundBugButtonText;
+    public Texture2D cursorTexture;
 
     // Use this for initialization
     void Start () {
@@ -39,10 +40,12 @@ public class GameViewController : MonoBehaviour {
         if (GameModeManager.Instance.isInFindBugMode)
         {
             foundBugButtonText.text = "Back To Play";
+            Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
         }
         else
         {
             foundBugButtonText.text = "FOUND IT!";
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
     }
 	
