@@ -31,15 +31,25 @@ public class NarrationAction : NarrativeAction
     void ShowNarration()
     {
         Debug.Log("show narration " + identifier);
-        if (!NarrationManager.Instance.IsShowingNarrationWithIdentifier(narrativeInfo.identifier))
+        Achievement achievement = AchievementManager.Instance.achievementDictionary[narrativeInfo.achievement];
+        if (achievement.state == AchievementState.active)
+        {
+            if (!NarrationManager.Instance.IsShowingNarrationWithIdentifier(identifier))
         {
             NarrationManager.Instance.ShowNarrationWithIdentifier(narrativeInfo);
+        }
+        }
+        else
+        {
+            Debug.Log("this dialog is passed");
         }
     }
 
     IEnumerator ShowNarrationAfterTime(float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
-        ShowNarration();
+        
+            ShowNarration();
+        
     }
 }

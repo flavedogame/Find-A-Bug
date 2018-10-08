@@ -7,8 +7,9 @@ public class BugableWall : BugableObject
 
     public bool Check_wallBlock_BugTriggered()
     {
-        Vector3 playerPosition = GameLogicManager.Instance.playerObject.transform.position;
-        return playerPosition.y > 2 || playerPosition.y <-5 || playerPosition.x >3|| playerPosition.x <-3;
+        return true;
+        //Vector3 playerPosition = GameLogicManager.Instance.playerObject.transform.position;
+        //return playerPosition.y > 2 || playerPosition.y <-5 || playerPosition.x >3|| playerPosition.x <-3;
     }
 
     protected override string Identifier
