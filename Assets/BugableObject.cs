@@ -9,7 +9,7 @@ public class BugableObject : MonoBehaviour {
     public GameObject alertIcon;
 
 	// Use this for initialization
-	void Start () {
+	protected virtual void Start () {
         info = BugableObjectManager.Instance.bugableObjectInfoDict[Identifier];
         if (info == null)
         {

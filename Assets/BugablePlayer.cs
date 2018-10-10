@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BugablePlayer : BugableObject {
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         GameLogicManager.Instance.playerObject = gameObject;
     }
 
