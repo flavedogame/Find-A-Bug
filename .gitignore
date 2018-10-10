@@ -16,6 +16,7 @@ Packages/
 ProjectSettings/
 *.meta
 Logs
+*.s3db
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
