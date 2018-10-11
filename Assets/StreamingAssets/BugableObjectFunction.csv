@@ -3,8 +3,8 @@ playerMove,player,It can move by user input WSAD.,,,0
 playerStop,player,It cannot move when hit something block it,,,1
 wallDraw,wall,It draws an enclosed place,,,0
 wallBlock,wall,It can block when something hit on it,finishWallBug,finishWallBug,1
-monsterGetHurt,monster,"When it get attacked, it's hp will decrease",attackMonster,,0
-monsterHealth,monster,Has 2 HP,attackMonster,,1
-playerAttack,player,It can attack by user input space,attackMonster,,2
-playerAttackValue,player,"When it attacks, cast damage 1",attackMonster,,3
+monsterGetHurt,monster,"When it get attacked, it's hp will decrease",finishWallBug,,0
+monsterHealth,monster,Has 2 HP,finishWallBug,,1
+playerAttack,player,It can attack by user input space,finishWallBug,,2
+playerAttackValue,player,"When it attacks, cast damage 1",finishWallBug,,3
 monsterDead,monster,Will die and destory itself when hp is 0,attackMonster,,2
