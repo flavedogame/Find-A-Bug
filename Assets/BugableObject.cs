@@ -72,8 +72,10 @@ public class BugableObject : MonoBehaviour {
                     hasFoundBug = true;
                     AchievementManager.Instance.FinishAchievement(notEnabledFunctionInfo.achievementToFinish);
                     //put these three line in manager
-                    BugableObjectFunctionManager.Instance.enabledBugableObjectFunctionInfoDict[info.identifier].Add(notEnabledFunctionInfo);
-                    BugableObjectFunctionManager.Instance.notEnabledBugableObjectFunctionInfoDict[info.identifier].Remove(notEnabledFunctionInfo);
+                    //todo: change to based on observer
+                    BugableObjectFunctionManager.Instance.ReadCSV();
+                    //BugableObjectFunctionManager.Instance.enabledBugableObjectFunctionInfoDict[info.identifier].Add(notEnabledFunctionInfo);
+                   // BugableObjectFunctionManager.Instance.notEnabledBugableObjectFunctionInfoDict[info.identifier].Remove(notEnabledFunctionInfo);
                     BugableObjectFunctionManager.Instance.UpdateFunctionDelegate();
 
                     GameModeManager.Instance.GetIntoPlayMode();

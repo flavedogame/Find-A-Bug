@@ -35,6 +35,10 @@ public class BugableObjectInfo {
     public bool IsFullyViewed
     {
         get { 
+            if (EnabledBugableFunctions.Count == 0)
+            {
+                return false;
+            }
         foreach(BugableObjectFunctionInfo functionInfo in EnabledBugableFunctions)
         {
             if (!functionInfo.isViewed)
