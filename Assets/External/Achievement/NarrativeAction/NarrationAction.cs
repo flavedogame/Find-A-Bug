@@ -11,7 +11,6 @@ public class NarrationAction : NarrativeAction
 
     protected override void P_Enable()
     {
-        Debug.Log("enable tutorial action with info: " + narrativeInfo.identifier);
         if (narrativeInfo.delayTime > 0)
         {
             MonoBehaviour mb = CoroutineMonobehavior.Instance.GetComponent<MonoBehaviour>();
@@ -25,7 +24,7 @@ public class NarrationAction : NarrativeAction
 
     void Update()
     {
-        Debug.Log("update action" + identifier);
+        //Debug.Log("update action" + identifier);
     }
 
     void ShowNarration()

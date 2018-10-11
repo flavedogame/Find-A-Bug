@@ -17,6 +17,8 @@ public class NarrativeAction{
         if (!isEnabled)
         {
             isEnabled = true;
+
+            Debug.Log("enable "+GetType()+" with info: " + narrativeInfo.identifier);
             P_Enable();
         }
     }
