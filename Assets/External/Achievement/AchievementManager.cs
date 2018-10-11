@@ -11,6 +11,7 @@ public class AchievementManager : Singleton<AchievementManager> {
     public Dictionary<string,Achievement> achievementDictionary;
     public Dictionary<string, AchievementStep> achievementStepDictionary;
     public Dictionary<string, AchievementStepInfo> achievementStepInfoDictionary;
+    List<AchievementCompleteDelegate> completeDelegates;
 
     public Dictionary<string, Achievement>.ValueCollection achievementList { get { return achievementDictionary.Values; } }
 
@@ -18,6 +19,7 @@ public class AchievementManager : Singleton<AchievementManager> {
     {
         InitAchievementStep();
         InitAchievements();
+        completeDelegates = new List<AchievementCompleteDelegate>();
     }
 
     void Start()
@@ -86,6 +88,24 @@ public class AchievementManager : Singleton<AchievementManager> {
         Achievement achievement = achievementDictionary[identifier];
         //achievement.FinishStep();
         achievement.state = AchievementState.complete;
+    }
+
+    public void RegisterAchievementComplete(AchievementCompleteDelegate dele)
+    {
+        completeDelegates.Add(dele);
+    }
+
+    public void RemoveAchievementComplete(AchievementCompleteDelegate dele)
+    {
+        completeDelegates.Remove(dele);
+    }
+
+    public void TriggerDelegates()
+    {
+        foreach (AchievementCompleteDelegate dele in completeDelegates)
+        {
+            dele();
+        }
     }
 
     public void CleanAchievements()

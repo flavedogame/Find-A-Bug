@@ -30,6 +30,7 @@ public class Achievement{
                 {
                     dele();
                 }
+                AchievementManager.Instance.TriggerDelegates();
             }
             NarrativeManager.Instance.UpdateAchievement(identifier, oldState, value);
         }

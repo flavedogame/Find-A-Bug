@@ -13,9 +13,6 @@ public class CheatSettings : Singleton<CheatSettings>
 
     public void Init()
     {
-    }
-    void Start()
-    {
         if (cleanAchievementWhenStart)
         {
             AchievementManager.Instance.CleanAchievements();
@@ -27,6 +24,10 @@ public class CheatSettings : Singleton<CheatSettings>
             ds.DeleteAllObjectFunction();
             BugableObjectFunctionManager.Instance.ReadCSV();
         }
+    }
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame
