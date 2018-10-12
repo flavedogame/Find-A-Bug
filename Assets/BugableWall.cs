@@ -17,6 +17,7 @@ public class BugableWall : BugableObject
         }
     }
 
+
     protected override string Identifier
     {
         get { return "wall"; }

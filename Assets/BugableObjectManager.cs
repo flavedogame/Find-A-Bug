@@ -8,7 +8,7 @@ public class BugableObjectManager : Singleton<BugableObjectManager>
 
     public List<BugableObjectInfo> bugableObjectInfoList;
     public Dictionary<string,BugableObjectInfo> bugableObjectInfoDict;
-    //public Dictionary<string, PersistentBall> ballsOwned;
+    List<BugableObject> bugableObjestsTriggered;
 
 
     //public string currentlyUsingBall;
@@ -16,6 +16,7 @@ public class BugableObjectManager : Singleton<BugableObjectManager>
     public void Init()
     {
         ReadCSV();
+        bugableObjestsTriggered = new List<BugableObject>();
         //ReadDatabase();
     }
 
@@ -36,5 +37,14 @@ public class BugableObjectManager : Singleton<BugableObjectManager>
         Debug.Log("finish load bugableObject.csv");
     }
 
+    public void TriggerABug(BugableObject bugableObject)
+    {
+        bugableObjestsTriggered.Add(bugableObject);
+    }
+
+    public void UntriggerABug(BugableObject bugableObject)
+    {
+        bugableObjestsTriggered.Remove(bugableObject);
+    }
 
 }

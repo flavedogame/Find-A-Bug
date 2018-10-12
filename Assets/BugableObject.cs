@@ -19,6 +19,18 @@ public class BugableObject : MonoBehaviour {
         AddObserveUpdateFunction();
 	}
 
+    void TriggerABug()
+    {
+
+        //todo: what a waste for wall
+        BugableObjectManager.Instance.TriggerABug(this);
+    }
+
+    void UntriggerABug()
+    {
+        BugableObjectManager.Instance.UntriggerABug(this);
+    }
+
     void AddObserveUpdateFunction()
     {
         BugableObjectFunctionManager.Instance.RegisterCompletionDelegate(delegate {
@@ -35,7 +47,9 @@ public class BugableObject : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	}
+        IsBugTriggered();
+
+    }
 
     protected virtual string Identifier
     {
@@ -54,7 +68,7 @@ public class BugableObject : MonoBehaviour {
             new BugableObjectStateViewController(info);
         }
     }
-
+    
     virtual protected void FindBug()
     {
         bool hasFoundBug = false;
@@ -95,6 +109,34 @@ public class BugableObject : MonoBehaviour {
 
             NarrationManager.Instance.ShowNarrationWithIdentifier("nothingSpecial");
         }
+    }
+
+    bool IsBugTriggered()
+    {
+        foreach (BugableObjectFunctionInfo notEnabledFunctionInfo in info.NotEnabledBugableFunctions)
+        {
+            System.Type T = GetType();
+            string checkMethod = "Check_" + notEnabledFunctionInfo.identifier + "_BugTriggered";
+            System.Reflection.MethodInfo methodInfo = T.GetMethod(checkMethod);
+            if (methodInfo != null)
+            {
+                bool ret = bool.Parse(methodInfo.Invoke(this, null).ToString());
+                if (ret)
+                {
+                    Debug.Log("check passed " + checkMethod + " " + methodInfo.Invoke(this, null).ToString());
+                    return true;
+                }
+                else
+                {
+                    Debug.Log("check failed " + checkMethod + " " + methodInfo.Invoke(this, null).ToString());
+                }
+            }
+            else
+            {
+                Debug.LogError("function not implemented " + checkMethod);
+            }
+        }
+        return false;
     }
 
 
