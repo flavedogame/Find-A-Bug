@@ -12,7 +12,7 @@ public class BugableWall : BugableObject
             return true;
         }else
         {
-            Vector3 playerPosition = GameLogicManager.Instance.playerObject.transform.position;
+            Vector3 playerPosition = GameLogicManager.Instance.PlayerObject.transform.position;
             return playerPosition.y > 2 || playerPosition.y < -5 || playerPosition.x > 3 || playerPosition.x < -3;
         }
     }

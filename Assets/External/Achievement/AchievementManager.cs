@@ -102,7 +102,8 @@ public class AchievementManager : Singleton<AchievementManager> {
 
     public void TriggerDelegates()
     {
-        foreach (AchievementCompleteDelegate dele in completeDelegates)
+        List<AchievementCompleteDelegate> temp = new List<AchievementCompleteDelegate>(completeDelegates);
+        foreach (AchievementCompleteDelegate dele in temp)
         {
             dele();
         }

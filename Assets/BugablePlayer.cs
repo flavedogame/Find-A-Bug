@@ -7,7 +7,7 @@ public class BugablePlayer : BugableObject {
     protected override void Start()
     {
         base.Start();
-        GameLogicManager.Instance.playerObject = gameObject;
+        GameLogicManager.Instance.SetPlayerObject(gameObject);
     }
 
     protected override string Identifier
