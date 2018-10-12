@@ -7,6 +7,12 @@ public class BugableObject : MonoBehaviour {
     BugableObjectInfo info;
 
     public GameObject alertIcon;
+    public SpriteRenderer hintSpriteRender;
+
+    bool ShouldShowHint;
+
+    Color transparentColor;
+    Color redColor;
 
 	// Use this for initialization
 	protected virtual void Start () {
@@ -17,7 +23,15 @@ public class BugableObject : MonoBehaviour {
         }
         UpdateAlertView();
         AddObserveUpdateFunction();
-	}
+        if (hintSpriteRender != null) { 
+        redColor = hintSpriteRender.color;
+        transparentColor = new Color(redColor.r, redColor.g, redColor.b, 0);
+        }
+        else
+        {
+            Debug.LogError("hintSpriteRender is missing");
+        }
+    }
 
     void TriggerABug()
     {
@@ -47,8 +61,15 @@ public class BugableObject : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        IsBugTriggered();
-
+        if (IsBugTriggered())
+        {
+            ShouldShowHint = true;
+        }
+        else
+        {
+            ShouldShowHint = false;
+        }
+        ShowHint();
     }
 
     protected virtual string Identifier
@@ -133,11 +154,22 @@ public class BugableObject : MonoBehaviour {
             }
             else
             {
-                Debug.LogError("function not implemented " + checkMethod);
+                //Debug.LogError("function not implemented " + checkMethod);
             }
         }
         return false;
     }
 
+    void ShowHint()
+    {
+        Debug.LogError("show hint " + ShouldShowHint+" "+transparentColor+" "+redColor);
+        if (ShouldShowHint)
+        {
+            hintSpriteRender.color = Color.Lerp(transparentColor, redColor, Mathf.PingPong(Time.time, 0.5f));
+        } else
+        {
+            hintSpriteRender.color = transparentColor;
+        }
+    }
 
 }

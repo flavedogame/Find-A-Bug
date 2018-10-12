@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BugablePlayer : BugableObject {
 
+    public bool Check_playerAttack_BugTriggered()
+    {
+        return false;
+    }
+
     protected override void Start()
     {
         base.Start();
