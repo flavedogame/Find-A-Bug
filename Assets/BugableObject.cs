@@ -9,7 +9,7 @@ public class BugableObject : MonoBehaviour {
     public GameObject alertIcon;
     public SpriteRenderer hintSpriteRender;
 
-    bool ShouldShowHint;
+    bool shouldShowHint;
 
     Color transparentColor;
     Color redColor;
@@ -31,6 +31,8 @@ public class BugableObject : MonoBehaviour {
         {
             Debug.LogError("hintSpriteRender is missing");
         }
+        BugableObjectManager.Instance.RegisterBugableObject(this);
+        HideHint();
     }
 
     void AddObserveUpdateFunction()
@@ -49,30 +51,7 @@ public class BugableObject : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (GameModeManager.Instance.isInFindBugMode)
-        {
-            if (IsBugTriggered())
-            {
-                ShowHint();
-            }
-            else
-            {
-                HideHint();
-            }
-        }
-        else
-        {
-            if (IsBugTriggered())
-            {
-                
-                BugableObjectManager.Instance.TriggerABug();
-            }
-            else
-            {
-                //fix this when hint is based on action not in update
-            }
-            HideHint();
-        }
+        ShowHint();
     }
 
     protected virtual string Identifier
@@ -135,8 +114,9 @@ public class BugableObject : MonoBehaviour {
         }
     }
 
-    bool IsBugTriggered()
+    public bool IsBugTriggered()
     {
+        shouldShowHint = false;
         foreach (BugableObjectFunctionInfo notEnabledFunctionInfo in info.NotEnabledBugableFunctions)
         {
             System.Type T = GetType();
@@ -148,6 +128,7 @@ public class BugableObject : MonoBehaviour {
                 if (ret)
                 {
                     Debug.Log("check passed " + checkMethod + " " + methodInfo.Invoke(this, null).ToString());
+                    shouldShowHint = true;
                     return true;
                 }
                 else
@@ -165,7 +146,22 @@ public class BugableObject : MonoBehaviour {
 
     void ShowHint()
     {
-            hintSpriteRender.color = Color.Lerp(transparentColor, redColor, Mathf.PingPong(Time.time, 0.5f));
+        if (GameModeManager.Instance.isInFindBugMode)
+        {
+            if (shouldShowHint)
+            {
+
+                hintSpriteRender.color = Color.Lerp(transparentColor, redColor, Mathf.PingPong(Time.time, 0.5f));
+            }
+            else
+            {
+                HideHint();
+            }
+        }
+        else
+        {
+            HideHint();
+        }
 
     }
 

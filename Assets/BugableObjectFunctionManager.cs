@@ -41,7 +41,7 @@ public class BugableObjectFunctionManager : Singleton<BugableObjectFunctionManag
             string prerequisiteString = info.prerequisite;
             if (prerequisiteString.Length != 0)
             {
-                Debug.Log("prerequisite for function " + info.identifier + " is " + prerequisiteString);
+                //Debug.Log("prerequisite for function " + info.identifier + " is " + prerequisiteString);
                 Achievement prerequisite = AchievementManager.Instance.achievementDictionary[prerequisiteString];
                 if (prerequisite.state != AchievementState.complete)
                 {
@@ -74,7 +74,7 @@ public class BugableObjectFunctionManager : Singleton<BugableObjectFunctionManag
         PersistentObjectFunction persistentObjectFunction = ds.GetPersistentObjectFunction(info.identifier);
         if (persistentObjectFunction == null)
         {
-            Debug.Log("persistentObjectFunction == null " + info);
+            //Debug.Log("persistentObjectFunction == null " + info);
             persistentObjectFunction = new PersistentObjectFunction();
             persistentObjectFunction.identifier = info.identifier;
             info.isViewed = false;
@@ -82,7 +82,7 @@ public class BugableObjectFunctionManager : Singleton<BugableObjectFunctionManag
         }
         else
         {
-            Debug.Log("persistentObjectFunction != null " + info);
+            //Debug.Log("persistentObjectFunction != null " + info);
             info.isViewed = persistentObjectFunction.isViewed;
             
         }

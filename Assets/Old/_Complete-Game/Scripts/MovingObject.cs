@@ -87,7 +87,9 @@ namespace Completed
 				//Return and loop until sqrRemainingDistance is close enough to zero to end the function
 				yield return null;
 			}
-		}
+            // todoDebug.LogError("life is hard");
+            BugableObjectManager.Instance.CheckBug();
+        }
 		
 		
 		//The virtual keyword means AttemptMove can be overridden by inheriting classes using the override keyword.

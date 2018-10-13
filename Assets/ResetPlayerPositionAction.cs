@@ -11,5 +11,7 @@ public class ResetPlayerPositionAction : NarrativeAction
     protected override void P_Enable()
     {
         GameLogicManager.Instance.ResetPlayerPosition();
+
+        BugableObjectManager.Instance.CheckBug();
     }
 }

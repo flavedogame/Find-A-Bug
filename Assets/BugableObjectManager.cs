@@ -9,7 +9,7 @@ public class BugableObjectManager : Singleton<BugableObjectManager>
     public List<BugableObjectInfo> bugableObjectInfoList;
     public Dictionary<string,BugableObjectInfo> bugableObjectInfoDict;
     public bool HasBugTriggered { get; private set; }
-    List<BugableObject> bugableObjestsTriggered;
+    List<BugableObject> bugableObjests;
 
 
     //public string currentlyUsingBall;
@@ -17,7 +17,7 @@ public class BugableObjectManager : Singleton<BugableObjectManager>
     public void Init()
     {
         ReadCSV();
-        bugableObjestsTriggered = new List<BugableObject>();
+        bugableObjests = new List<BugableObject>();
         //ReadDatabase();
     }
 
@@ -41,6 +41,30 @@ public class BugableObjectManager : Singleton<BugableObjectManager>
     public void TriggerABug()
     {
         HasBugTriggered |= true;
+    }
+
+    public void RegisterBugableObject(BugableObject bo)
+    {
+        bugableObjests.Add(bo);
+    }
+
+    public void UnregisterBugableObject(BugableObject bo)
+    {
+        bugableObjests.Remove(bo);
+    }
+
+    public void CheckBug()
+    {
+        HasBugTriggered = false;
+        //Debug.Log("check bug " + bugableObjests);
+        foreach(BugableObject bo in bugableObjests)
+        {
+            //Debug.Log("check bug " + bo);
+            if (bo.IsBugTriggered())
+            {
+                TriggerABug();
+            }
+        }
     }
 
 }

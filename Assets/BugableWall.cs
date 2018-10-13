@@ -16,6 +16,10 @@ public class BugableWall : BugableObject
             Vector3 playerPosition = GameLogicManager.Instance.PlayerObject.transform.position;
             return playerPosition.y > 2 || playerPosition.y < -5 || playerPosition.x > 3 || playerPosition.x < -3;
             }
+            else
+            {
+                Debug.LogError("GameLogicManager.Instance.PlayerObject is null");
+            }
             return false;
         }
     }
