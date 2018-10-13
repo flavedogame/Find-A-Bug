@@ -9,6 +9,7 @@ public class CheatSettings : Singleton<CheatSettings>
     public bool cleanAchievementWhenStart;
     public bool cleanObjectFunctionWhenStart;
     public bool alwaysTriggeringBugs;
+    public bool alwaysGiveHint;
     // Start is called before the first frame update
 
     public void Init()

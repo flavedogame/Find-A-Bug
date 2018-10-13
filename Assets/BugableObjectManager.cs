@@ -55,14 +55,19 @@ public class BugableObjectManager : Singleton<BugableObjectManager>
 
     public void CheckBug()
     {
-        HasBugTriggered = false;
-        //Debug.Log("check bug " + bugableObjests);
-        foreach(BugableObject bo in bugableObjests)
+        //todo: check in tutorial, or pay to get a hint
+        if (CheatSettings.Instance.alwaysGiveHint)
         {
-            //Debug.Log("check bug " + bo);
-            if (bo.IsBugTriggered())
+
+            HasBugTriggered = false;
+            //Debug.Log("check bug " + bugableObjests);
+            foreach (BugableObject bo in bugableObjests)
             {
-                TriggerABug();
+                //Debug.Log("check bug " + bo);
+                if (bo.IsBugTriggered())
+                {
+                    TriggerABug();
+                }
             }
         }
     }
