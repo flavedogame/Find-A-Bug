@@ -33,18 +33,6 @@ public class BugableObject : MonoBehaviour {
         }
     }
 
-    void TriggerABug()
-    {
-
-        //todo: what a waste for wall
-        BugableObjectManager.Instance.TriggerABug(this);
-    }
-
-    void UntriggerABug()
-    {
-        BugableObjectManager.Instance.UntriggerABug(this);
-    }
-
     void AddObserveUpdateFunction()
     {
         BugableObjectFunctionManager.Instance.RegisterCompletionDelegate(delegate {
@@ -61,15 +49,30 @@ public class BugableObject : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (IsBugTriggered())
+        if (GameModeManager.Instance.isInFindBugMode)
         {
-            ShouldShowHint = true;
+            if (IsBugTriggered())
+            {
+                ShowHint();
+            }
+            else
+            {
+                HideHint();
+            }
         }
         else
         {
-            ShouldShowHint = false;
+            if (IsBugTriggered())
+            {
+                
+                BugableObjectManager.Instance.TriggerABug();
+            }
+            else
+            {
+                //fix this when hint is based on action not in update
+            }
+            HideHint();
         }
-        ShowHint();
     }
 
     protected virtual string Identifier
@@ -162,14 +165,13 @@ public class BugableObject : MonoBehaviour {
 
     void ShowHint()
     {
-        Debug.LogError("show hint " + ShouldShowHint+" "+transparentColor+" "+redColor);
-        if (ShouldShowHint)
-        {
             hintSpriteRender.color = Color.Lerp(transparentColor, redColor, Mathf.PingPong(Time.time, 0.5f));
-        } else
-        {
-            hintSpriteRender.color = transparentColor;
-        }
+
+    }
+
+    void HideHint()
+    {
+        hintSpriteRender.color = transparentColor;
     }
 
 }

@@ -11,10 +11,19 @@ public class GameViewController : MonoBehaviour {
     public Button foundBugButton;
     public TextMeshProUGUI foundBugButtonText;
 
+    public Image hintSpriteRender;
+
+    bool ShouldShowHint;
+
+    Color transparentColor;
+    Color redColor;
+
     // Use this for initialization
     void Start () {
         pauseButton.onClick.AddListener(OnClickPauseButton);
         foundBugButton.onClick.AddListener(OnClickFoundBugButton);
+        redColor = hintSpriteRender.color;
+        transparentColor = new Color(redColor.r, redColor.g, redColor.b, 0);
     }
 
     void OnClickPauseButton()
@@ -50,5 +59,16 @@ public class GameViewController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         pointsText.text = CurrencyManager.Instance.AmountOfCurrency("points").ToString();
-	}
+
+        if (!GameModeManager.Instance.isInFindBugMode && BugableObjectManager.Instance.HasBugTriggered)
+        {
+            hintSpriteRender.color = Color.Lerp(transparentColor, redColor, Mathf.PingPong(Time.time, 0.5f));
+        }
+        else
+        {
+            hintSpriteRender.color = transparentColor;
+        }
+        
+    }
+    
 }

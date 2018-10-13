@@ -8,6 +8,7 @@ public class BugableObjectManager : Singleton<BugableObjectManager>
 
     public List<BugableObjectInfo> bugableObjectInfoList;
     public Dictionary<string,BugableObjectInfo> bugableObjectInfoDict;
+    public bool HasBugTriggered { get; private set; }
     List<BugableObject> bugableObjestsTriggered;
 
 
@@ -37,14 +38,9 @@ public class BugableObjectManager : Singleton<BugableObjectManager>
         Debug.Log("finish load bugableObject.csv");
     }
 
-    public void TriggerABug(BugableObject bugableObject)
+    public void TriggerABug()
     {
-        bugableObjestsTriggered.Add(bugableObject);
-    }
-
-    public void UntriggerABug(BugableObject bugableObject)
-    {
-        bugableObjestsTriggered.Remove(bugableObject);
+        HasBugTriggered |= true;
     }
 
 }
