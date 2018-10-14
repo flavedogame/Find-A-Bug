@@ -39,6 +39,7 @@ public class BugableObjectStateFunctionCell : MonoBehaviour {
         {
             CurrencyManager.Instance.AddValue("points", 1);
             BugableObjectFunctionManager.Instance.ViewFunction(functionInfo);
+            SFXManager.Instance.PlaySFX(SFXEnum.getPoint);
             UpdateView();
         } else
         {

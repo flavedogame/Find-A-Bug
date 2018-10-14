@@ -96,6 +96,7 @@ public class BugableObject : MonoBehaviour {
                     BugableObjectFunctionManager.Instance.UpdateFunctionDelegate();
 
                     GameModeManager.Instance.GetIntoPlayMode();
+                    SFXManager.Instance.PlaySFX(SFXEnum.findBug);
 
                     break;
                 } else
@@ -111,6 +112,7 @@ public class BugableObject : MonoBehaviour {
         {
 
             NarrationManager.Instance.ShowNarrationWithIdentifier("nothingSpecial");
+            SFXManager.Instance.PlaySFX(SFXEnum.failFindBug);
         }
     }
 

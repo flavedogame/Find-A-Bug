@@ -148,7 +148,10 @@ namespace Completed
 			{
 				//Call RandomizeSfx of SoundManager to play the move sound, passing in two audio clips to choose from.
 				SoundManager.instance.RandomizeSfx (moveSound1, moveSound2);
-			}
+			} else
+            {
+                SFXManager.Instance.PlaySFX(SFXEnum.hitOnWall);
+            }
 			
 			//Since the player has moved and lost food points, check if the game has ended.
 			//CheckIfGameOver ();
