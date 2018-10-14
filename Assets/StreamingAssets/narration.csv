@@ -15,3 +15,7 @@ developerTestOneRoomBugFinished_5,,"I also added some new stuff, a real bug! Try
 wallBugHint_1,,"Hmm...When I say there is a bug in the room, it does not mean a real bug",,TRUE
 wallBugHint_2,,Or it is really in the room.,,FALSE
 nothingSpecial,,I can't see a bug here,,TRUE
+v1Dialog_1,,I see you want to attack the monster,,TRUE
+v1Dialog_2,,"That's good. But, you know, this is all the game I've finished",,FALSE
+v1Dialog_3,,I'll keep working on it so come back later~,,FALSE
+v1Dialog_4,,Thanks for you playing!,,FALSE
