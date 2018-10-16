@@ -21,7 +21,7 @@ public class SFXManager : Singleton<SFXManager>
     void Start()
     {
         audioSource = GameObject.Find("SFX").GetComponent<AudioSource>();
-        ChangeVolume(PlayerPrefs.GetFloat(CSConstant.SFXVolumePref, 1));
+        //ChangeVolume(PlayerPrefs.GetFloat(CSConstant.SFXVolumePref, 1));
     }
 
     public void ButtonClick()
