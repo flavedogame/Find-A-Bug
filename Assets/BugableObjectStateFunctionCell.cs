@@ -10,6 +10,8 @@ public class BugableObjectStateFunctionCell : MonoBehaviour {
     public GameObject newBanner;
     Button cellBackground;
     BugableObjectFunctionInfo functionInfo;
+    public GameObject newParticleEffect;
+    public GameObject tapParticleEffect;
 
 
     public BugableObjectStateFunctionCell(BugableObjectFunctionInfo info, Object cellPrefab, Transform tableTransform)
@@ -23,12 +25,16 @@ public class BugableObjectStateFunctionCell : MonoBehaviour {
     {
         functionInfo = info;
         UpdateView();
+        newParticleEffect.SetActive(false);
+        tapParticleEffect.SetActive(false);
     }
 
     public void UpdateView()
     {
         functionDescription.text = functionInfo.description;
-        newBanner.SetActive(!functionInfo.isViewed);
+        bool isNew = !functionInfo.isViewed;
+        newBanner.SetActive(isNew);
+        newParticleEffect.SetActive(isNew);
         cellBackground = GetComponent<Button>();
         cellBackground.onClick.AddListener(OnClick);
     }
@@ -41,6 +47,7 @@ public class BugableObjectStateFunctionCell : MonoBehaviour {
             BugableObjectFunctionManager.Instance.ViewFunction(functionInfo);
             SFXManager.Instance.PlaySFX(SFXEnum.getPoint);
             UpdateView();
+            tapParticleEffect.SetActive(true);
         } else
         {
             Debug.Log("already collected for function " + functionInfo.identifier);
