@@ -97,6 +97,7 @@ public class BugableObject : MonoBehaviour {
 
                     GameModeManager.Instance.GetIntoPlayMode();
                     SFXManager.Instance.PlaySFX(SFXEnum.findBug);
+                    PopupViewController.CreateFoundItExplosionViewController();
 
                     break;
                 } else
