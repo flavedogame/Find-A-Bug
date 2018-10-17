@@ -12,6 +12,7 @@ public class DeveloperDialogViewController : DefaultViewController
     List<NarrationInfo> narrationInfoList;
     int currentNarrationFrameIndex;
     string narrativeIdentifier;
+    TeleType teleType;
     // Start is called before the first frame update
 
     static public void CreateViewController(string identifier, List<NarrationInfo> narrationInfoList)
@@ -27,6 +28,7 @@ public class DeveloperDialogViewController : DefaultViewController
         narrativeIdentifier = identifier;
         narrationInfoList = list;
         currentNarrationFrameIndex = -1;
+        teleType = dialogText.GetComponent<TeleType>();
         SetupView();
         ShowNextFrame();
     }
@@ -82,6 +84,7 @@ public class DeveloperDialogViewController : DefaultViewController
     void UpdateView(NarrationInfo narrationInfo)
     {
         dialogText.text = narrationInfo.dialog;
+        teleType.Init();
     }
 
     NarrationInfo CurrentNarrationInfo()

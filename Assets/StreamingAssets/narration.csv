@@ -1,5 +1,5 @@
 identifier,speakerName,dialog,speakerImage,isVisibleForTest
-developerIntroduction_1,,"Hi,I'm Flavedo, a game develop",,TRUE
+developerIntroduction_1,,"Hi,I'm Flavedo, a game developer",,TRUE
 developerIntroduction_2,,You must be the volunteer tester to help me test my game! Thank you very much!,,FALSE
 developerIntroduction_3,,"Before we start testing, let me test your test skill :P",,FALSE
 developerIntroduction_4,,"So first, there is a bug in this room.",,FALSE
