@@ -8,12 +8,12 @@ developerIntroduction_6,,"When you met a bug(or we would say, reproduce a bug),"
 developerIntroduction_7,,you can click on "FOUND IT" button then click on the object that cause the bug.,,FALSE
 developerIntroduction_8,,Now find the bug in the room!,,FALSE
 developerTestOneRoomBugFinished_1,,Wow I'm impressed you find it so fast! ,,TRUE
-developerTestOneRoomBugFinished_2,,"The wall says it will block you, but I didn't implement it -- on purpose!",,FALSE
+developerTestOneRoomBugFinished_2,,"The wall should block the player, but I didn't implement it -- on purpose!",,FALSE
 developerTestOneRoomBugFinished_3,,"Ok I'll fix the bug, you can't walk through the wall now.",,FALSE
 developerTestOneRoomBugFinished_4,,And I'll send you back so you won't be stuck by the wall.,,FALSE
 developerTestOneRoomBugFinished_5,,"I also added some new stuff, a real bug! Try it!",,FALSE
 wallBugHint_1,,"Hmm...When I say there is a bug in the room, it does not mean a real bug",,TRUE
-wallBugHint_2,,Or it is really in the room.,,FALSE
+wallBugHint_2,,Neither does it means that it is have to be IN the room.,,FALSE
 nothingSpecial,,I can't see a bug here,,TRUE
 v1Dialog_1,,I see you want to attack the monster,,TRUE
 v1Dialog_2,,"That's good. But, you know, this is all the game I've finished",,FALSE

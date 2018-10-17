@@ -1,0 +1,6 @@
+identifier,description,startAchievement,finishAchievement,endAchievement,parentList,comment
+findFirstBug,,finishIntroduction,finishWallBug,finishWallBugNarration,,"when startAchievement active, this will show"
+findFirstBug_trigger,"Tap on items with alert button and view its attribute, then trigger the bug",finishIntroduction,firstTimeTriggerABug,finishWallBugNarration,findFirstBug,"when finishAchievement is finished, this will complete"
+findFirstBug_tapButton,Tap on Found It! button,finishIntroduction,firstTimeTapFoundItButton,finishWallBugNarration,findFirstBug,"when endAchievement is finished, this will hide"
+findFirstBug_find,Tap on the item(s) that has bug,finishIntroduction,finishWallBug,finishWallBugNarration,findFirstBug,
+attackFirstMonster,,,,,,
