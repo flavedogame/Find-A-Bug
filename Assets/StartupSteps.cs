@@ -7,8 +7,10 @@ public class StartupSteps : MonoBehaviour {
     private void Awake()
     {
         SQLiteDatabaseManager.Instance.Init();
+        CheatSettings.Instance.InitDatabase();
 
         CurrencyManager.Instance.Init();
+
 
         AchievementManager.Instance.Init();
         NarrativeManager.Instance.Init();
@@ -24,8 +26,7 @@ public class StartupSteps : MonoBehaviour {
         //TutorialManager.Instance.Init();
         //MonsterManager.Instance.Init();
         //LevelManager.Instance.Init();
-
-        CheatSettings.Instance.Init();
+        CheatSettings.Instance.InitCsv();
     }
     // Use this for initialization
     void Start () {

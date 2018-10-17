@@ -12,7 +12,16 @@ public class CheatSettings : Singleton<CheatSettings>
     public bool alwaysGiveHint;
     // Start is called before the first frame update
 
-    public void Init()
+    public void InitDatabase()
+    {
+        
+        if (cleanObjectFunctionWhenStart)
+        {
+            DataService ds = SQLiteDatabaseManager.Instance.ds;
+            ds.DeleteAllObjectFunction();
+        }
+    }
+    public void InitCsv()
     {
         if (cleanAchievementWhenStart)
         {
@@ -21,8 +30,8 @@ public class CheatSettings : Singleton<CheatSettings>
         }
         if (cleanObjectFunctionWhenStart)
         {
-            DataService ds = SQLiteDatabaseManager.Instance.ds;
-            ds.DeleteAllObjectFunction();
+            //DataService ds = SQLiteDatabaseManager.Instance.ds;
+            //ds.DeleteAllObjectFunction();
             BugableObjectFunctionManager.Instance.ReadCSV();
         }
     }

@@ -10,9 +10,16 @@ public class BugableObjectStateFunctionCell : MonoBehaviour {
     public GameObject newBanner;
     Button cellBackground;
     BugableObjectFunctionInfo functionInfo;
-    public GameObject newParticleEffect;
-    public GameObject tapParticleEffect;
 
+    public Image newOverlayRender;
+    public Image tapOverlayRender;
+    Color newTransparentColor;
+    Color newPulseColor;
+    Color tapTransparentColor;
+    Color tapPulseColor;
+
+    bool shouldNewOverlayShow;
+    
 
     public BugableObjectStateFunctionCell(BugableObjectFunctionInfo info, Object cellPrefab, Transform tableTransform)
     {
@@ -24,9 +31,13 @@ public class BugableObjectStateFunctionCell : MonoBehaviour {
     public void Init(BugableObjectFunctionInfo info)
     {
         functionInfo = info;
+        newPulseColor = newOverlayRender.color;
+        newTransparentColor = new Color(newPulseColor.r, newPulseColor.g, newPulseColor.b, 0);
+        tapPulseColor = tapOverlayRender.color;
+        tapTransparentColor = new Color(tapPulseColor.r, tapPulseColor.g, tapPulseColor.b, 0);
+        newOverlayRender.gameObject.SetActive(false);
+        tapOverlayRender.gameObject.SetActive(false);
         UpdateView();
-        newParticleEffect.SetActive(false);
-        tapParticleEffect.SetActive(false);
     }
 
     public void UpdateView()
@@ -34,7 +45,7 @@ public class BugableObjectStateFunctionCell : MonoBehaviour {
         functionDescription.text = functionInfo.description;
         bool isNew = !functionInfo.isViewed;
         newBanner.SetActive(isNew);
-        newParticleEffect.SetActive(isNew);
+        shouldNewOverlayShow = isNew;
         cellBackground = GetComponent<Button>();
         cellBackground.onClick.AddListener(OnClick);
     }
@@ -47,10 +58,33 @@ public class BugableObjectStateFunctionCell : MonoBehaviour {
             BugableObjectFunctionManager.Instance.ViewFunction(functionInfo);
             SFXManager.Instance.PlaySFX(SFXEnum.getPoint);
             UpdateView();
-            tapParticleEffect.SetActive(true);
+
+            tapOverlayRender.gameObject.SetActive(true);
+            Animator anim = tapOverlayRender.GetComponent<Animator>();
+            anim.Rebind();
+            if (anim != null)
+            {
+                AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
+                float length = info.length;
+                Destroy(tapOverlayRender, length);
+            }
         } else
         {
             Debug.Log("already collected for function " + functionInfo.identifier);
+        }
+    }
+
+    void Update()
+    {
+
+        if (shouldNewOverlayShow)
+        {
+            newOverlayRender.gameObject.SetActive(true);
+            newOverlayRender.color = Color.Lerp(newTransparentColor, newPulseColor, Mathf.PingPong(Time.time, 0.5f));
+        }
+        else
+        {
+            newOverlayRender.gameObject.SetActive(false);
         }
     }
 }
