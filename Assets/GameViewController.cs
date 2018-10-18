@@ -33,6 +33,8 @@ public class GameViewController : MonoBehaviour {
 
     void OnClickFoundBugButton()
     {
+
+        AchievementManager.Instance.FinishAchievement("firstTimeTapFoundItButton");
         if (GameModeManager.Instance.isInFindBugMode)
         {
             GameModeManager.Instance.GetIntoPlayMode();

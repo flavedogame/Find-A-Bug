@@ -99,6 +99,8 @@ public class BugableObject : MonoBehaviour {
                     SFXManager.Instance.PlaySFX(SFXEnum.findBug);
                     PopupViewController.CreateFoundItExplosionViewController();
 
+                    AchievementManager.Instance.FinishAchievement("firstTimeTriggerABug");
+                    
                     break;
                 } else
                 {
