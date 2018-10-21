@@ -2,17 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TodoListViewController : MonoBehaviour
+public class TodoListViewController : DefaultViewController
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject todoListCell;
+    public GameObject todoListListPanel;
+    // Use this for initialization
+
+    static public void CreateViewController()
     {
-        
+
+        Object prefab = ViewControllerManager.Instance.viewControllers[6];
+        GameObject go = Instantiate(prefab, ViewControllerManager.Instance.viewControllerCanvas.transform) as GameObject;
+        TodoListViewController script = go.GetComponent<TodoListViewController>();
+        script.Init();
     }
 
-    // Update is called once per frame
-    void Update()
+    void Init()
     {
-        
+        foreach (string todoListKey in TodoListManager.Instance.activeTodoListList)
+        {
+            foreach (TodoListInfo info in TodoListManager.Instance.activeTodoListDictionary[todoListKey])
+            {
+                GameObject go = Instantiate(todoListCell, todoListListPanel.transform);
+                TodoListCell script = go.GetComponent<TodoListCell>();
+            }
+            
+        }
     }
 }
