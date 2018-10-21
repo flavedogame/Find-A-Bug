@@ -41,6 +41,7 @@ public class BugableObjectManager : Singleton<BugableObjectManager>
     public void TriggerABug()
     {
         HasBugTriggered |= true;
+        AchievementManager.Instance.FinishAchievement("firstTimeTriggerABug");
     }
 
     public void RegisterBugableObject(BugableObject bo)

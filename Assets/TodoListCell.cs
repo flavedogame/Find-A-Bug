@@ -32,7 +32,7 @@ public class TodoListCell : MonoBehaviour
         if (todoListInfo.parentList.Length !=0)
         {
             //todo: does not support multi level nesting
-            description.rectTransform.offsetMin = new Vector2(40, 1);
+            description.rectTransform.offsetMin = new Vector2(40, 0);
         }
     }
 

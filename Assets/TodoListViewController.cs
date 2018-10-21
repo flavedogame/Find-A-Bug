@@ -20,10 +20,17 @@ public class TodoListViewController : DefaultViewController
     private void Start()
     {
         Init();
+
+        AchievementManager.Instance.RegisterAchievementComplete(Init);
     }
 
     void Init()
     {
+        //todo: don't destroy them, reuse them
+        foreach (Transform child in todoListListPanel.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
         foreach (string todoListKey in TodoListManager.Instance.activeTodoListList)
         {
             foreach (TodoListInfo info in TodoListManager.Instance.activeTodoListDictionary[todoListKey])
