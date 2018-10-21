@@ -21,6 +21,9 @@ public class AttackableObject : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isControlledByPlayer && 
             AchievementManager.Instance.achievementDictionary["finishWallBugNarration"].state == AchievementState.complete)
         {
+            AchievementManager.Instance.FinishAchievement("firstTimeAttackMonster");
+
+            //temp
             NarrationManager.Instance.ShowNarrationWithIdentifier("v1Dialog");
         }
     }

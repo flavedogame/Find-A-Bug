@@ -20,10 +20,12 @@ public class StartupSteps : MonoBehaviour {
         GameLogicManager.Instance.Init();
         GameModeManager.Instance.Init();
         AttackManager.Instance.Init();
-        TodoListManager.Instance.Init();
 
 
         CheatSettings.Instance.InitCsv();
+
+
+        TodoListManager.Instance.Init();
     }
     // Use this for initialization
     void Start () {

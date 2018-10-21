@@ -22,6 +22,7 @@ public class Achievement{
             DataService ds = SQLiteDatabaseManager.Instance.ds;
             ds.UpdateAchievement(persistentAchievement);
             CheckToChangeState();
+            NarrativeManager.Instance.UpdateAchievement(identifier, oldState, value);
             //Debug.LogError("oldstate " + oldState + " new state " + persistentAchievement.state);
             if (oldState != AchievementState.complete && value == AchievementState.complete)
             {
@@ -30,11 +31,11 @@ public class Achievement{
                 {
                     dele();
                 }
-                AchievementManager.Instance.TriggerDelegates();
                 //don't reload all list?
                 TodoListManager.Instance.InitList();
+
+                AchievementManager.Instance.TriggerDelegates();
             }
-            NarrativeManager.Instance.UpdateAchievement(identifier, oldState, value);
         }
     }
 

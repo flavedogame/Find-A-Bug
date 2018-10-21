@@ -20,12 +20,14 @@ public class TodoListCell : MonoBehaviour
         description.text = todoListInfo.description;
         if (AchievementManager.Instance.achievementDictionary[todoListInfo.finishAchievement].state == AchievementState.complete)
         {
-            checkIcon.SetActive(true);
+            if (todoListInfo.parentList.Length != 0)
+            {
+                checkIcon.SetActive(true);
+            }
             description.color = new Color(0, 1, 0);
         }
         else
         {
-
             checkIcon.SetActive(false);
             description.color = new Color(1, 1, 0);
         }

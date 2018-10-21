@@ -85,6 +85,10 @@ public class AchievementManager : Singleton<AchievementManager> {
 
     public void FinishAchievement(string identifier)
     {
+        if (!achievementDictionary.ContainsKey(identifier))
+        {
+            Debug.LogError("can't find identifier in achievementDictionary " + identifier);
+        }
         Achievement achievement = achievementDictionary[identifier];
         //achievement.FinishStep();
         achievement.state = AchievementState.complete;

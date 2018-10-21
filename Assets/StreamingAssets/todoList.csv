@@ -3,3 +3,7 @@ findFirstBug,Find the first bug!,finishIntroduction,finishWallBug,finishWallBugN
 findFirstBug_trigger,Move Around to trigger the bug,finishIntroduction,firstTimeTriggerABug,finishWallBugNarration,findFirstBug,"when finishAchievement is finished, this will complete"
 findFirstBug_tapButton,Tap on Found It! button,finishIntroduction,firstTimeTapFoundItButton,finishWallBugNarration,findFirstBug,"when endAchievement is finished, this will hide"
 findFirstBug_find,Tap on the item(s) that has bug,finishIntroduction,finishWallBug,finishWallBugNarration,findFirstBug,
+attackMonster,Find the bug in Attacking monster,attackMonster,finishAttackMonsterBug,finishAttackMonsterBugNarration,,
+attackMonster_attack,Attack Monster with space,attackMonster,firstTimeAttackMonster,finishAttackMonsterBugNarration,attackMonster,
+attackMonster_trigger,Trigger the bug after attacking several times,attackMonster,firstTimeTriggerUndeadMonsterBug,finishAttackMonsterBugNarration,attackMonster,
+attackMonster_find,Find the bug,attackMonster,finishAttackMonsterBug,finishAttackMonsterBugNarration,attackMonster,
