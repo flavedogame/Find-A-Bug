@@ -21,10 +21,18 @@ public class TodoListCell : MonoBehaviour
         if (AchievementManager.Instance.achievementDictionary[todoListInfo.finishAchievement].state == AchievementState.complete)
         {
             checkIcon.SetActive(true);
+            description.color = new Color(0, 1, 0);
         }
         else
         {
+
             checkIcon.SetActive(false);
+            description.color = new Color(1, 1, 0);
+        }
+        if (todoListInfo.parentList.Length !=0)
+        {
+            //todo: does not support multi level nesting
+            description.rectTransform.offsetMin = new Vector2(40, 1);
         }
     }
 

@@ -17,6 +17,11 @@ public class TodoListViewController : DefaultViewController
         script.Init();
     }
 
+    private void Start()
+    {
+        Init();
+    }
+
     void Init()
     {
         foreach (string todoListKey in TodoListManager.Instance.activeTodoListList)
@@ -25,6 +30,7 @@ public class TodoListViewController : DefaultViewController
             {
                 GameObject go = Instantiate(todoListCell, todoListListPanel.transform);
                 TodoListCell script = go.GetComponent<TodoListCell>();
+                script.InitCell(info);
             }
             
         }

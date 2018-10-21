@@ -31,6 +31,8 @@ public class Achievement{
                     dele();
                 }
                 AchievementManager.Instance.TriggerDelegates();
+                //don't reload all list?
+                TodoListManager.Instance.InitList();
             }
             NarrativeManager.Instance.UpdateAchievement(identifier, oldState, value);
         }

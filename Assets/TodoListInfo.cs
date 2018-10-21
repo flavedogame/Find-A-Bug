@@ -14,6 +14,6 @@ public class TodoListInfo
 
     public override string ToString()
     {
-        return "AchievementInfo: " + identifier;
+        return "Todolist: " + identifier;
     }
 }

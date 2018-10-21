@@ -24,7 +24,7 @@ public void Init()
             todoListInfoDictionary[todoListInfo.identifier] = todoListInfo;
         }
     }
-    void InitList()
+    public void InitList()
     {
         activeTodoListList = new List<string>();
         activeTodoListDictionary = new Dictionary<string, List<TodoListInfo>>();
@@ -40,6 +40,7 @@ public void Init()
                 }
                 else
                 {
+                    //Debug.LogError("parent "+ todoListInfo.parentList+" does not exist in todo list: " + todoListInfo);
                     continue;
                 }
             }
@@ -50,6 +51,9 @@ public void Init()
                     AchievementManager.Instance.achievementDictionary[todoListInfo.endAchievement].state != AchievementState.complete)
                 {
                     activeTodoListDictionary[todoListInfo.identifier] = new List<TodoListInfo>();
+                    activeTodoListDictionary[todoListInfo.identifier].Add(todoListInfo);
+                    //sort active todo list
+                    activeTodoListList.Add(todoListInfo.identifier);
                 }
             }
 
