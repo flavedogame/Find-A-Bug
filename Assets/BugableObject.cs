@@ -91,8 +91,9 @@ public class BugableObject : MonoBehaviour {
                     //put these three line in manager
                     //todo: change to based on observer
                     BugableObjectFunctionManager.Instance.ReadCSV();
+                    BugableObjectFunctionManager.Instance.ReadDatabase();
                     //BugableObjectFunctionManager.Instance.enabledBugableObjectFunctionInfoDict[info.identifier].Add(notEnabledFunctionInfo);
-                   // BugableObjectFunctionManager.Instance.notEnabledBugableObjectFunctionInfoDict[info.identifier].Remove(notEnabledFunctionInfo);
+                    // BugableObjectFunctionManager.Instance.notEnabledBugableObjectFunctionInfoDict[info.identifier].Remove(notEnabledFunctionInfo);
                     BugableObjectFunctionManager.Instance.UpdateFunctionDelegate();
 
                     GameModeManager.Instance.GetIntoPlayMode();

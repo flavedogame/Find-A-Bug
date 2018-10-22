@@ -1,6 +1,6 @@
 identifier,achievement,narrativeAction,param,delayTime,finishAchievement,comment
 gameStartNarration,startGame,NarrationAction,narrationID:developerIntroduction,0,startGame,active when achievement is active
-wallBugHintNarration,finishIntroduction,NarrationAction,narrationID:wallBugHint,5,,
+wallBugHintNarration,finishIntroduction,NarrationAction,narrationID:wallBugHint,20,,
 wallBugFinishedNarration,finishWallBugNarration,NarrationAction,narrationID:developerTestOneRoomBugFinished,0,finishWallBugNarration,
 addWallCollision,attackMonster,SetScriptActiveAction,tag_name:wall|script_name:TilemapCollider2D,0,,
 resetPlayerPosition,attackMonster,ResetPlayerPositionAction,narrationID:developerTestOneRoomBugFinished,0,,

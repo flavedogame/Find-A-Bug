@@ -15,14 +15,15 @@ public class StartupSteps : MonoBehaviour {
         AchievementManager.Instance.Init();
         NarrativeManager.Instance.Init();
         NarrationManager.Instance.Init();
+
+
+        CheatSettings.Instance.InitCsv();
+
         BugableObjectFunctionManager.Instance.Init();
         BugableObjectManager.Instance.Init();
         GameLogicManager.Instance.Init();
         GameModeManager.Instance.Init();
         AttackManager.Instance.Init();
-
-
-        CheatSettings.Instance.InitCsv();
 
 
         TodoListManager.Instance.Init();
