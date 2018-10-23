@@ -48,7 +48,7 @@ public class DataService  {
 		File.Copy(loadDb, filepath);
 #else
         
-	var loadDb =  Application.streamingAssetsPath+ DatabaseName;  // this is the path to your StreamingAssets in iOS
+	var loadDb =  Application.streamingAssetsPath+"/"+ DatabaseName;  // this is the path to your StreamingAssets in iOS
 	// then save to Application.persistentDataPath
 	File.Copy(loadDb, filepath);
 

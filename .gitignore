@@ -19,6 +19,7 @@ ProjectSettings/
 *.meta
 Logs
 *.s3db
+FindABugSetup.exe
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
