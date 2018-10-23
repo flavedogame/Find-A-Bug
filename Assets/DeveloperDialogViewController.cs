@@ -23,6 +23,14 @@ public class DeveloperDialogViewController : DefaultViewController
         script.Init(identifier,narrationInfoList);
     }
 
+    static public void CreateViewControllerTest(string test)
+    {
+        Object prefab = ViewControllerManager.Instance.viewControllers[3];
+        GameObject go = Instantiate(prefab, ViewControllerManager.Instance.viewControllerCanvas.transform) as GameObject;
+        DeveloperDialogViewController script = go.GetComponent<DeveloperDialogViewController>();
+        script.dialogText.text = test;
+    }
+
     private void Init(string identifier, List<NarrationInfo> list)
     {
         narrativeIdentifier = identifier;

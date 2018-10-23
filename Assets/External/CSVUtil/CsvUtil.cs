@@ -41,6 +41,11 @@ namespace Sinbad {
             while (!loadDb.isDone) { }  // CAREFUL here, for safety reasons you shouldn't let this while loop unattended, place a timer and error check
             // then save to Application.persistentDataPath
             File.WriteAllBytes(filepath, loadDb.bytes);
+#else
+        
+	var loadDb =  Application.streamingAssetsPath+"/"+ filename;  // this is the path to your StreamingAssets in iOS
+	// then save to Application.persistentDataPath
+	File.Copy(loadDb, filepath);
 #endif
             Debug.Log("Database written");
         }

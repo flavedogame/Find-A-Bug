@@ -11,7 +11,6 @@ public class DataService  {
 	private SQLiteConnection _connection;
 
 	public DataService(string DatabaseName){
-
 #if UNITY_EDITOR
         var dbPath = string.Format(@"Assets/StreamingAssets/{0}", DatabaseName);
 #else
@@ -48,7 +47,8 @@ public class DataService  {
 		// then save to Application.persistentDataPath
 		File.Copy(loadDb, filepath);
 #else
-	var loadDb = Application.dataPath + "/StreamingAssets/" + DatabaseName;  // this is the path to your StreamingAssets in iOS
+        
+	var loadDb =  Application.streamingAssetsPath+ DatabaseName;  // this is the path to your StreamingAssets in iOS
 	// then save to Application.persistentDataPath
 	File.Copy(loadDb, filepath);
 
@@ -59,6 +59,8 @@ public class DataService  {
 
         var dbPath = filepath;
 #endif
+        //Debug.LogError(Application.streamingAssetsPath);
+        //var loadDb = Application.streamingAssetsPath+ DatabaseName; ;
         _connection = new SQLiteConnection(dbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
         Debug.Log("Final PATH: " + dbPath);     
 

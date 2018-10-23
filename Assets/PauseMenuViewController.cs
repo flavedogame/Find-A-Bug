@@ -9,6 +9,7 @@ public class PauseMenuViewController : DefaultViewController
     public Button cheatButton;
     public Button settingButton;
     public Button achievementButton;
+    public Button quitButton;
 
     static public void CreateViewController()
     {
@@ -23,6 +24,6 @@ public class PauseMenuViewController : DefaultViewController
 
         resumeButton.onClick.AddListener(Back);
         cheatButton.onClick.AddListener(delegate { CheatMenuViewController.CreateViewController(); });
-        achievementButton.onClick.AddListener(delegate { AchievementPanelViewController.CreateViewController(); });
+        quitButton.onClick.AddListener(delegate { Application.Quit(); });
     }
 }
