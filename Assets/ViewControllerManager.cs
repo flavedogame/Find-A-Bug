@@ -8,8 +8,9 @@ public class ViewControllerManager : Singleton<ViewControllerManager>
 {
     public List<Object> viewControllers;
     public GameObject viewControllerCanvas;
-	// Use this for initialization
-	void Start () {
+    public GameObject foundItPopupCanvas;
+    // Use this for initialization
+    void Start () {
 		
 	}
 	

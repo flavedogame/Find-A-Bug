@@ -7,7 +7,7 @@ public class PopupViewController : MonoBehaviour
     static public void CreateFoundItExplosionViewController()
     {
         Object prefab = ViewControllerManager.Instance.viewControllers[5];
-        GameObject go = Instantiate(prefab, ViewControllerManager.Instance.viewControllerCanvas.transform) as GameObject;
+        GameObject go = Instantiate(prefab, ViewControllerManager.Instance.foundItPopupCanvas.transform) as GameObject;
         Animator anim = go.GetComponent<Animator>();
         if (anim != null)
         {
