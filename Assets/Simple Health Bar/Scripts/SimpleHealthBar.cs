@@ -125,9 +125,10 @@ public class SimpleHealthBar : MonoBehaviour
 		// Fix the value to be a percentage.
 		_currentFraction = currentValue / maxValue;
 
+        //this makes it easier to find the bug :P
 		// If the value is greater than 1 or less than 0, then fix the values to being min/max.
-		if( _currentFraction < 0 || _currentFraction > 1 )
-			_currentFraction = _currentFraction < 0 ? 0 : 1;
+		//if( _currentFraction < 0 || _currentFraction > 1 )
+		//	_currentFraction = _currentFraction < 0 ? 0 : 1;
 
 		// Store the target amount of fill according to the users options.
 		targetFill = _currentFraction;

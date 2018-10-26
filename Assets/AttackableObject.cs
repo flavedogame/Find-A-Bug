@@ -8,10 +8,13 @@ public class AttackableObject : GameHealthObject
     public int rangeStart;
     public int rangeEnd;
     public bool isControlledByPlayer;
+    public GameObject attackEffect;
+    public AudioClip  attackSFX;
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -29,6 +32,9 @@ public class AttackableObject : GameHealthObject
                 {
                     AchievementManager.Instance.FinishAchievement("firstTimeAttackMonster");
                     healthScript.GetDamage(attack);
+                    Instantiate(attackEffect, hitCollider.gameObject.transform,true);
+                    audioSource.clip = attackSFX;
+                    audioSource.Play();
                 }
             }
 
