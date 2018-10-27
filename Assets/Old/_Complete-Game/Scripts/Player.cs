@@ -23,6 +23,7 @@ namespace Completed
 		
 		private Animator animator;					//Used to store a reference to the Player's animator component.
 		private int food;                           //Used to store player food points total during level.
+        public int sightRange = 3;
 #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
         private Vector2 touchOrigin = -Vector2.one;	//Used to store location of screen touch origin for mobile controls.
 #endif
@@ -42,7 +43,9 @@ namespace Completed
 			
 			//Call the Start function of the MovingObject base class.
 			base.Start ();
-		}
+            UpdateSightAndFog();
+
+        }
 		
 		
 		//This function is called when the behaviour becomes disabled or inactive.
@@ -148,7 +151,9 @@ namespace Completed
 			{
 				//Call RandomizeSfx of SoundManager to play the move sound, passing in two audio clips to choose from.
 				SoundManager.instance.RandomizeSfx (moveSound1, moveSound2);
-			} else
+                UpdateSightAndFog();
+
+            } else
             {
                 SFXManager.Instance.PlaySFX(SFXEnum.hitOnWall);
             }
@@ -159,6 +164,20 @@ namespace Completed
 			//Set the playersTurn boolean of GameManager to false now that players turn is over.
 			GameManager.instance.playersTurn = false;
 		}
+
+        void UpdateSightAndFog()
+        {
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, sightRange, 1 << LayerMask.NameToLayer("fog"));
+            foreach (Collider2D hitCollider in hitColliders)
+            {
+                //Debug.Log("hit " + hitCollider.gameObject);
+                FogOfWar fogScript = hitCollider.GetComponent<FogOfWar>();
+                if (fogScript)
+                {
+                    fogScript.ClearFog();
+                }
+            }
+        }
 
 
         //OnCantMove overrides the abstract function OnCantMove in MovingObject.
