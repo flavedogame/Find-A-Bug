@@ -63,7 +63,7 @@ public class TouchManager : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
-                    BugableObject script = vhit.transform.gameObject.GetComponent<BugableObject>();
+                    TouchAction script = vhit.transform.gameObject.GetComponent<TouchAction>();
                     script.DidTap();
                 }
                 //improve this later, don't call manager in update

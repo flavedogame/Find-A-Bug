@@ -44,6 +44,7 @@ namespace Completed
 			//Call the Start function of the MovingObject base class.
 			base.Start ();
             UpdateSightAndFog();
+            SetupSight();
 
         }
 		
@@ -164,6 +165,20 @@ namespace Completed
 			//Set the playersTurn boolean of GameManager to false now that players turn is over.
 			GameManager.instance.playersTurn = false;
 		}
+
+        void SetupSight()
+        {
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, sightRange, 1 << LayerMask.NameToLayer("fog_sight"));
+            foreach (Collider2D hitCollider in hitColliders)
+            {
+                //Debug.Log("hit " + hitCollider.gameObject);
+                FogOfWar fogScript = hitCollider.GetComponent<FogOfWar>();
+                if (fogScript)
+                {
+                    fogScript.ClearFog();
+                }
+            }
+        }
 
         void UpdateSightAndFog()
         {
