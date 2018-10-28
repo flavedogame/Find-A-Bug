@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class TouchAction : MonoBehaviour
 {
+    SpriteRenderer sr;
     // Start is called before the first frame update
     void Start()
     {
-        
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -18,7 +19,10 @@ public class TouchAction : MonoBehaviour
 
     public void DidTap()
     {
-        HumanInfo info = GetComponent<HumanInfo>();
-        HumanStateViewController.CreateViewController(info);
+        if (sr.enabled)
+        {
+            HumanInfo info = GetComponent<HumanInfo>();
+            HumanStateViewController.CreateViewController(info);
+        }
     }
 }

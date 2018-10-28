@@ -6,20 +6,20 @@ public class FogOfWar : MonoBehaviour
 {
 
     public GameObject fog;
-    SpriteRenderer sr;
-    public void ClearFog()
+    protected SpriteRenderer sr;
+    public virtual void ClearFog()
     {
         sr = fog.GetComponent<SpriteRenderer>();
         fog.SetActive(false);
     }
-    public void UnclearFog()
+    public virtual void UnclearFog()
     {
         fog.SetActive(true);
 
         sr.color = new Color(sr.color.r, sr.color.r, sr.color.r, 0.5f);
     }
     // Start is called before the first frame update
-    void Start()
+    protected virtual void  Start()
     {
         sr = fog.GetComponent<SpriteRenderer>();
     }

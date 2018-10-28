@@ -192,7 +192,7 @@ namespace Completed
 
         void UpdateSightAndFog()
         {
-            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, sightRange, 1 << LayerMask.NameToLayer("fog"));
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, sightRange, 1 << LayerMask.NameToLayer("fog")| 1 << LayerMask.NameToLayer("human"));
             HashSet<FogOfWar> newFogs = new HashSet<FogOfWar>();
             foreach (Collider2D hitCollider in hitColliders)
             {
