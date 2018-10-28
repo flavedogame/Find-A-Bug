@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;	//Allows us to use UI.
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,7 @@ namespace Completed
 	//Player inherits from MovingObject, our base class for objects that can move, Enemy also inherits from this.
 	public class Player : MovingObject
 	{
+        
 		public float restartLevelDelay = 1f;		//Delay time in seconds to restart level.
 		public int pointsPerFood = 10;				//Number of points to add to player food points when picking up a food object.
 		public int pointsPerSoda = 20;				//Number of points to add to player food points when picking up a soda object.
@@ -43,8 +45,9 @@ namespace Completed
 			
 			//Call the Start function of the MovingObject base class.
 			base.Start ();
+            fogs = new HashSet<FogOfWar>();
             UpdateSightAndFog();
-            SetupSight();
+            //SetupSight();
 
         }
 		
@@ -152,7 +155,6 @@ namespace Completed
 			{
 				//Call RandomizeSfx of SoundManager to play the move sound, passing in two audio clips to choose from.
 				SoundManager.instance.RandomizeSfx (moveSound1, moveSound2);
-                UpdateSightAndFog();
 
             } else
             {
@@ -166,32 +168,48 @@ namespace Completed
 			GameManager.instance.playersTurn = false;
 		}
 
-        void SetupSight()
+        //void SetupSight()
+        //{
+        //    Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, sightRange, 1 << LayerMask.NameToLayer("fog_sight"));
+        //    foreach (Collider2D hitCollider in hitColliders)
+        //    {
+        //        //Debug.Log("hit " + hitCollider.gameObject);
+        //        FogOfWar fogScript = hitCollider.GetComponent<FogOfWar>();
+        //        if (fogScript)
+        //        {
+        //            fogScript.ClearFog();
+        //        }
+        //    }
+        //}
+
+        HashSet<FogOfWar> fogs;
+
+        protected override void AfterMoveAction()
         {
-            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, sightRange, 1 << LayerMask.NameToLayer("fog_sight"));
-            foreach (Collider2D hitCollider in hitColliders)
-            {
-                //Debug.Log("hit " + hitCollider.gameObject);
-                FogOfWar fogScript = hitCollider.GetComponent<FogOfWar>();
-                if (fogScript)
-                {
-                    fogScript.ClearFog();
-                }
-            }
+            base.AfterMoveAction();
+            UpdateSightAndFog();
         }
 
         void UpdateSightAndFog()
         {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, sightRange, 1 << LayerMask.NameToLayer("fog"));
+            HashSet<FogOfWar> newFogs = new HashSet<FogOfWar>();
             foreach (Collider2D hitCollider in hitColliders)
             {
                 //Debug.Log("hit " + hitCollider.gameObject);
                 FogOfWar fogScript = hitCollider.GetComponent<FogOfWar>();
                 if (fogScript)
                 {
+                    newFogs.Add(fogScript);
                     fogScript.ClearFog();
                 }
             }
+            fogs.ExceptWith(newFogs);
+            foreach (FogOfWar fw in fogs)
+            {
+                fw.UnclearFog();
+            }
+            fogs = newFogs;
         }
 
 

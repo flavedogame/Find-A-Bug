@@ -88,8 +88,10 @@ namespace Completed
 				yield return null;
 			}
             // todoDebug.LogError("life is hard");
-            BugableObjectManager.Instance.CheckBug();
+            AfterMoveAction();
         }
+
+        protected virtual void AfterMoveAction() { }
 		
 		
 		//The virtual keyword means AttemptMove can be overridden by inheriting classes using the override keyword.
