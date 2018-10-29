@@ -15,6 +15,12 @@ public class HumanInfo : MonoBehaviour
     public RelationDescriptionEnum relationDescriptionEnum;
     public HealthDescriptionEnum healthDescriptionEnum;
     public AwarenessEnum awarenessEnum;
+    public int AttackChance;
+    public int DodgeChance;
+    public int RunawayChance;
+    public int CoopChance;
+    public int HowYouBehaveInTheGame;
+    public int HowOthersBehaveInTheGame;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +74,9 @@ public class HumanInfo : MonoBehaviour
         relationDescriptionEnum = (RelationDescriptionEnum)Random.Range(0, System.Enum.GetValues(typeof(RelationDescriptionEnum)).Length);
         healthDescriptionEnum = HealthDescriptionEnum.healthy;
         awarenessEnum = (AwarenessEnum)Random.Range(0, System.Enum.GetValues(typeof(AwarenessEnum)).Length);
+        HowYouBehaveInTheGame = 0;//-5 when you kill someone, -10 when you kill his bf or lover.  -50 when you try to attack him,
+        //+5 when you talk or him, +10 when you provide help
+        HowOthersBehaveInTheGame = 0; //-1 when anyone kill some one, -10 when someone kiil his bf or lover, -10 when someone try to kill him
     }
 
     // Update is called once per frame

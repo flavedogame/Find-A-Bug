@@ -155,7 +155,7 @@ namespace Completed
 			{
 				//Call RandomizeSfx of SoundManager to play the move sound, passing in two audio clips to choose from.
 				SoundManager.instance.RandomizeSfx (moveSound1, moveSound2);
-
+                TurnBaseClock.Instance.UpdateTime();
             } else
             {
                 SFXManager.Instance.PlaySFX(SFXEnum.hitOnWall);

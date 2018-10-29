@@ -16,25 +16,32 @@ public class ActionCell : MonoBehaviour
         
     }
 
-    public void InitCell(ActionEnum action)
+    public void InitCell(ActionEnum action, HumanInfo humanInfo)
     {
         switch (action)
         {
             case ActionEnum.talk:
                 description.text = "Talk";
                 actionButton.onClick.AddListener(delegate {
+                    DoAction();
                 });
                 break;
         }
     }
 
-    public void InitCell(InventoryEnum inventory)
+    void DoAction()
+    {
+        TurnBaseClock.Instance.UpdateTime();
+    }
+
+    public void InitCell(InventoryEnum inventory, HumanInfo humanInfo)
     {
         switch (inventory)
         {
             case InventoryEnum.stone:
                 description.text = "Throw a stone";
                 actionButton.onClick.AddListener(delegate {
+                    DoAction();
                 });
                 break;
             case InventoryEnum.kitchenKnife:
