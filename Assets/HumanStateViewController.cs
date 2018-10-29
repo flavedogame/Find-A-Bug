@@ -25,6 +25,7 @@ public class HumanStateViewController : DefaultViewController {
 
         humanInfo = info;
         description.text = FormatDescription();
+        AddActions();
     }
 
     string FormatDescription()
@@ -91,6 +92,24 @@ public class HumanStateViewController : DefaultViewController {
                 break;
         }
         return res;
+    }
+    public GameObject inventoryCell;
+    public GameObject inventoryListPanel;
+    void AddActions()
+    {
+        foreach (ActionEnum action in System.Enum.GetValues(typeof(ActionEnum)))
+        {
+            GameObject go = Instantiate(inventoryCell, inventoryListPanel.transform);
+            ActionCell script = go.GetComponent<ActionCell>();
+            script.InitCell(action);
+        }
+        foreach (InventoryEnum inventory in InventoryManager.Instance.inventories)
+        {
+
+            GameObject go = Instantiate(inventoryCell, inventoryListPanel.transform);
+            ActionCell script = go.GetComponent<ActionCell>();
+            script.InitCell(inventory);
+        }
     }
 
     // Update is called once per frame
