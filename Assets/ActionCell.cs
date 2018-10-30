@@ -10,14 +10,16 @@ public class ActionCell : MonoBehaviour
 {
     public TextMeshProUGUI description;
     public Button actionButton;
+    HumanStateViewController viewController;
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    public void InitCell(ActionEnum action, HumanInfo humanInfo)
+    public void InitCell(ActionEnum action, HumanInfo humanInfo, HumanStateViewController controller)
     {
+        viewController = controller;
         switch (action)
         {
             case ActionEnum.talk:
@@ -32,17 +34,16 @@ public class ActionCell : MonoBehaviour
     void DoAction()
     {
         TurnBaseClock.Instance.UpdateTime();
+        viewController.Back();
     }
 
-    public void InitCell(InventoryEnum inventory, HumanInfo humanInfo)
+    public void InitCell(InventoryEnum inventory, HumanInfo humanInfo,HumanStateViewController controller)
     {
+        viewController = controller;
         switch (inventory)
         {
             case InventoryEnum.stone:
                 description.text = "Throw a stone";
-                actionButton.onClick.AddListener(delegate {
-                    DoAction();
-                });
                 break;
             case InventoryEnum.kitchenKnife:
                 description.text = "Throw a kitchen knife";
@@ -66,7 +67,13 @@ public class ActionCell : MonoBehaviour
             case InventoryEnum.potLid:
                 break;
         }
-        
+
+
+        actionButton.onClick.AddListener(delegate {
+            InventoryManager.Instance.UseInventory(inventory, humanInfo);
+            DoAction();
+        });
+
     }
 
 

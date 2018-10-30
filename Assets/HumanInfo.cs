@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum RelationDescriptionEnum {dontKnow, notFamiliar,talkedSeveralTimes,sitAround,playedTogether,friend,bestFriend, lover, }
-public enum HealthDescriptionEnum { healthy, weak, hurt, dying, dead }
+public enum HealthDescriptionEnum { healthy, hurt, dying, dead }
 public enum AwarenessEnum { dontcare,normal,aware,nervous }
 
 
@@ -14,6 +14,7 @@ public class HumanInfo : MonoBehaviour
     public int sightRange;
     public RelationDescriptionEnum relationDescriptionEnum;
     public HealthDescriptionEnum healthDescriptionEnum;
+    public int hp = 100;
     public AwarenessEnum awarenessEnum;
     public int AttackChance;
     public int DodgeChance;
@@ -21,6 +22,9 @@ public class HumanInfo : MonoBehaviour
     public int CoopChance;
     public int HowYouBehaveInTheGame;
     public int HowOthersBehaveInTheGame;
+    public bool hasBeenAttackedByMe;
+    public bool hasBeenAttackedByAnyone;
+    public bool isWeak;
     // Start is called before the first frame update
     void Start()
     {

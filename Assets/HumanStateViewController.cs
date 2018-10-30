@@ -45,9 +45,6 @@ public class HumanStateViewController : DefaultViewController {
             case HealthDescriptionEnum.healthy:
                 res = humanInfo.SubjectiveProunoun(true) + " looks healthy. ";
                 break;
-            case HealthDescriptionEnum.weak:
-                res = humanInfo.SubjectiveProunoun(true) + " looks weak. ";
-                break;
             case HealthDescriptionEnum.hurt:
                 res = humanInfo.SubjectiveProunoun(true) + " is injured. ";
                 break;
@@ -101,14 +98,14 @@ public class HumanStateViewController : DefaultViewController {
         {
             GameObject go = Instantiate(inventoryCell, inventoryListPanel.transform);
             ActionCell script = go.GetComponent<ActionCell>();
-            script.InitCell(action,humanInfo);
+            script.InitCell(action,humanInfo,this);
         }
         foreach (InventoryEnum inventory in InventoryManager.Instance.inventories)
         {
 
             GameObject go = Instantiate(inventoryCell, inventoryListPanel.transform);
             ActionCell script = go.GetComponent<ActionCell>();
-            script.InitCell(inventory, humanInfo);
+            script.InitCell(inventory, humanInfo, this);
         }
     }
 
