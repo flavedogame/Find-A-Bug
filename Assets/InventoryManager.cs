@@ -2,15 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum InventoryEnum { stone, kitchenKnife, shotgun, pistol, binoculars, megaphone, crossbow, handAxe, kevlarVest, grenade, potLid,  }
+public enum InventoryEnum { stone, kitchenKnife, shotgun, pistol, binoculars,
+    megaphone, crossbow, handAxe, kevlarVest, grenade, potLid,  }
 //harisen, flashlight, rope, dagger, sickle, fork, machete, switchBlade, 
 public class InventoryManager : Singleton<InventoryManager>
 {
     public List<InventoryEnum> inventories;
-    int[] chanceFromFarAway = new int[] { 50, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
-    int[] damageMinFromFarAway = new int[] { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
-    int[] damageMaxFromFarAway = new int[] { 15, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
-    int[] goodAtFarAway = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    int[] chanceFromFarAway = new int[] { 10, 20, 60, 40, 10,
+        10, 50, 30, 0, 100, 10 };
+    int[] damageMinFromFarAway = new int[] { 10, 15, 30, 40, 10,
+        10, 20, 20, 0, 90, 10 };
+    int[] damageMaxFromFarAway = new int[] { 15, 30, 100, 90, 15,
+        15, 50, 40, 0, 100, 20 };
+    int[] goodAtWeapon = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+    int[] chanceFromClose = new int[] { 50, 60, 20, 70, 10,
+        10, 30, 40, 0, 100, 100 };
+    int[] damageMinFromClose = new int[] { 20, 30, 10, 60, 10,
+        10, 50, 70, 0, 100, 10 };
+    int[] damageMaxFromClose = new int[] { 45, 50, 100, 100, 15,
+        15, 60, 80, 0, 100, 20 };
+    int[] weaponItemLeft = new int[] {1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     // Start is called before the first frame update
     void Start()
     {
