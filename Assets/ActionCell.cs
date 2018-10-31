@@ -49,22 +49,31 @@ public class ActionCell : MonoBehaviour
                 description.text = "Throw a kitchen knife";
                 break;
             case InventoryEnum.shotgun:
+                description.text = "Shoot shotgun";
                 break;
             case InventoryEnum.pistol:
+                description.text = "Shoot pistol";
                 break;
             case InventoryEnum.binoculars:
+                description.text = "Throw a binoculars";
                 break;
             case InventoryEnum.megaphone:
+                description.text = "Throw a megaphone";
                 break;
             case InventoryEnum.crossbow:
+                description.text = "Shoot a crossbow";
                 break;
             case InventoryEnum.handAxe:
+                description.text = "Throw a handAxe";
                 break;
             case InventoryEnum.kevlarVest:
+                description.text = "Throw a kevlarVest";
                 break;
             case InventoryEnum.grenade:
+                description.text = "Throw a grenade";
                 break;
             case InventoryEnum.potLid:
+                description.text = "Throw a potLid";
                 break;
         }
 

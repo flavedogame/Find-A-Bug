@@ -64,7 +64,11 @@ public class TouchManager : MonoBehaviour
                 if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
                     TouchAction script = vhit.transform.gameObject.GetComponent<TouchAction>();
-                    script.DidTap();
+                    FogOfWarItem fowItem = vhit.transform.gameObject.GetComponent<FogOfWarItem>();
+                    if (fowItem.IsVisible())
+                    {
+                        script.DidTap();
+                    }
                 }
                 //improve this later, don't call manager in update
                 if (GameModeManager.Instance.isInFindBugMode)

@@ -13,6 +13,11 @@ public class FogOfWarItem : FogOfWar
     {
         sr.enabled = false;
     }
+
+    public bool IsVisible()
+    {
+        return sr.enabled;
+    }
     protected override void Start()
     {
        

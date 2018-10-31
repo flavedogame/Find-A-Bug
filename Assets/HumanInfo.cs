@@ -28,7 +28,7 @@ public class HumanInfo : MonoBehaviour
     public string loverName;
     public List<InventoryEnum> inventories;
     // Start is called before the first frame update
-    void Start()
+    public void Init()
     {
         inventories = new List<InventoryEnum>();
         inventories.Add(InventoryEnum.stone);

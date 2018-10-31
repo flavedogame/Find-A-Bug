@@ -11,6 +11,7 @@ public class HumanGenerator : MonoBehaviour
     public Vector3 humanOriginPosition = new Vector3(0.54f, 0.78f, 013f);
     public int widthOfMap=30;
     public int heightOfMap = 20;
+    public float initialDistance = 6.0f;
     // Start is called before the first frame update
 
     Vector3 RandomPosition()
@@ -62,7 +63,7 @@ public class HumanGenerator : MonoBehaviour
                     position = RandomPosition();
                     foreach(Vector3 po in positions)
                     {
-                        if (Vector3.Distance(position, po) < 5)
+                        if (Vector3.Distance(position, po) < initialDistance)
                         {
                             success = false;
                         }
@@ -105,12 +106,7 @@ public class HumanGenerator : MonoBehaviour
                 lovers.Remove(humanInfo.loverName);
             }
 
-            //inventory
-            
-            InventoryEnum inventory = (InventoryEnum)Random.Range(1, inventorys.Count);
-            inventorys.Remove(inventory);
-            humanInfo.inventories.Add(inventory);
-            humanInfo.healthDescriptionEnum = HealthDescriptionEnum.healthy;
+
             if (HumanManager.Instance.heroInfo.bestFriendName.Equals(humanInfo.Name))
             {
                 humanInfo.relationDescriptionEnum = RelationDescriptionEnum.bestFriend;
@@ -118,10 +114,18 @@ public class HumanGenerator : MonoBehaviour
             else if (HumanManager.Instance.heroInfo.loverName.Equals(humanInfo.Name))
             {
                 humanInfo.relationDescriptionEnum = RelationDescriptionEnum.lover;
-            }else
+            }
+            else
             {
                 humanInfo.relationDescriptionEnum = (RelationDescriptionEnum)Random.Range(0, System.Enum.GetValues(typeof(RelationDescriptionEnum)).Length - 2);
             }
+
+            //inventory
+            humanInfo.Init();
+            InventoryEnum inventory = (InventoryEnum)Random.Range(1, inventorys.Count);
+            inventorys.Remove(inventory);
+            humanInfo.inventories.Add(inventory);
+            humanInfo.healthDescriptionEnum = HealthDescriptionEnum.healthy;
         }
         //generate human
     }
