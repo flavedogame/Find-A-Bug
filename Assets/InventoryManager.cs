@@ -187,46 +187,73 @@ public class InventoryManager : Singleton<InventoryManager>
         return res;
         }
 
+    void UseWeapon(List<string> dialogs,InventoryEnum inventory, HumanInfo humanInfo)
+    {
+        switch (inventory)
+        {
+            case InventoryEnum.stone:
+                dialogs.Add("You throwed a stone to " + humanInfo.Name);
+                break;
+            case InventoryEnum.kitchenKnife:
+                dialogs.Add("You thrust a kitchen knife to " + humanInfo.Name);
+                break;
+            case InventoryEnum.shotgun:
+                dialogs.Add("You shot " + humanInfo.Name+" with a shotgun.");
+                break;
+            case InventoryEnum.pistol:
+                dialogs.Add("You shot " + humanInfo.Name + " with a pistol.");
+                break;
+            case InventoryEnum.grenade:
+                dialogs.Add("You throw a grenade to " + humanInfo.Name);
+                break;
+            case InventoryEnum.potLid:
+                dialogs.Add("You hit " + humanInfo.Name+" with a pot lid.");
+                break;
+            case InventoryEnum.crossbow:
+                dialogs.Add("You shot " + humanInfo.Name + " with a crossbow.");
+                break;
+            case InventoryEnum.handAxe:
+                dialogs.Add("You attack " + humanInfo.Name + " with a hand axe.");
+                break;
+        }
+                
+        bool didHit = DidHit(inventory, humanInfo);
+        if (didHit)
+        {
+            bool isHitOnHead = Random.Range(0, 100) > 80;
+            dialogs.Add("It hit " + humanInfo.Name + " on " + humanInfo.PosseciveProunoun() + (isHitOnHead ? " head." : " body "));
+            dialogs.Add(DamageString(humanInfo, inventory, isHitOnHead));
+            dialogs.Add(MissTalk(humanInfo));
+        }
+        else
+        {
+            dialogs.Add("It missed!");
+
+            dialogs.Add(MissTalk(humanInfo));
+        }
+    }
+
     public void UseInventory(InventoryEnum inventory,HumanInfo humanInfo)
     {
         List<string> dialogs = new List<string>();
         switch (inventory)
         {
             case InventoryEnum.stone:
-                dialogs.Add("You throwed a stone to " + humanInfo.Name);
-                bool didHit = DidHit(inventory,humanInfo);
-                if (didHit)
-                {
-                    bool isHitOnHead = Random.Range(0, 100) > 80;
-                    dialogs.Add("It hit " + humanInfo.Name+" on "+humanInfo.PosseciveProunoun() + (isHitOnHead?" head.":" body "));
-                    dialogs.Add(DamageString(humanInfo,inventory,isHitOnHead));
-                    dialogs.Add(MissTalk(humanInfo));
-                }else
-                {
-                    dialogs.Add("It missed!");
-
-                    dialogs.Add(MissTalk(humanInfo));
-                }
-                break;
             case InventoryEnum.kitchenKnife:
-                break;
             case InventoryEnum.shotgun:
-                break;
             case InventoryEnum.pistol:
+            case InventoryEnum.grenade:
+            case InventoryEnum.potLid:
+            case InventoryEnum.crossbow:
+            case InventoryEnum.handAxe:
+                UseWeapon(dialogs, inventory, humanInfo);
+                break;
+
+            case InventoryEnum.kevlarVest:
                 break;
             case InventoryEnum.binoculars:
                 break;
             case InventoryEnum.megaphone:
-                break;
-            case InventoryEnum.crossbow:
-                break;
-            case InventoryEnum.handAxe:
-                break;
-            case InventoryEnum.kevlarVest:
-                break;
-            case InventoryEnum.grenade:
-                break;
-            case InventoryEnum.potLid:
                 break;
         }
         DialogManager.CreateViewController(dialogs);

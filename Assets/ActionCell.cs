@@ -46,7 +46,7 @@ public class ActionCell : MonoBehaviour
                 description.text = "Throw a stone";
                 break;
             case InventoryEnum.kitchenKnife:
-                description.text = "Throw a kitchen knife";
+                description.text = "Thrust a kitchen knife";
                 break;
             case InventoryEnum.shotgun:
                 description.text = "Shoot shotgun";
@@ -61,10 +61,10 @@ public class ActionCell : MonoBehaviour
                 description.text = "Throw a megaphone";
                 break;
             case InventoryEnum.crossbow:
-                description.text = "Shoot a crossbow";
+                description.text = "Shoot crossbow";
                 break;
             case InventoryEnum.handAxe:
-                description.text = "Throw a handAxe";
+                description.text = "Wield a handAxe";
                 break;
             case InventoryEnum.kevlarVest:
                 description.text = "Throw a kevlarVest";
@@ -73,7 +73,7 @@ public class ActionCell : MonoBehaviour
                 description.text = "Throw a grenade";
                 break;
             case InventoryEnum.potLid:
-                description.text = "Throw a potLid";
+                description.text = "Wield a potLid";
                 break;
         }
 
