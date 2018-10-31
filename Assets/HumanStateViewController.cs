@@ -102,10 +102,12 @@ public class HumanStateViewController : DefaultViewController {
         }
         foreach (InventoryEnum inventory in HumanManager.Instance.heroInfo.inventories)
         {
-
-            GameObject go = Instantiate(inventoryCell, inventoryListPanel.transform);
-            ActionCell script = go.GetComponent<ActionCell>();
-            script.InitCell(inventory, humanInfo, this);
+            if (InventoryManager.Instance.IsInventoryUsable(inventory, humanInfo))
+            {
+                GameObject go = Instantiate(inventoryCell, inventoryListPanel.transform);
+                ActionCell script = go.GetComponent<ActionCell>();
+                script.InitCell(inventory, humanInfo, this);
+            }
         }
     }
 

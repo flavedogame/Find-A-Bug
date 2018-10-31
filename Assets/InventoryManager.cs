@@ -8,21 +8,16 @@ public enum InventoryEnum { stone, kitchenKnife, shotgun, pistol, binoculars,
 public class InventoryManager : Singleton<InventoryManager>
 {
     public List<InventoryEnum> inventories;
-    int[] chanceFromFarAway = new int[] { 10, 20, 60, 40, 10,
-        10, 50, 30, 0, 100, 10 };
-    int[] damageMinFromFarAway = new int[] { 10, 15, 30, 40, 10,
-        10, 20, 20, 0, 90, 10 };
-    int[] damageMaxFromFarAway = new int[] { 15, 30, 100, 90, 15,
-        15, 50, 40, 0, 100, 20 };
+    int[] chanceToHit = new int[] { 20, 90, 60, 40, 0,
+        0, 50, 40, 0, 100, 20 };
+    int[] damageMin = new int[] { 20, 30, 30, 40, 0,
+        0, 50, 40, 0, 90, 5 };
+    int[] damageMax = new int[] { 15, 40, 100, 90, 15,
+        0, 50, 90, 0, 100, 100 };
     int[] goodAtWeapon = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-    int[] chanceFromClose = new int[] { 50, 60, 20, 70, 10,
-        10, 30, 40, 0, 100, 100 };
-    int[] damageMinFromClose = new int[] { 20, 30, 10, 60, 10,
-        10, 50, 70, 0, 100, 10 };
-    int[] damageMaxFromClose = new int[] { 45, 50, 100, 100, 15,
-        15, 60, 80, 0, 100, 20 };
-    int[] weaponItemLeft = new int[] {1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    int[] weaponRange = new int[] { 3, 1, 7, 5, 0,
+        0, 3, 2, 0, 100, 1 };
     // Start is called before the first frame update
     void Start()
     {
@@ -30,9 +25,25 @@ public class InventoryManager : Singleton<InventoryManager>
         inventories.Add(InventoryEnum.stone);
     }
 
+    public bool IsInventoryUsable(InventoryEnum inventoryEnum, HumanInfo attackee)
+    {
+        HumanInfo heroInfo = HumanManager.Instance.heroInfo;
+        if (attackee != heroInfo)
+        {
+            if (Vector3.Distance( attackee.transform.position, heroInfo.transform.position) <= weaponRange[(int)inventoryEnum]){
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     bool DidHit(InventoryEnum inventory, HumanInfo humanInfo)
     {
-        int chance = chanceFromFarAway[(int)inventory];
+        int chance = chanceToHit[(int)inventory];
         int rand = Random.Range(0, 100);
         return chance > rand;
     }
@@ -41,7 +52,7 @@ public class InventoryManager : Singleton<InventoryManager>
     string DamageString(HumanInfo humanInfo, InventoryEnum inventory, bool isHitOnHead)
     {
         string res = "";
-        int damage = Random.Range(damageMinFromFarAway[(int)inventory], damageMaxFromFarAway[(int)inventory]);
+        int damage = Random.Range(damageMin[(int)inventory], damageMax[(int)inventory]);
         if (isHitOnHead)
         {
             damage *= 2;
@@ -182,7 +193,7 @@ public class InventoryManager : Singleton<InventoryManager>
         switch (inventory)
         {
             case InventoryEnum.stone:
-                dialogs.Add("You throw a stone to " + humanInfo.Name);
+                dialogs.Add("You throwed a stone to " + humanInfo.Name);
                 bool didHit = DidHit(inventory,humanInfo);
                 if (didHit)
                 {
