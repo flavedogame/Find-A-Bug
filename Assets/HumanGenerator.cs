@@ -12,6 +12,7 @@ public class HumanGenerator : MonoBehaviour
     public int widthOfMap=30;
     public int heightOfMap = 20;
     public float initialDistance = 6.0f;
+    public float initialDistanceWithHero = 6.0f;
     // Start is called before the first frame update
 
     Vector3 RandomPosition()
@@ -26,7 +27,10 @@ public class HumanGenerator : MonoBehaviour
         List<InventoryEnum> inventorys = new List<InventoryEnum>();
         foreach (InventoryEnum inv in System.Enum.GetValues(typeof(InventoryEnum)))
         {
-            inventorys.Add(inv);
+            if (inv != InventoryEnum.stone)
+            {
+                inventorys.Add(inv);
+            }
         }
         List<string> names = new List<string>();
         List<bool> isBoys = new List<bool>();
@@ -67,6 +71,10 @@ public class HumanGenerator : MonoBehaviour
                         {
                             success = false;
                         }
+                    }
+                    if (Vector3.Distance(position, HumanManager.Instance.hero.gameObject.transform.position) < initialDistanceWithHero)
+                    {
+                        success = false;
                     }
                     if (success)
                     {
@@ -122,10 +130,12 @@ public class HumanGenerator : MonoBehaviour
 
             //inventory
             humanInfo.Init();
-            InventoryEnum inventory = (InventoryEnum)Random.Range(1, inventorys.Count);
+            if (inventorys.Count > 0) { 
+            InventoryEnum inventory = (InventoryEnum)Random.Range(0, inventorys.Count);
             inventorys.Remove(inventory);
             humanInfo.inventories.Add(inventory);
             humanInfo.healthDescriptionEnum = HealthDescriptionEnum.healthy;
+            }
         }
         //generate human
     }
