@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum InventoryEnum { stone, kitchenKnife, shotgun, pistol, binoculars,
     megaphone, crossbow, handAxe, kevlarVest, grenade, potLid,  }
-//harisen, flashlight, rope, dagger, sickle, fork, machete, switchBlade, 
+//harisen, flashlight, rope, dagger, sickle, fork, machete, switchBlade, baseball bat, jutte, semi-automatic shotgun, katana, potassium cyanide,
+//submachine gun, gps tracking device, sickle, nunchaku,pickaxe,revolver
 public class InventoryManager : Singleton<InventoryManager>
 {
     public List<InventoryEnum> inventories;
