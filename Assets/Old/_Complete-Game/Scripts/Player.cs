@@ -47,6 +47,7 @@ namespace Completed
 			base.Start ();
             fogs = new HashSet<FogOfWar>();
             UpdateSightAndFog();
+            BRInventoryViewController.Instance.UpdateInventoryView();
             //SetupSight();
 
         }

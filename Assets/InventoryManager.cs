@@ -221,6 +221,47 @@ public class InventoryManager : Singleton<InventoryManager>
         DialogManager.CreateViewController(dialogs);
     }
 
+    static public string InventoryName(InventoryEnum inventoryEnum)
+    {
+        switch (inventoryEnum)
+        {
+            case InventoryEnum.stone:
+                return "Stone";
+                break;
+            case InventoryEnum.kitchenKnife:
+                return "Kitchen Knife";
+                break;
+            case InventoryEnum.shotgun:
+                return "Shotgun";
+                break;
+            case InventoryEnum.pistol:
+                return "Pistol";
+                break;
+            case InventoryEnum.binoculars:
+                return "Binocular";
+                break;
+            case InventoryEnum.megaphone:
+                return "Megaphone";
+                break;
+            case InventoryEnum.crossbow:
+                return "Crossbow";
+                break;
+            case InventoryEnum.handAxe:
+                return "Hand Axe";
+                break;
+            case InventoryEnum.kevlarVest:
+                return "Kevlar Vest";
+                break;
+            case InventoryEnum.grenade:
+                return "Grenade";
+                break;
+            case InventoryEnum.potLid:
+                return "Potlid";
+                break;
+        }
+        return "";
+    }
+
     // Update is called once per frame
     void Update()
     {
