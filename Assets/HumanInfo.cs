@@ -9,7 +9,6 @@ public enum AwarenessEnum { dontcare,normal,aware,nervous }
 
 public class HumanInfo : MonoBehaviour
 {
-    public int nameId;
     public bool isBoy;
     public int sightRange;
     public RelationDescriptionEnum relationDescriptionEnum;
@@ -25,16 +24,18 @@ public class HumanInfo : MonoBehaviour
     public bool hasBeenAttackedByMe;
     public bool hasBeenAttackedByAnyone;
     public bool isWeak;
+    public string bestFriendName;
+    public string loverName;
+    public List<InventoryEnum> inventories;
     // Start is called before the first frame update
     void Start()
     {
+        inventories = new List<InventoryEnum>();
+        inventories.Add(InventoryEnum.stone);
         RandomInfo();
     }
 
-    public string Name()
-    {
-        return isBoy ? EnumParser.boysNames[nameId]: EnumParser.girlsNames[nameId];
-    }
+    public string Name;
     public string SubjectiveProunoun(bool needCapitalize = false)
     {
         if (needCapitalize)
@@ -73,14 +74,14 @@ public class HumanInfo : MonoBehaviour
 
     void RandomInfo()
     {
-        isBoy = Random.Range(0, 2)>0;
-        nameId = Random.Range(0, isBoy ? EnumParser.boysNames.Length : EnumParser.girlsNames.Length);
-        relationDescriptionEnum = (RelationDescriptionEnum)Random.Range(0, System.Enum.GetValues(typeof(RelationDescriptionEnum)).Length);
-        healthDescriptionEnum = HealthDescriptionEnum.healthy;
-        awarenessEnum = (AwarenessEnum)Random.Range(0, System.Enum.GetValues(typeof(AwarenessEnum)).Length);
-        HowYouBehaveInTheGame = 0;//-5 when you kill someone, -10 when you kill his bf or lover.  -50 when you try to attack him,
-        //+5 when you talk or him, +10 when you provide help
-        HowOthersBehaveInTheGame = 0; //-1 when anyone kill some one, -10 when someone kiil his bf or lover, -10 when someone try to kill him
+        //isBoy = Random.Range(0, 2)>0;
+        //nameId = Random.Range(0, isBoy ? EnumParser.boysNames.Length : EnumParser.girlsNames.Length);
+        //relationDescriptionEnum = (RelationDescriptionEnum)Random.Range(0, System.Enum.GetValues(typeof(RelationDescriptionEnum)).Length);
+        //healthDescriptionEnum = HealthDescriptionEnum.healthy;
+        //awarenessEnum = (AwarenessEnum)Random.Range(0, System.Enum.GetValues(typeof(AwarenessEnum)).Length);
+        //HowYouBehaveInTheGame = 0;//-5 when you kill someone, -10 when you kill his bf or lover.  -50 when you try to attack him,
+        ////+5 when you talk or him, +10 when you provide help
+        //HowOthersBehaveInTheGame = 0; //-1 when anyone kill some one, -10 when someone kiil his bf or lover, -10 when someone try to kill him
     }
 
     // Update is called once per frame

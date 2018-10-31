@@ -31,7 +31,7 @@ public class HumanStateViewController : DefaultViewController {
     string FormatDescription()
     {
         string res = "";
-        res += "That is " + humanInfo.Name() + ". ";
+        res += "That is " + humanInfo.Name + ". ";
         res += RelationDesc();
         res += HealthDesc();
         return res;
@@ -100,7 +100,7 @@ public class HumanStateViewController : DefaultViewController {
             ActionCell script = go.GetComponent<ActionCell>();
             script.InitCell(action,humanInfo,this);
         }
-        foreach (InventoryEnum inventory in InventoryManager.Instance.inventories)
+        foreach (InventoryEnum inventory in HumanManager.Instance.heroInfo.inventories)
         {
 
             GameObject go = Instantiate(inventoryCell, inventoryListPanel.transform);

@@ -49,25 +49,25 @@ public class InventoryManager : Singleton<InventoryManager>
         humanInfo.hp -= damage;
         if (damage < 20)
         {
-            res = "It scratched " + humanInfo.Name() + " a little. ";
+            res = "It scratched " + humanInfo.Name+ " a little. ";
         } else if(damage < 50)
         {
-            res = "It hurt " + humanInfo.Name() + ". ";
+            res = "It hurt " + humanInfo.Name + ". ";
         }
         else if (damage < 100)
         {
-            res = "It hurt " + humanInfo.Name() + "very bad. ";
+            res = "It hurt " + humanInfo.Name + "very bad. ";
         }
         if (humanInfo.hp >= 80)
         {
-            res += humanInfo.Name() + " is still very healthy";
+            res += humanInfo.Name + " is still very healthy";
         } else if (humanInfo.hp >= 50)
         {
-            res += humanInfo.Name() + " looks not that good but "+humanInfo.PosseciveProunoun()+" wound only make him stronger. ";
+            res += humanInfo.Name+ " looks not that good but "+humanInfo.PosseciveProunoun()+" wound only make him stronger. ";
         }
         else if (humanInfo.hp >= 20)
         {
-            res += humanInfo.Name() + " was not good and his movement is slow now.";
+            res += humanInfo.Name + " was not good and his movement is slow now.";
         }
         switch (humanInfo.healthDescriptionEnum)
         {
@@ -106,7 +106,7 @@ public class InventoryManager : Singleton<InventoryManager>
         {
             if (!humanInfo.hasBeenAttackedByAnyone)
             {
-                res = humanInfo.Name() + " is shocking and yelling at you: \n";
+                res = humanInfo.Name + " is shocking and yelling at you: \n";
                 switch (humanInfo.relationDescriptionEnum)
                 {
                     case RelationDescriptionEnum.dontKnow:
@@ -125,7 +125,7 @@ public class InventoryManager : Singleton<InventoryManager>
                         res += "What's wrong with you? We were playing football together yesterday! ";
                         break;
                     case RelationDescriptionEnum.friend:
-                        res += "Look at me I'm " + humanInfo.Name() + "! We were friends!";
+                        res += "Look at me I'm " + humanInfo.Name + "! We were friends!";
                         break;
                     case RelationDescriptionEnum.bestFriend:
                         res += "I trusted you you were my best friend!, I ..";
@@ -140,7 +140,7 @@ public class InventoryManager : Singleton<InventoryManager>
         {
             if (humanInfo.healthDescriptionEnum == HealthDescriptionEnum.dying || humanInfo.hp < 30)
             {
-                res = humanInfo.Name() + " is begging you: \n";
+                res = humanInfo.Name+ " is begging you: \n";
                 string[] strings;
                 switch (humanInfo.relationDescriptionEnum)
                 {
@@ -182,12 +182,12 @@ public class InventoryManager : Singleton<InventoryManager>
         switch (inventory)
         {
             case InventoryEnum.stone:
-                dialogs.Add("You throw a stone to " + humanInfo.Name());
+                dialogs.Add("You throw a stone to " + humanInfo.Name);
                 bool didHit = DidHit(inventory,humanInfo);
                 if (didHit)
                 {
                     bool isHitOnHead = Random.Range(0, 100) > 80;
-                    dialogs.Add("It hit " + humanInfo.Name() +" on "+humanInfo.PosseciveProunoun() + (isHitOnHead?" head.":" body "));
+                    dialogs.Add("It hit " + humanInfo.Name+" on "+humanInfo.PosseciveProunoun() + (isHitOnHead?" head.":" body "));
                     dialogs.Add(DamageString(humanInfo,inventory,isHitOnHead));
                     dialogs.Add(MissTalk(humanInfo));
                 }else
