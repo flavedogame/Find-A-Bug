@@ -84,6 +84,22 @@ public class HumanInfo : MonoBehaviour
         //HowOthersBehaveInTheGame = 0; //-1 when anyone kill some one, -10 when someone kiil his bf or lover, -10 when someone try to kill him
     }
 
+    public List<InventoryEnum> RobHuman(HumanInfo humanInfo)
+    {
+        List<InventoryEnum> robItems = new List<InventoryEnum>();
+        foreach(InventoryEnum inventory in humanInfo.inventories)
+        {
+            if (!inventories.Contains(inventory))
+            {
+                robItems.Add(inventory);
+                inventories.Add(inventory);
+            }
+        }
+        humanInfo.inventories = new List<InventoryEnum>();
+        BRInventoryViewController.Instance.UpdateInventoryView();
+        return robItems;
+    }
+
     // Update is called once per frame
     void Update()
     {

@@ -14,6 +14,10 @@ public class BRInventoryViewController : Singleton<BRInventoryViewController>
 
     public void UpdateInventoryView()
     {
+        foreach (Transform child in inventoryListPanel.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
         foreach (InventoryEnum inventory in HumanManager.Instance.heroInfo.inventories)
         {
 

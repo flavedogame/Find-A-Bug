@@ -96,9 +96,11 @@ public class HumanStateViewController : DefaultViewController {
     {
         foreach (ActionEnum action in System.Enum.GetValues(typeof(ActionEnum)))
         {
-            GameObject go = Instantiate(inventoryCell, inventoryListPanel.transform);
-            ActionCell script = go.GetComponent<ActionCell>();
-            script.InitCell(action,humanInfo,this);
+            if (ActionManager.Instance.IsActionDoable(action, humanInfo)){
+                GameObject go = Instantiate(inventoryCell, inventoryListPanel.transform);
+                ActionCell script = go.GetComponent<ActionCell>();
+                script.InitCell(action, humanInfo, this);
+            }
         }
         foreach (InventoryEnum inventory in HumanManager.Instance.heroInfo.inventories)
         {

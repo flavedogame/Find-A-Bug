@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public enum ActionEnum { talk }
+public enum ActionEnum { talk,takeItem }
 
 public class ActionCell : MonoBehaviour
 {
@@ -17,6 +17,74 @@ public class ActionCell : MonoBehaviour
         
     }
 
+    
+
+    void TakeItem(HumanInfo humanInfo)
+    {
+        List<string> dialogs = new List<string>();
+        
+        switch (humanInfo.healthDescriptionEnum)
+        {
+            case HealthDescriptionEnum.healthy:
+            case HealthDescriptionEnum.hurt:
+                dialogs.Add(humanInfo.Name + " shrank back and stared at you: ");
+                dialogs.Add("\"What are you trying to do? Steal my inventory?\"");
+                humanInfo.HowYouBehaveInTheGame -= 10;
+                break;
+            case HealthDescriptionEnum.dying:
+                List<InventoryEnum> list = HumanManager.Instance.heroInfo.RobHuman(humanInfo);
+                if (list.Count == 0)
+                {
+                    dialogs.Add("You looked into " + humanInfo.Name + "'s bag but find nothing. ");
+                    dialogs.Add(humanInfo.Name + " squint at you and sneer:");
+                    dialogs.Add("\"Quite dispointed right? You should be thankful, if I have any inventories, you would die. \"");
+                } else
+                {
+                    string listString = "";
+                    foreach (InventoryEnum inventory in list)
+                    {
+                        if (listString.Length != 0)
+                        {
+                            listString += ", ";
+                        }
+                        listString += InventoryManager.InventoryName(inventory);
+                    }
+                    dialogs.Add("You looked into " + humanInfo.Name + "'s bag and find "+listString+".");
+                    if (list.Contains(InventoryEnum.binoculars))
+                    {
+                        dialogs.Add("Binoculars make you see farther.");
+                    }
+                    dialogs.Add(humanInfo.Name + " wanted to beg you, "+humanInfo.SubjectiveProunoun() +" opened "+humanInfo.PosseciveProunoun() +" mouth but only sighed.");
+                }
+                break;
+            case HealthDescriptionEnum.dead:
+                list = HumanManager.Instance.heroInfo.RobHuman(humanInfo);
+                if (list.Count == 0)
+                {
+                    dialogs.Add("You looked into " + humanInfo.Name + "'s bag but find nothing. ");
+                }
+                else
+                {
+                    string listString = "";
+                    foreach (InventoryEnum inventory in list)
+                    {
+                        if (listString.Length != 0)
+                        {
+                            listString += ", ";
+                        }
+                        listString += InventoryManager.InventoryName(inventory);
+                    }
+                    dialogs.Add("You looked into " + humanInfo.Name + "'s bag and find " + listString + ".");
+                    if (list.Contains(InventoryEnum.binoculars))
+                    {
+                        dialogs.Add("Binoculars make you see farther.");
+                    }
+                }
+                break;
+        }
+        DialogManager.CreateViewController(dialogs);
+    }
+
     public void InitCell(ActionEnum action, HumanInfo humanInfo, HumanStateViewController controller)
     {
         viewController = controller;
@@ -25,6 +93,13 @@ public class ActionCell : MonoBehaviour
             case ActionEnum.talk:
                 description.text = "Talk";
                 actionButton.onClick.AddListener(delegate {
+                    DoAction();
+                });
+                break;
+            case ActionEnum.takeItem:
+                description.text = "Take His Inventory";
+                actionButton.onClick.AddListener(delegate {
+                    TakeItem(humanInfo);
                     DoAction();
                 });
                 break;
