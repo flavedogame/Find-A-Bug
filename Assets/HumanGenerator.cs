@@ -138,6 +138,18 @@ public class HumanGenerator : MonoBehaviour
             }
 
             humanInfo.healthDescriptionEnum = HealthDescriptionEnum.healthy;
+
+            //image
+            if (humanInfo.isBoy)
+            {
+                int rand = Random.Range(0, ResourceManager.Instance.boyImages.Count);
+                humanInfo.sr.sprite = ResourceManager.Instance.boyImages[rand];
+            }
+            else
+            {
+                int rand = Random.Range(0, ResourceManager.Instance.girlImages.Count);
+                humanInfo.sr.sprite = ResourceManager.Instance.girlImages[rand];
+            }
         }
         //generate human
     }

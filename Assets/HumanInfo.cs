@@ -27,11 +27,14 @@ public class HumanInfo : MonoBehaviour
     public string bestFriendName;
     public string loverName;
     public List<InventoryEnum> inventories;
+
+    public SpriteRenderer sr;
     // Start is called before the first frame update
     public void Init()
     {
         inventories = new List<InventoryEnum>();
         inventories.Add(InventoryEnum.stone);
+        sr = GetComponent<SpriteRenderer>();
         RandomInfo();
     }
 
