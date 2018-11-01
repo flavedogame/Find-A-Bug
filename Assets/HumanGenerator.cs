@@ -131,11 +131,13 @@ public class HumanGenerator : MonoBehaviour
             //inventory
             humanInfo.Init();
             if (inventorys.Count > 0) { 
-            InventoryEnum inventory = (InventoryEnum)Random.Range(0, inventorys.Count);
+            int inventoryIdx = Random.Range(0, inventorys.Count);
+                InventoryEnum inventory = inventorys[inventoryIdx];
             inventorys.Remove(inventory);
             humanInfo.inventories.Add(inventory);
-            humanInfo.healthDescriptionEnum = HealthDescriptionEnum.healthy;
             }
+
+            humanInfo.healthDescriptionEnum = HealthDescriptionEnum.healthy;
         }
         //generate human
     }

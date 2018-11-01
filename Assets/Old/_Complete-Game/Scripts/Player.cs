@@ -198,7 +198,7 @@ namespace Completed
             {
                 range = 5;
             }
-            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range, 1 << LayerMask.NameToLayer("fog")| 1 << LayerMask.NameToLayer("human"));
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range, 1 << LayerMask.NameToLayer("fog")| 1 << LayerMask.NameToLayer("Player"));
             HashSet<FogOfWar> newFogs = new HashSet<FogOfWar>();
             foreach (Collider2D hitCollider in hitColliders)
             {

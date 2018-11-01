@@ -45,9 +45,15 @@ namespace Completed
 			
 			//Cast a line from start point to end point checking collision on blockingLayer.
 			hit = Physics2D.Linecast (start, checkend, blockingLayer);
-			
-			//Re-enable boxCollider after linecast
-			boxCollider.enabled = true;
+            if (hit.transform == null)
+            {
+                gameObject.layer = LayerMask.NameToLayer("Default");
+                hit = Physics2D.Linecast( start, end, 1 << LayerMask.NameToLayer("Player"));
+                gameObject.layer = LayerMask.NameToLayer("Player");
+            }
+
+            //Re-enable boxCollider after linecast
+            boxCollider.enabled = true;
 			
 			//Check if anything was hit
 			if(hit.transform == null)

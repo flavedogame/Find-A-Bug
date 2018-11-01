@@ -27,9 +27,44 @@ public class ActionCell : MonoBehaviour
         {
             case HealthDescriptionEnum.healthy:
             case HealthDescriptionEnum.hurt:
-                dialogs.Add(humanInfo.Name + " shrank back and stared at you: ");
-                dialogs.Add("\"What are you trying to do? Steal my inventory?\"");
-                humanInfo.HowYouBehaveInTheGame -= 10;
+                bool robSuccessful = Random.Range(0, 10) > 5;
+                if (robSuccessful)
+                {
+                    List<InventoryEnum> list2 = HumanManager.Instance.heroInfo.RobHuman(humanInfo);
+                    if (list2.Count == 0)
+                    {
+                        dialogs.Add("You looked into " + humanInfo.Name + "'s bag but find nothing. ");
+                        dialogs.Add(humanInfo.Name + " noticed and grab "+humanInfo.PosseciveProunoun()+" bag back and shouted:");
+                        dialogs.Add("\"How dare you do this! \"");
+                        humanInfo.HowYouBehaveInTheGame -= 30;
+                    }
+                    else
+                    {
+                        string listString = "";
+                        foreach (InventoryEnum inventory in list2)
+                        {
+                            if (listString.Length != 0)
+                            {
+                                listString += ", ";
+                            }
+                            listString += InventoryManager.InventoryName(inventory);
+                        }
+                        dialogs.Add("You looked into " + humanInfo.Name + "'s bag and find " + listString + ".");
+                        if (list2.Contains(InventoryEnum.binoculars))
+                        {
+                            dialogs.Add("Binoculars make you see farther.");
+                        }
+                        dialogs.Add(humanInfo.Name + " noticed and grab " + humanInfo.PosseciveProunoun() + " bag back and shouted:");
+                        dialogs.Add("\"Give back my inventories! We are enemies now! \"");
+                        humanInfo.HowYouBehaveInTheGame -= 100;
+                    }
+                }
+                else
+                {
+                    dialogs.Add(humanInfo.Name + " shrank back and stared at you: ");
+                    dialogs.Add("\"What are you trying to do? Steal my inventory?\"");
+                    humanInfo.HowYouBehaveInTheGame -= 10;
+                }
                 break;
             case HealthDescriptionEnum.dying:
                 List<InventoryEnum> list = HumanManager.Instance.heroInfo.RobHuman(humanInfo);
