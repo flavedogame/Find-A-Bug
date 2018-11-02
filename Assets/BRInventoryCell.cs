@@ -23,4 +23,19 @@ public class BRInventoryCell : MonoBehaviour
         
         description.text = InventoryManager.InventoryName(inventory);
     }
+
+    public void InitCell(HumanInfo killer, HumanInfo killee)
+    {
+        description.text = killer.Name + " has killed " + killee.Name + ".";
+    }
+
+    public void InitCell(string message)
+    {
+        description.text = message;
+    }
+
+    public void InitCell(int hour)
+    {
+        description.text = "Red zone will be dead zone in " + hour + " hours.";
+    }
 }

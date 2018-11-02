@@ -37,6 +37,10 @@ public class InventoryManager : Singleton<InventoryManager>
             }
             attackee.hp -= damage;
             attackee.UpdateHeathyState();
+            if (attackee.hp<=0)
+            {
+                BRMessageViewController.Instance.AddCell(attacker, attackee);
+            }
         }
         //make noise
 
