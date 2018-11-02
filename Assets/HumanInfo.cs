@@ -10,7 +10,7 @@ public enum AwarenessEnum { dontcare,normal,aware,nervous }
 public class HumanInfo : MonoBehaviour
 {
     public bool isBoy;
-    public int sightRange;
+    public int sightRange=3;
     public RelationDescriptionEnum relationDescriptionEnum;
     public HealthDescriptionEnum healthDescriptionEnum;
     public int hp = 100;
@@ -28,7 +28,12 @@ public class HumanInfo : MonoBehaviour
     public string loverName;
     public List<InventoryEnum> inventories;
 
+    public HumanInfo targetHumanInfo;
+    public Transform targetTransform;
+    public int remainTargetTransformMovement;
+
     public SpriteRenderer sr;
+    public Shader greyScaleShader;
     // Start is called before the first frame update
     public void Init()
     {
@@ -102,6 +107,56 @@ public class HumanInfo : MonoBehaviour
         BRInventoryViewController.Instance.UpdateInventoryView();
         return robItems;
     }
+
+    public int SightRange()
+    {
+        int range = sightRange;
+        if (inventories.Contains(InventoryEnum.binoculars))
+        {
+            range = 5;
+        }
+        return range;
+    }
+
+    public List<InventoryEnum> AllWeapons()
+    {
+        List<InventoryEnum> weapons = new List<InventoryEnum>();
+        foreach(InventoryEnum inventory in inventories)
+        {
+            if (InventoryManager.Instance.IsWeapon(inventory))
+            {
+                weapons.Add(inventory);
+            }
+        }
+        return weapons;
+    }
+
+    public void UpdateHeathyState()
+    {
+        if (hp >= 20)
+        {
+            healthDescriptionEnum = HealthDescriptionEnum.hurt;
+        }
+        else if (hp > 0)
+        {
+            healthDescriptionEnum = HealthDescriptionEnum.dying;
+        }
+        else
+        {
+            healthDescriptionEnum = HealthDescriptionEnum.dead;
+            sr.material.shader = greyScaleShader;
+        }
+    }
+
+    public void Attack(HumanInfo humanInfo) 
+    {
+        targetHumanInfo = humanInfo;
+        List<InventoryEnum> weapons = AllWeapons();
+        InventoryEnum weapon = weapons[Random.Range(0, weapons.Count)];
+        InventoryManager.Instance.AttackWithInventory(weapon, this, humanInfo);
+    }
+
+    public bool IsAlive { get { return healthDescriptionEnum != HealthDescriptionEnum.dead; } }
 
     // Update is called once per frame
     void Update()

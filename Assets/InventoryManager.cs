@@ -19,6 +19,28 @@ public class InventoryManager : Singleton<InventoryManager>
 
     int[] weaponRange = new int[] { 3, 1, 7, 5, 0,
         0, 3, 2, 0, 100, 1 };
+
+    public bool IsWeapon(InventoryEnum inventory)
+    {
+        return weaponRange[(int)inventory] > 0;
+    }
+
+    public void AttackWithInventory(InventoryEnum weapon,HumanInfo attacker,HumanInfo attackee)
+    {
+        if (DidHit(weapon, attackee))
+        {
+            bool isHitOnHead = Random.Range(0, 100) > 80;
+            int damage = Random.Range(damageMin[(int)weapon], damageMax[(int)weapon]);
+            if (isHitOnHead)
+            {
+                damage *= 2;
+            }
+            attackee.hp -= damage;
+            attackee.UpdateHeathyState();
+        }
+        //make noise
+
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +64,7 @@ public class InventoryManager : Singleton<InventoryManager>
         return true;
     }
 
-    bool DidHit(InventoryEnum inventory, HumanInfo humanInfo)
+    bool DidHit(InventoryEnum inventory, HumanInfo attackee)
     {
         int chance = chanceToHit[(int)inventory];
         int rand = Random.Range(0, 100);
@@ -97,17 +119,7 @@ public class InventoryManager : Singleton<InventoryManager>
                 res = humanInfo.SubjectiveProunoun(true) + " has been dead. What do you expect from attacking " + humanInfo.ObjectiveProunoun() + " again?";
                 break;
         }
-        if (humanInfo.hp >= 20)
-        {
-            humanInfo.healthDescriptionEnum = HealthDescriptionEnum.hurt;
-        }
-        else if (humanInfo.hp > 0)
-        {
-            humanInfo.healthDescriptionEnum = HealthDescriptionEnum.dying;
-        } else
-        {
-            humanInfo.healthDescriptionEnum = HealthDescriptionEnum.dead;
-        }
+        humanInfo.UpdateHeathyState();
         return res;
     }
 

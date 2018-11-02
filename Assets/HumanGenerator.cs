@@ -32,6 +32,7 @@ public class HumanGenerator : MonoBehaviour
                 inventorys.Add(inv);
             }
         }
+        int[] numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         List<string> names = new List<string>();
         List<bool> isBoys = new List<bool>();
         List<string> bestFriends = new List<string>();
@@ -83,6 +84,7 @@ public class HumanGenerator : MonoBehaviour
                 }
                 GameObject human = Instantiate(humanPrefab, position, Quaternion.identity);
                 humanInfo = human.GetComponent<HumanInfo>();
+                OtherHumanManager.Instance.AddHumanInfo(humanInfo);
             }
             positions.Add(position);
 

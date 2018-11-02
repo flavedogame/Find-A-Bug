@@ -25,7 +25,6 @@ namespace Completed
 		
 		private Animator animator;					//Used to store a reference to the Player's animator component.
 		private int food;                           //Used to store player food points total during level.
-        public int sightRange = 3;
 #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
         private Vector2 touchOrigin = -Vector2.one;	//Used to store location of screen touch origin for mobile controls.
 #endif
@@ -189,33 +188,30 @@ namespace Completed
         {
             base.AfterMoveAction();
             UpdateSightAndFog();
+            OtherHumanManager.Instance.OtherHuamnMove();
         }
 
         void UpdateSightAndFog()
         {
-            int range = sightRange;
-            if (HumanManager.Instance.heroInfo.inventories.Contains(InventoryEnum.binoculars))
-            {
-                range = 5;
-            }
+            int range = HumanManager.Instance.heroInfo.SightRange();
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range, 1 << LayerMask.NameToLayer("fog")| 1 << LayerMask.NameToLayer("Player"));
             HashSet<FogOfWar> newFogs = new HashSet<FogOfWar>();
-            foreach (Collider2D hitCollider in hitColliders)
-            {
-                //Debug.Log("hit " + hitCollider.gameObject);
-                FogOfWar fogScript = hitCollider.GetComponent<FogOfWar>();
-                if (fogScript)
-                {
-                    newFogs.Add(fogScript);
-                    fogScript.ClearFog();
-                }
-            }
-            fogs.ExceptWith(newFogs);
-            foreach (FogOfWar fw in fogs)
-            {
-                fw.UnclearFog();
-            }
-            fogs = newFogs;
+            //foreach (Collider2D hitCollider in hitColliders)
+            //{
+            //    //Debug.Log("hit " + hitCollider.gameObject);
+            //    FogOfWar fogScript = hitCollider.GetComponent<FogOfWar>();
+            //    if (fogScript)
+            //    {
+            //        newFogs.Add(fogScript);
+            //        fogScript.ClearFog();
+            //    }
+            //}
+            //fogs.ExceptWith(newFogs);
+            //foreach (FogOfWar fw in fogs)
+            //{
+            //    fw.UnclearFog();
+            //}
+            //fogs = newFogs;
         }
 
 
