@@ -191,6 +191,10 @@ namespace Completed
             UpdateSightAndFog();
             OtherHumanManager.Instance.OtherHuamnMove();
             MapViewController.Instance.UpdateMap();
+            if (DeadZoneManager.Instance.IsInBombedDeadZone(transform.position))
+            {
+                GetComponent<HumanInfo>().HurtHuman(1000, "DEAD ZONE");
+            }
         }
 
         void UpdateSightAndFog()

@@ -29,22 +29,9 @@ public class MapViewController : Singleton<MapViewController>
         {
             cell.UpdateLocation(false);
         }
-        if (heroPosition.x < 0 && heroPosition.y >= 0)
-        {
-            mapCells[0].UpdateLocation(true);
-        }
-        if (heroPosition.x>=0 && heroPosition.y >= 0)
-        {
-            mapCells[1].UpdateLocation(true);
-        }
-        if (heroPosition.x < 0 && heroPosition.y < 0)
-        {
-            mapCells[2].UpdateLocation(true);
-        }
-        if (heroPosition.x >= 0 && heroPosition.y < 0)
-        {
-            mapCells[3].UpdateLocation(true);
-        }
+        int index = DeadZoneManager.Instance.PositionToZoneIndex(heroPosition);
+            mapCells[index].UpdateLocation(true);
+        
     }
     // Update is called once per frame
     void Update()

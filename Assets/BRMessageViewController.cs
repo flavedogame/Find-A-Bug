@@ -12,6 +12,13 @@ public class BRMessageViewController : Singleton<BRMessageViewController>
         
     }
 
+    public void AddCell(string killer, HumanInfo killee)
+    {
+        GameObject go = Instantiate(inventoryCell, inventoryListPanel.transform);
+        BRInventoryCell script = go.GetComponent<BRInventoryCell>();
+        script.InitCell(killer, killee);
+    }
+
     public void AddCell(HumanInfo killer, HumanInfo killee)
     {
             GameObject go = Instantiate(inventoryCell, inventoryListPanel.transform);

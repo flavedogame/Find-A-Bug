@@ -129,6 +129,11 @@ public class OtherHumanManager : Singleton<OtherHumanManager>
                     humanInfo.remainTargetTransformMovement = 10;
                 }
             }
+
+            if (DeadZoneManager.Instance.IsInBombedDeadZone(humanInfo.transform.position))
+            {
+                humanInfo.HurtHuman(1000, "DEAD ZONE");
+            }
         }
     }
 

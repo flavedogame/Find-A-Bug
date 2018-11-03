@@ -38,6 +38,9 @@ public class DeadZoneManager : Singleton<DeadZoneManager>
                 nextBombZoneId = randZone;
             } else if(deadZoneBombTime[i] == curHour)
             {
+
+                BombDamage(nextBombZoneId);
+
                 BRMessageViewController.Instance.AddCell("BOMB! Black Zone is bombed and you are not allowed to get into it later.");
                 MapViewController.Instance.UpdateMapColor(nextBombZoneId, new Color(0.2f,0,0));
                 bombedZoneId.Add(nextBombZoneId);
@@ -46,6 +49,48 @@ public class DeadZoneManager : Singleton<DeadZoneManager>
                 startCheck += 1;
             }
         }
+    }
+
+    void BombDamage(int index)
+    {
+        if (PositionToZoneIndex(HumanManager.Instance.heroInfo.transform.position) == index)
+        {
+            HumanManager.Instance.heroInfo.HurtHuman(1000, "DEAD ZONE");
+        }
+        foreach (HumanInfo info in OtherHumanManager.Instance.otherHumans)
+        {
+            if (PositionToZoneIndex(info.transform.position) == index)
+            {
+                info.HurtHuman(1000, "DEAD ZONE");
+            }
+        }
+    }
+
+    public bool IsInBombedDeadZone(Vector3 position)
+    {
+        return bombedZoneId.Contains(PositionToZoneIndex(position));
+    }
+
+    public int PositionToZoneIndex(Vector3 position)
+    {
+        if (position.x < 0 && position.y >= 0)
+        {
+            return 0;
+        }
+        if (position.x >= 0 && position.y >= 0)
+        {
+            return 1;
+        }
+        if (position.x < 0 && position.y < 0)
+        {
+            return 2;
+        }
+        if (position.x >= 0 && position.y < 0)
+        {
+            return 3;
+        }
+
+        return 0;
     }
 
     // Update is called once per frame

@@ -148,6 +148,19 @@ public class HumanInfo : MonoBehaviour
         }
     }
 
+    public void HurtHuman(int damageNumber, string attacker)
+    {
+        if (IsAlive)
+        {
+            hp -= damageNumber;
+            UpdateHeathyState();
+            if (!IsAlive)
+            {
+                BRMessageViewController.Instance.AddCell(attacker, this);
+            }
+        }
+    }
+
     public void Attack(HumanInfo humanInfo) 
     {
         targetHumanInfo = humanInfo;

@@ -9,9 +9,9 @@ public enum InventoryEnum { stone, kitchenKnife, shotgun, pistol, binoculars,
 public class InventoryManager : Singleton<InventoryManager>
 {
     public List<InventoryEnum> inventories;
-    int[] chanceToHit = new int[] { 100, 90, 60, 40, 0,
+    int[] chanceToHit = new int[] { 10, 90, 60, 40, 0,
         0, 50, 40, 0, 100, 20 };
-    int[] damageMin = new int[] { 70, 30, 30, 40, 0,
+    int[] damageMin = new int[] { 10, 30, 30, 40, 0,
         0, 50, 40, 0, 90, 5 };
     int[] damageMax = new int[] { 100, 40, 100, 90, 15,
         0, 50, 90, 0, 100, 100 };
