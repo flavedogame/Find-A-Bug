@@ -9,6 +9,7 @@ public class DeadZoneManager : Singleton<DeadZoneManager>
     public List<int> bombedZoneId;
     public List<int> safeZoneId;
     public int nextBombZoneId;
+    public GameObject[] destroyedMapTiles;
     int startCheck = 0;
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,10 @@ public class DeadZoneManager : Singleton<DeadZoneManager>
         bombedZoneId = new List<int>();
         safeZoneId = new List<int>() { 0, 1, 2, 3 };
         nextBombZoneId = -1;
+        foreach(GameObject go in destroyedMapTiles)
+        {
+            go.SetActive(false);
+        }
     }
 
     public void CheckBombStatus(int curHour)
@@ -34,8 +39,9 @@ public class DeadZoneManager : Singleton<DeadZoneManager>
             } else if(deadZoneBombTime[i] == curHour)
             {
                 BRMessageViewController.Instance.AddCell("BOMB! Black Zone is bombed and you are not allowed to get into it later.");
-                MapViewController.Instance.UpdateMapColor(nextBombZoneId, Color.black);
+                MapViewController.Instance.UpdateMapColor(nextBombZoneId, new Color(0.2f,0,0));
                 bombedZoneId.Add(nextBombZoneId);
+                destroyedMapTiles[nextBombZoneId].SetActive(true);
                 nextBombZoneId = -1;
                 startCheck += 1;
             }
