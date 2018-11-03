@@ -46,6 +46,7 @@ namespace Completed
 			base.Start ();
             fogs = new HashSet<FogOfWar>();
             UpdateSightAndFog();
+            MapViewController.Instance.UpdateMap();
             BRInventoryViewController.Instance.UpdateInventoryView();
             //SetupSight();
 
@@ -189,6 +190,7 @@ namespace Completed
             base.AfterMoveAction();
             UpdateSightAndFog();
             OtherHumanManager.Instance.OtherHuamnMove();
+            MapViewController.Instance.UpdateMap();
         }
 
         void UpdateSightAndFog()

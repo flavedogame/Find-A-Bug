@@ -29,6 +29,11 @@ public class BRInventoryCell : MonoBehaviour
         description.text = killer.Name + " has killed " + killee.Name + ".";
     }
 
+    public void InitCell(string killer, HumanInfo killee)
+    {
+        description.text = killer + " has killed " + killee.Name + ".";
+    }
+
     public void InitCell(string message)
     {
         description.text = message;
