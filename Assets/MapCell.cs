@@ -14,7 +14,7 @@ public class MapCell : MonoBehaviour
 
     public void UpdateColor(Color color)
     {
-        panelImage.color = color;
+        panelImage.color = new Color(color.r, color.g,color.b, panelImage.color.a);
     }
     // Start is called before the first frame update
     void Start()

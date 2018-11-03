@@ -26,6 +26,11 @@ public class BRMessageViewController : Singleton<BRMessageViewController>
         script.InitCell(hour);
     }
 
+    public void AddBombCell()
+    {
+        AddCell("Bomb!");
+    }
+
     public void AddCell(string message)
     {
         GameObject go = Instantiate(inventoryCell, inventoryListPanel.transform);

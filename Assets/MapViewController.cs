@@ -10,7 +10,19 @@ public class MapViewController : Singleton<MapViewController>
     {
         
     }
-    public void UpdateMap()
+    public void UpdateMapColor(int id, Color color)
+    {
+        Debug.Log(id + " will change to color " + color);
+        if (id >= 0 && id < 4)
+        {
+            mapCells[id].UpdateColor(color);
+        }
+        else
+        {
+            Debug.LogError(id + " is out of range");
+        }
+    }
+        public void UpdateMap()
     {
         Vector3 heroPosition = HumanManager.Instance.heroInfo.transform.position;
         foreach (MapCell cell in mapCells)

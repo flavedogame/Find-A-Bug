@@ -41,6 +41,6 @@ public class BRInventoryCell : MonoBehaviour
 
     public void InitCell(int hour)
     {
-        description.text = "Red zone will be dead zone in " + hour + " hours.";
+        description.text = "Red zone will be dead zone in " + hour + " hours. Leave there now.";
     }
 }

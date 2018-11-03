@@ -26,23 +26,15 @@ public class TurnBaseClock : Singleton<TurnBaseClock>
     {
         //-- calculate time
         minutes += time;
-        if (msecs >= 1.0f)
-        {
-            msecs -= 1.0f;
-            seconds++;
-            if (seconds >= 60)
-            {
-                seconds = 0;
-                minutes++;
-                if (minutes > 60)
+                if (minutes >= 60)
                 {
                     minutes = 0;
                     hour++;
+                    
                     if (hour >= 24)
                         hour = 0;
+                    DeadZoneManager.Instance.CheckBombStatus(hour);
                 }
-            }
-        }
 
 
         //-- calculate pointer angles
