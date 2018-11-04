@@ -133,6 +133,10 @@ public class HumanInfo : MonoBehaviour
 
     public void UpdateHeathyState()
     {
+        if (!IsAlive)
+        {
+            return;
+        }
         if (hp >= 20)
         {
             healthDescriptionEnum = HealthDescriptionEnum.hurt;
@@ -145,6 +149,7 @@ public class HumanInfo : MonoBehaviour
         {
             healthDescriptionEnum = HealthDescriptionEnum.dead;
             sr.material.shader = greyScaleShader;
+            ResourceManager.Instance.LeftPeople -= 1;
         }
     }
 

@@ -39,6 +39,7 @@ public class HumanGenerator : MonoBehaviour
         List<string> lovers = new List<string>();
         Dictionary<string, string> bestFriendPair = new Dictionary<string, string>();
         Dictionary<string, string> loverPair = new Dictionary<string, string>();
+        ResourceManager.Instance.LeftPeople = NumOfHuman;
         for (int i = 0; i < NumOfHuman; i++)
         {
             isBoys.Add(Random.Range(0, 2)>0);
