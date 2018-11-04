@@ -48,6 +48,15 @@ public class DeadZoneManager : Singleton<DeadZoneManager>
                 nextBombZoneId = -1;
                 startCheck += 1;
             }
+
+            if (deadZoneBombTime[i] == curHour + 1)
+            {
+                BGMManager.Instance.PlayBGM(BGMEnum.tickBGM);
+                if(deadZoneNotificationTime[i] != curHour)
+                {
+                    BRMessageViewController.Instance.AddCell(deadZoneBombTime[i] - deadZoneNotificationTime[i]);
+                }
+            }
         }
     }
 
@@ -64,6 +73,7 @@ public class DeadZoneManager : Singleton<DeadZoneManager>
                 info.HurtHuman(1000, "DEAD ZONE");
             }
         }
+        BGMManager.Instance.PlayNormal();
     }
 
     public bool IsInBombedDeadZone(Vector3 position)

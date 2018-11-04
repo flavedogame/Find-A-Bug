@@ -8,6 +8,12 @@ public enum SFXEnum
     hitOnWall,
     getPoint,
     buttonClick,
+    allyDeath,
+    deadZoneBomb,
+    shotgun,
+    pistol,
+    bomb,
+    grassStep,
 };
 
 public class SFXManager : Singleton<SFXManager>
