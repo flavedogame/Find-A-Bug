@@ -63,6 +63,10 @@ namespace Completed
 		
 		private void Update ()
 		{
+            if (!BRDialogManager.Instance.IsNoDialog())
+            {
+                return;
+            }
 			//If it's not the player's turn, exit the function.
 			if(!GameManager.instance.playersTurn) return;
 			
@@ -154,7 +158,8 @@ namespace Completed
 			//If Move returns true, meaning Player was able to move into an empty space.
 			if (Move (xDir, yDir, out hit)) 
 			{
-				//Call RandomizeSfx of SoundManager to play the move sound, passing in two audio clips to choose from.
+                //Call RandomizeSfx of SoundManager to play the move sound, passing in two audio clips to choose from.
+                BRHintManager.Instance.SetPositions();
 				SoundManager.instance.RandomizeSfx (moveSound1, moveSound2);
                 TurnBaseClock.Instance.UpdateTime();
             } else
@@ -189,12 +194,14 @@ namespace Completed
         {
             base.AfterMoveAction();
             UpdateSightAndFog();
+            
             OtherHumanManager.Instance.OtherHuamnMove();
             MapViewController.Instance.UpdateMap();
             if (DeadZoneManager.Instance.IsInBombedDeadZone(transform.position))
             {
                 GetComponent<HumanInfo>().HurtHuman(1000, "DEAD ZONE");
             }
+            BRHintManager.Instance.ShowHints();
         }
 
         void UpdateSightAndFog()
@@ -202,22 +209,22 @@ namespace Completed
             int range = HumanManager.Instance.heroInfo.SightRange();
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range, 1 << LayerMask.NameToLayer("fog")| 1 << LayerMask.NameToLayer("Player"));
             HashSet<FogOfWar> newFogs = new HashSet<FogOfWar>();
-            //foreach (Collider2D hitCollider in hitColliders)
-            //{
-            //    //Debug.Log("hit " + hitCollider.gameObject);
-            //    FogOfWar fogScript = hitCollider.GetComponent<FogOfWar>();
-            //    if (fogScript)
-            //    {
-            //        newFogs.Add(fogScript);
-            //        fogScript.ClearFog();
-            //    }
-            //}
-            //fogs.ExceptWith(newFogs);
-            //foreach (FogOfWar fw in fogs)
-            //{
-            //    fw.UnclearFog();
-            //}
-            //fogs = newFogs;
+            foreach (Collider2D hitCollider in hitColliders)
+            {
+                //Debug.Log("hit " + hitCollider.gameObject);
+                FogOfWar fogScript = hitCollider.GetComponent<FogOfWar>();
+                if (fogScript)
+                {
+                    newFogs.Add(fogScript);
+                    fogScript.ClearFog();
+                }
+            }
+            fogs.ExceptWith(newFogs);
+            foreach (FogOfWar fw in fogs)
+            {
+                fw.UnclearFog();
+            }
+            fogs = newFogs;
         }
 
 

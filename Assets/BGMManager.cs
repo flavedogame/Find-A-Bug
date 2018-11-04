@@ -21,7 +21,7 @@ public class BGMManager : Singleton<BGMManager>
 
     public void PlayNormal()
     {
-        audioSource.clip = bgms[(int)BGMEnum.normalBGM];
+        PlayBGM(BGMEnum.normalBGM);
     }
 
         // Update is called once per frame

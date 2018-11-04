@@ -18,6 +18,14 @@ public class DialogManager : DefaultViewController
         GameObject go = Instantiate(prefab, ViewControllerManager.Instance.viewControllerCanvas.transform) as GameObject;
         DialogManager script = go.GetComponent<DialogManager>();
         script.Init(strings);
+        BRDialogManager.Instance.AddDialog();
+    }
+
+    static public void CreateViewController(string strings)
+    {
+        List<string> l = new List<string>();
+        l.Add(strings);
+        CreateViewController(l);
     }
 
     void Init(List<string> strings)
@@ -41,6 +49,7 @@ public class DialogManager : DefaultViewController
         if (currentDialogIndex >= dialogs.Count)
         {
             Back();
+            BRDialogManager.Instance.CloseDialog();
         }
         else
         {

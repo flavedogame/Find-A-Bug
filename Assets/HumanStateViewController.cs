@@ -12,12 +12,19 @@ public class HumanStateViewController : DefaultViewController {
         
     }
 
+    public override void Back()
+    {
+        base.Back();
+        BRDialogManager.Instance.CloseDialog();
+    }
+
     static public void CreateViewController(HumanInfo info)
     {
         Object prefab = ViewControllerManager.Instance.viewControllers[7];
         GameObject go = Instantiate(prefab, ViewControllerManager.Instance.viewControllerCanvas.transform) as GameObject;
         HumanStateViewController script = go.GetComponent<HumanStateViewController>();
         script.Init(info);
+        BRDialogManager.Instance.AddDialog();
     }
 
     void Init(HumanInfo info)

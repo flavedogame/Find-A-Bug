@@ -132,6 +132,16 @@ public class HumanGenerator : MonoBehaviour
 
             //inventory
             humanInfo.Init();
+            if (inventorys.Count == 0)
+            {
+                foreach (InventoryEnum inv in System.Enum.GetValues(typeof(InventoryEnum)))
+                {
+                    if (inv != InventoryEnum.stone)
+                    {
+                        inventorys.Add(inv);
+                    }
+                }
+            }
             if (inventorys.Count > 0) { 
             int inventoryIdx = Random.Range(0, inventorys.Count);
                 InventoryEnum inventory = inventorys[inventoryIdx];

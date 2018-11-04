@@ -27,6 +27,15 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public void AttackWithInventory(InventoryEnum weapon,HumanInfo attacker,HumanInfo attackee)
     {
+        switch (weapon)
+        {
+            case InventoryEnum.shotgun:
+            case InventoryEnum.pistol:
+                BRHintManager.Instance.AddHint(attacker.transform.position, BRHintEnum.gun);
+                break;
+            default:
+                break;
+        }
         if (DidHit(weapon, attackee))
         {
             bool isHitOnHead = Random.Range(0, 100) > 80;

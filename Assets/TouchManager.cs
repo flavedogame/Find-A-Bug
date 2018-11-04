@@ -15,6 +15,10 @@ public class TouchManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!BRDialogManager.Instance.IsNoDialog())
+        {
+            return;
+        }
         //if (GameLogicManager.Instance.isPaused)
         //{
         //    return;

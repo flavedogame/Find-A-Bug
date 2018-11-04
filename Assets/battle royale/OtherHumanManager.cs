@@ -113,6 +113,7 @@ public class OtherHumanManager : Singleton<OtherHumanManager>
                     }
 
                     humanInfo.remainTargetTransformMovement -= 1;
+                    BRHintManager.Instance.AddHint(humanInfo.transform.position, BRHintEnum.step);
                 } else
                 {
                     //either move to player or move to a random player
