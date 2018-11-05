@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActionManager : Singleton<ActionManager>
 {
-    int[] actionRange = new int[] { 5, 2 };
+    int[] actionRange = new int[] { 5,4, 2 };
     // Start is called before the first frame update
     void Start()
     {

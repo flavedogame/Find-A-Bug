@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DeadZoneManager : Singleton<DeadZoneManager>
 {
-    public int[] deadZoneNotificationTime = new int[]{1,3,5,7};
-    public int[] deadZoneBombTime = new int[] { 2,4,6,8 };
+    int[] deadZoneNotificationTime = new int[]{3,8,12,16};
+    int[] deadZoneBombTime = new int[] { 6,10,14,18 };
     public List<int> bombedZoneId;
     public List<int> safeZoneId;
     public int nextBombZoneId;

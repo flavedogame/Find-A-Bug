@@ -9,16 +9,16 @@ public enum InventoryEnum { stone, kitchenKnife, shotgun, pistol, binoculars,
 public class InventoryManager : Singleton<InventoryManager>
 {
     public List<InventoryEnum> inventories;
-    int[] chanceToHit = new int[] { 10, 90, 60, 40, 0,
-        0, 50, 40, 0, 100, 20 };
-    int[] damageMin = new int[] { 10, 30, 30, 40, 0,
+    int[] chanceToHit = new int[] { 20, 90, 70, 60, 0,
+        0, 60, 90, 0, 100, 50 };
+    int[] damageMin = new int[] { 5, 30, 30, 40, 0,
         0, 50, 40, 0, 90, 5 };
-    int[] damageMax = new int[] { 100, 40, 100, 90, 15,
+    int[] damageMax = new int[] { 20, 40, 100, 90, 15,
         0, 50, 90, 0, 100, 100 };
     int[] goodAtWeapon = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-    int[] weaponRange = new int[] { 3, 1, 7, 5, 0,
-        0, 3, 2, 0, 100, 1 };
+    int[] weaponRange = new int[] { 6, 2, 7, 5, 0,
+        0, 5, 2, 0, 100, 2 };
 
     public bool IsWeapon(InventoryEnum inventory)
     {
@@ -36,6 +36,10 @@ public class InventoryManager : Singleton<InventoryManager>
             default:
                 break;
         }
+        if (weapon == InventoryEnum.grenade)
+        {
+            attackee.inventories.Remove(weapon);
+        }
         if (DidHit(weapon, attackee))
         {
             bool isHitOnHead = Random.Range(0, 100) > 80;
@@ -46,6 +50,18 @@ public class InventoryManager : Singleton<InventoryManager>
             }
             attackee.hp -= damage;
             attackee.UpdateHeathyState();
+            if (!attackee.IsAlive)
+            {
+                attackee.killedBy = attacker;
+            }
+            if (attacker != HumanManager.Instance.heroInfo && !attackee.IsAlive)
+            {
+                bool pickUP = Random.Range(0, 100) > 50;
+                if (pickUP)
+                {
+                    attacker.RobHuman(attackee);
+                }
+            }
             if (attackee.hp<=0)
             {
                 BRMessageViewController.Instance.AddCell(attacker, attackee);
@@ -242,6 +258,11 @@ public class InventoryManager : Singleton<InventoryManager>
                 dialogs.Add("You attack " + humanInfo.Name + " with a hand axe.");
                 break;
         }
+
+        if(inventory == InventoryEnum.grenade)
+        {
+            HumanManager.Instance.heroInfo.inventories.Remove(inventory);
+        }
                 
         bool didHit = DidHit(inventory, humanInfo);
         if (didHit)
@@ -249,7 +270,44 @@ public class InventoryManager : Singleton<InventoryManager>
             bool isHitOnHead = Random.Range(0, 100) > 80;
             dialogs.Add("It hit " + humanInfo.Name + " on " + humanInfo.PosseciveProunoun() + (isHitOnHead ? " head." : " body "));
             dialogs.Add(DamageString(humanInfo, inventory, isHitOnHead));
-            dialogs.Add(MissTalk(humanInfo));
+            if (humanInfo.IsAlive)
+            {
+
+                dialogs.Add(MissTalk(humanInfo));
+            } else
+            {
+                switch (humanInfo.relationDescriptionEnum)
+                {
+                    case RelationDescriptionEnum.dontKnow:
+                    case RelationDescriptionEnum.notFamiliar:
+                        dialogs.Add(humanInfo.Name + " shouted something meanless and stares at you. ");
+                        dialogs.Add(humanInfo.SubjectiveProunoun(true) + " died with resentment.");
+                        break;
+                    case RelationDescriptionEnum.talkedSeveralTimes:
+                    case RelationDescriptionEnum.sitAround:
+                    case RelationDescriptionEnum.playedTogether:
+                        dialogs.Add(humanInfo.Name + " stared at you with confusion. Why would you kill me? "+humanInfo.SubjectiveProunoun()+" seems want to ask that.");
+                        dialogs.Add("But " + humanInfo.SubjectiveProunoun() + " does not have the chance to ask that.");
+                        break;
+                    case RelationDescriptionEnum.friend:
+                        dialogs.Add(humanInfo.Name + " stared at you with confusion. We were.. friends..why..? " + humanInfo.SubjectiveProunoun() + " seems want to ask that.");
+                        dialogs.Add("But " + humanInfo.SubjectiveProunoun() + " does not have the chance to ask that.");
+                        break;
+                    case RelationDescriptionEnum.bestFriend:
+                        dialogs.Add(humanInfo.Name + ", your former best friend, looked away for a seconds then close " + humanInfo.PosseciveProunoun() + " his eyes. ");
+                        dialogs.Add(humanInfo.SubjectiveProunoun(true)+" grit "+ humanInfo.PosseciveProunoun()+" teeth and died quietly.");
+                        dialogs.Add("You don't know what was " + humanInfo.SubjectiveProunoun() + " thinking before " + humanInfo.SubjectiveProunoun() + " died, after facing such a horrible betrayal");
+                        dialogs.Add("And you Don't want to know. You need to keep walking, and killing.");
+                        break;
+                    case RelationDescriptionEnum.lover:
+                        dialogs.Add(humanInfo.Name + " looked at you, with love in " + humanInfo.PosseciveProunoun() + " eyes.");
+                        dialogs.Add("\"I'll wait for you, don't let me wait too long.\"");
+                        dialogs.Add("You looked at " + humanInfo.ObjectiveProunoun() + ", not sure if that is a curse or confession.");
+                        break;
+                }
+                dialogs.Add("Everyone get the notification that you killed " + humanInfo.ObjectiveProunoun() + ". Not sure how would they think.");
+
+            }
         }
         else
         {

@@ -3,22 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+public delegate void DialogEndDelegate();
 public class DialogManager : DefaultViewController
 {
     public TextMeshProUGUI dialog;
     List<string> dialogs;
     public Button button;
+    DialogEndDelegate dialogEndDele;
 
     int currentDialogIndex = 0;
 
-    static public void CreateViewController(List<string> strings)
+    static public void CreateViewController(List<string> strings, DialogEndDelegate dialogEndDelegate)
     {
         Object prefab = ViewControllerManager.Instance.viewControllers[8];
         GameObject go = Instantiate(prefab, ViewControllerManager.Instance.viewControllerCanvas.transform) as GameObject;
         DialogManager script = go.GetComponent<DialogManager>();
-        script.Init(strings);
+        script.Init(strings, dialogEndDelegate);
         BRDialogManager.Instance.AddDialog();
+    }
+
+    static public void CreateViewController(List<string> strings)
+    {
+        CreateViewController(strings, null);
     }
 
     static public void CreateViewController(string strings)
@@ -28,9 +34,9 @@ public class DialogManager : DefaultViewController
         CreateViewController(l);
     }
 
-    void Init(List<string> strings)
+    void Init(List<string> strings, DialogEndDelegate dialogEndDelegate)
     {
-
+        dialogEndDele = dialogEndDelegate;
         dialogs = strings;
         UpdateDialog();
         button.onClick.AddListener(delegate {
@@ -48,6 +54,7 @@ public class DialogManager : DefaultViewController
         currentDialogIndex++;
         if (currentDialogIndex >= dialogs.Count)
         {
+            dialogEndDele?.Invoke();
             Back();
             BRDialogManager.Instance.CloseDialog();
         }

@@ -11,15 +11,17 @@ public class FogOfWarItem : FogOfWar
     }
     public override void UnclearFog()
     {
+        sr = GetComponent<SpriteRenderer>();
         sr.enabled = false;
     }
 
     public bool IsVisible()
     {
+        sr = GetComponent<SpriteRenderer>();
         return sr.enabled;
     }
     protected override void Start()
     {
-       
+        sr = GetComponent<SpriteRenderer>();
     }
 }

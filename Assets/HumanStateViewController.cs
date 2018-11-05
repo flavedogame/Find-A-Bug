@@ -32,15 +32,47 @@ public class HumanStateViewController : DefaultViewController {
 
         humanInfo = info;
         description.text = FormatDescription();
-        AddActions();
+        if (humanInfo == HumanManager.Instance.heroInfo)
+        {
+            AddActionsForMyself();
+        } else
+        {
+            AddActions();
+        }
     }
 
     string FormatDescription()
     {
         string res = "";
-        res += "That is " + humanInfo.Name + ". ";
-        res += RelationDesc();
+        if (humanInfo == HumanManager.Instance.heroInfo)
+        {
+            res += "This is YOU, " + humanInfo.Name;
+        }
+        else
+        {
+            res += "That is " + humanInfo.Name + ". ";
+        }
+        if (humanInfo != HumanManager.Instance.heroInfo)
+            res += RelationDesc();
         res += HealthDesc();
+        if (humanInfo != HumanManager.Instance.heroInfo)
+            res += GameBehaviorString();
+        return res;
+    }
+
+    string GameBehaviorString()
+    {
+        string res = "";
+        if (humanInfo.HowYouBehaveInTheGame > 0)
+        {
+            res = humanInfo.SubjectiveProunoun(true) + " seems trust you for what you've done before in the game.";
+        } else if(humanInfo.HowYouBehaveInTheGame == 0)
+        {
+            res = "You haven't communicated enough since this game started.";
+        } else
+        {
+            res = "What you have done before in thei game irritated " + humanInfo.ObjectiveProunoun();
+        }
         return res;
     }
 
@@ -99,6 +131,18 @@ public class HumanStateViewController : DefaultViewController {
     }
     public GameObject inventoryCell;
     public GameObject inventoryListPanel;
+
+    void AddActionsForMyself() {
+        foreach (ActionSelfEnum action in System.Enum.GetValues(typeof(ActionSelfEnum)))
+        {
+                GameObject go = Instantiate(inventoryCell, inventoryListPanel.transform);
+                ActionCell script = go.GetComponent<ActionCell>();
+                script.InitCell(action, this);
+           
+        }
+    }
+
+
     void AddActions()
     {
         foreach (ActionEnum action in System.Enum.GetValues(typeof(ActionEnum)))

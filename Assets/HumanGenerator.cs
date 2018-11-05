@@ -7,8 +7,7 @@ public class HumanGenerator : MonoBehaviour
 {
     public GameObject hero;
     public GameObject humanPrefab;
-    public int NumOfHuman = 10;
-    public Vector3 humanOriginPosition = new Vector3(0.54f, 0.78f, 013f);
+    public Vector3 humanOriginPosition = new Vector3(0.54f, 0.78f, 1.3f);
     public int widthOfMap=30;
     public int heightOfMap = 20;
     public float initialDistance = 6.0f;
@@ -23,6 +22,7 @@ public class HumanGenerator : MonoBehaviour
     }
     void OnEnable()
     {
+        int NumOfHuman = HumanManager.Instance.numberOfHuman;
         List<Vector3> positions = new List<Vector3>();
         List<InventoryEnum> inventorys = new List<InventoryEnum>();
         foreach (InventoryEnum inv in System.Enum.GetValues(typeof(InventoryEnum)))
@@ -39,7 +39,6 @@ public class HumanGenerator : MonoBehaviour
         List<string> lovers = new List<string>();
         Dictionary<string, string> bestFriendPair = new Dictionary<string, string>();
         Dictionary<string, string> loverPair = new Dictionary<string, string>();
-        ResourceManager.Instance.LeftPeople = NumOfHuman;
         for (int i = 0; i < NumOfHuman; i++)
         {
             isBoys.Add(Random.Range(0, 2)>0);
@@ -121,10 +120,12 @@ public class HumanGenerator : MonoBehaviour
             if (HumanManager.Instance.heroInfo.bestFriendName.Equals(humanInfo.Name))
             {
                 humanInfo.relationDescriptionEnum = RelationDescriptionEnum.bestFriend;
+                humanInfo.hp = 200;
             }
             else if (HumanManager.Instance.heroInfo.loverName.Equals(humanInfo.Name))
             {
                 humanInfo.relationDescriptionEnum = RelationDescriptionEnum.lover;
+                humanInfo.hp = 200;
             }
             else
             {
@@ -164,6 +165,8 @@ public class HumanGenerator : MonoBehaviour
                 humanInfo.sr.sprite = ResourceManager.Instance.girlImages[rand];
             }
         }
+
+        ResourceManager.Instance.LeftPeople = NumOfHuman;
         //generate human
     }
 

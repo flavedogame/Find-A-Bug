@@ -29,11 +29,13 @@ public class HumanInfo : MonoBehaviour
     public List<InventoryEnum> inventories;
 
     public HumanInfo targetHumanInfo;
-    public Transform targetTransform;
+    public Vector3 targetPosition;
     public int remainTargetTransformMovement;
 
     public SpriteRenderer sr;
     public Shader greyScaleShader;
+    public HumanInfo killedBy;
+    public bool isTeamed;
     // Start is called before the first frame update
     public void Init()
     {
@@ -135,6 +137,10 @@ public class HumanInfo : MonoBehaviour
     {
         if (!IsAlive)
         {
+            healthDescriptionEnum = HealthDescriptionEnum.dead;
+            sr = GetComponent<SpriteRenderer>();
+            sr.material.shader = greyScaleShader;
+            ResourceManager.Instance.LeftPeople -= 1;
             return;
         }
         if (hp >= 20)
@@ -148,8 +154,11 @@ public class HumanInfo : MonoBehaviour
         else
         {
             healthDescriptionEnum = HealthDescriptionEnum.dead;
+
+            sr = GetComponent<SpriteRenderer>();
             sr.material.shader = greyScaleShader;
             ResourceManager.Instance.LeftPeople -= 1;
+
         }
     }
 
@@ -168,13 +177,18 @@ public class HumanInfo : MonoBehaviour
 
     public void Attack(HumanInfo humanInfo) 
     {
+        
         targetHumanInfo = humanInfo;
         List<InventoryEnum> weapons = AllWeapons();
+        if (weapons.Count == 0)
+        {
+            return;
+        }
         InventoryEnum weapon = weapons[Random.Range(0, weapons.Count)];
         InventoryManager.Instance.AttackWithInventory(weapon, this, humanInfo);
     }
 
-    public bool IsAlive { get { return healthDescriptionEnum != HealthDescriptionEnum.dead; } }
+    public bool IsAlive { get { return healthDescriptionEnum != HealthDescriptionEnum.dead && hp > 0; } }
 
     // Update is called once per frame
     void Update()

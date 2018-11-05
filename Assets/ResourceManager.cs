@@ -11,7 +11,7 @@ public class ResourceManager : Singleton<ResourceManager>
     int leftPeople;
     public int LeftPeople { get { return leftPeople; }
         set { leftPeople = value;
-            leftPoepleText.text = leftPeople + " classmates left"; } }
+            leftPoepleText.text = ""+(OtherHumanManager.Instance.aliveHumans.Count+ (HumanManager.Instance.heroInfo.IsAlive?1:0))+" students left"; } }
     public List<Sprite> bugableObjectIcons;
     public List<Sprite> girlImages; public List<Sprite> boyImages;
 

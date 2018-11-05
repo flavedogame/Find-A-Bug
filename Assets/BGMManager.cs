@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum BGMEnum { normalBGM, nightBGM, tickBGM, geBGM, beBGM }
+public enum BGMEnum { nightBGM, normalBGM, beBGM,geBGM, tickBGM, }
 public class BGMManager : Singleton<BGMManager>
 {
     public AudioClip[] bgms;

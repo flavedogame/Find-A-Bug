@@ -9,11 +9,11 @@ public enum SFXEnum
     getPoint,
     buttonClick,
     allyDeath,
-    deadZoneBomb,
-    shotgun,
-    pistol,
     bomb,
     grassStep,
+    deadZoneBomb,
+    pistol,
+    shotgun,
 };
 
 public class SFXManager : Singleton<SFXManager>

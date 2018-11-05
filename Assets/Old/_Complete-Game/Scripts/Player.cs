@@ -57,7 +57,7 @@ namespace Completed
 		private void OnDisable ()
 		{
 			//When Player object is disabled, store the current local food total in the GameManager so it can be re-loaded in next level.
-			GameManager.instance.playerFoodPoints = food;
+			//GameManager.instance.playerFoodPoints = food;
 		}
 		
 		
@@ -68,7 +68,8 @@ namespace Completed
                 return;
             }
 			//If it's not the player's turn, exit the function.
-			if(!GameManager.instance.playersTurn) return;
+			if(!GameManager.instance.playersTurn)
+                return;
 			
 			int horizontal = 0;  	//Used to store the horizontal move direction.
 			int vertical = 0;		//Used to store the vertical move direction.
@@ -173,20 +174,7 @@ namespace Completed
 			//Set the playersTurn boolean of GameManager to false now that players turn is over.
 			GameManager.instance.playersTurn = false;
 		}
-
-        //void SetupSight()
-        //{
-        //    Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, sightRange, 1 << LayerMask.NameToLayer("fog_sight"));
-        //    foreach (Collider2D hitCollider in hitColliders)
-        //    {
-        //        //Debug.Log("hit " + hitCollider.gameObject);
-        //        FogOfWar fogScript = hitCollider.GetComponent<FogOfWar>();
-        //        if (fogScript)
-        //        {
-        //            fogScript.ClearFog();
-        //        }
-        //    }
-        //}
+        
 
         HashSet<FogOfWar> fogs;
 
@@ -207,7 +195,7 @@ namespace Completed
         void UpdateSightAndFog()
         {
             int range = HumanManager.Instance.heroInfo.SightRange();
-            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range, 1 << LayerMask.NameToLayer("fog")| 1 << LayerMask.NameToLayer("Player"));
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, range, 1 << LayerMask.NameToLayer("Fog")| 1 << LayerMask.NameToLayer("Player"));
             HashSet<FogOfWar> newFogs = new HashSet<FogOfWar>();
             foreach (Collider2D hitCollider in hitColliders)
             {

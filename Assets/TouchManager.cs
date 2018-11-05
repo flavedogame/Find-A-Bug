@@ -69,7 +69,7 @@ public class TouchManager : MonoBehaviour
                 {
                     TouchAction script = vhit.transform.gameObject.GetComponent<TouchAction>();
                     FogOfWarItem fowItem = vhit.transform.gameObject.GetComponent<FogOfWarItem>();
-                    if (fowItem.IsVisible())
+                    if (!fowItem || fowItem.IsVisible())
                     {
                         script.DidTap();
                     }

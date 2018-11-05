@@ -8,6 +8,7 @@ public class HumanManager : Singleton<HumanManager>
     public List<GameObject> AliveHuman;
     public GameObject hero;
     public HumanInfo heroInfo;
+    public int numberOfHuman = 10;
     // Start is called before the first frame update
     void Start()
     {
